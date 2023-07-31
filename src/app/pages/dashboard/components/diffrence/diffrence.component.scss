@@ -1,0 +1,23 @@
+::ng-deep #differenceWrap{
+  .tableWrap{
+    & table{
+      border-radius: 8px !important;
+      box-shadow: none !important;
+      overflow: hidden !important;
+      border: 1px solid var(--light-grey-color) !important;
+      border-collapse: unset !important;
+      // max-height: 575px !important;
+      // overflow: scroll !important;
+      & tr{
+        height: 35px !important;
+        &.cdk-header-row{
+            background-color: #f2f2f2;
+        }
+        &:nth-child(even){
+          background-color: #f2f2f2 !important;
+        }
+      }
+    }
+  }
+
+}

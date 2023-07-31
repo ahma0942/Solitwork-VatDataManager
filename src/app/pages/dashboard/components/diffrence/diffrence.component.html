@@ -1,0 +1,75 @@
+<div id="differenceWrap">
+  <div class="heading font-semibold text-[20px]">Difference</div>
+<div class="subheading text-[--grey-color] text-xs">
+  by subledger voucher
+</div>
+<div class="tableWrap mt-5">
+  <table mat-table [dataSource]="transactions" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="voucher">
+      <th mat-header-cell *matHeaderCellDef> Voucher </th>
+      <td mat-cell *matCellDef="let transaction"> {{transaction?.voucher}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actual">
+      <th mat-header-cell *matHeaderCellDef> Actual </th>
+      <td mat-cell *matCellDef="let transaction"> {{transaction?.actual| number:'1.2-2' }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="expected">
+      <th mat-header-cell *matHeaderCellDef> Expected </th>
+      <td mat-cell *matCellDef="let transaction"> {{transaction?.expected | number:'1.2-2'}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="difference">
+      <th mat-header-cell *matHeaderCellDef> Difference </th>
+      <td mat-cell *matCellDef="let transaction"> {{transaction?.difference| number:'1.2-2' }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="checkbox">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-icon>check_box</mat-icon>
+      </th>
+      <td mat-cell *matCellDef="let transaction">
+        <mat-checkbox [color]="'primary'"></mat-checkbox>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="attachment">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-icon> attach_file</mat-icon>
+      </th>
+      <td mat-cell *matCellDef="let transaction"> {{transaction?.attachment}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="vatJournal">
+      <th mat-header-cell *matHeaderCellDef>
+        VAT Journal
+      </th>
+      <td mat-cell *matCellDef="let transaction">
+      <div class="tableEllipsis w-[75px]">
+        <a [ngClass]="transaction?.vatJournal? 'text-[--primary-color] underline underline-solid':'text-[--black-color]'">{{transaction?.vatJournal || '-'}}</a>
+      </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <div class="totalRow flex items-center gap-3 pl-[10px] my-3">
+    <div class="text-[--primary-color] font-bold text-[12px] w-[90px]">
+      Total
+    </div>
+    <div class="actualTotal font-bold text-[12px] w-[90px] text-[--black-color]">
+      <!-- {{getTotalActual() | number:'1.2-2'}} -->
+    </div>
+    <div class="expectedTotal font-bold text-[12px] w-[90px] text-[--black-color]">
+      <!-- {{getTotalExpected() | number :'1.2-2'}} -->
+    </div>
+    <div class="differenceTotal font-bold text-[12px] w-[90px] text-[--black-color]">
+      <!-- {{getTotalDifference()| number:'1.2-2' }} -->
+    </div>
+  </div>
+</div>
+
+</div>

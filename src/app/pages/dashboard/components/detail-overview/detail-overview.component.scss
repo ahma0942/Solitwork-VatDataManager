@@ -1,0 +1,40 @@
+::ng-deep #detailOverview{
+  .tableWrap{
+    border-radius: 8px !important;
+      overflow: hidden !important;
+      border: 1px solid var(--light-grey-color) !important;
+    & table{
+      box-shadow: none !important;
+      border-collapse: unset !important;
+      max-height: 400px !important;
+      overflow: auto !important;
+      & thead{
+        & tr{
+          height: 36px !important;
+          background-color: #f2f2f2;
+          & th{
+            padding: 5px 10px!important;
+            font-size: 12px;
+            color: var(--grey-color);
+            background: transparent;
+            &::before{
+              display: none;
+            }
+          }
+        }
+      }
+      & tbody tr{
+        height: 35px !important;
+        &:first-child{
+          display: none !important;
+        }
+        & td{
+        }
+        &:nth-child(odd){
+          background-color: #f2f2f2 !important;
+        }
+      }
+    }
+  }
+
+}

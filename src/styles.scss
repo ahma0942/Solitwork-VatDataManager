@@ -1,0 +1,187 @@
+/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+:root{
+  --primary-color:#0080ff;
+  --light-primary-color:#e2f0f2;
+  --grey-color: #888888;
+  --light-grey-color:#d6d5d9;
+  --black-color:#343641;
+  --green-color:#2fa360;
+  --light-green-color:#e6f9ee;
+  --red-color:#fc4319;
+  --light-red-color:#ffe7e0;
+}
+*{
+  font-family: 'Nunito Sans', sans-serif;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.pointer{
+  cursor: pointer;
+}
+.tableWrap{
+  & table{
+    border-radius: 8px !important;
+    box-shadow: none !important;
+    overflow: hidden !important;
+    & tr{
+      &.cdk-header-row{
+      & th{
+        color:var(--grey-color);
+        font-size: 11px !important;
+        padding: 0 10px !important;
+        border: 0 !important;
+        & mat-icon{
+          font-size: 20px!important;
+          height: 20px !important;
+          margin-top: 6px !important;
+        }
+      }
+    }
+      & td{
+        padding: 0 10px !important;
+        font-size: 12px !important;
+        font-weight: 500 !important;
+        color: var(--black-color) !important;
+        border: 0 !important;
+        & mat-checkbox{
+         & .mdc-checkbox{
+          padding: 0;
+
+            .mdc-checkbox__ripple{
+              background-color: transparent !important;
+            }
+
+          & .mdc-checkbox__native-control{
+            height: 18px;
+            width: 18px;
+          }
+          & .mat-mdc-checkbox-touch-target{
+            height: 18px;
+            width: 18px;
+          }
+          & .mdc-checkbox__background{
+            top: 0;
+            left: 2px;
+            width: 16px;
+            height: 16px;
+          }
+         }
+        }
+        & .tableEllipsis{
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+        }
+      }
+    }
+  }
+}
+
+.formGroup {
+  & input{
+    border-color: #F3F4F8;
+    &:not(.bg-white){
+      background: #F3F4F8;
+    }
+    &:hover{
+      border-color: #F3F4F8;
+    }
+    &:focus{
+      outline: none;
+    }
+  }
+  & textarea{
+    border-color: #F3F4F8;
+    background: #F3F4F8;
+    &:hover{
+      border-color: #F3F4F8;
+    }
+    &.ng-invalid.ng-touched, &.ng-invalid.ng-dirty{
+      border: 1px solid red !important;
+    }
+  }
+  & .ant-select-selector{
+    border-radius: 5px !important;
+  }
+  & .ant-select-selection-item{
+    background-color: transparent;
+  }
+  & nz-select{
+    border-radius: 4px;
+    min-height: 39px;
+    display: flex;
+    align-items: center;
+    &>nz-select-top-control{
+      display: flex;
+      align-items: center;
+      height: 100%;
+      box-shadow: none !important;
+    }
+    & .ant-select-selector{
+      width: 100%;
+      background-color: transparent !important;
+      border: 0 !important;
+      height: 100%;
+    }
+  }
+  & nz-select:not(.bg-white){
+    background-color: #F3F4F8;
+  }
+  &>.ant-picker{
+    background-color: #F3F4F8;
+  }
+  &>*{
+    &.ng-invalid.ng-touched, &.ng-invalid.ng-dirty{
+      border: 1px solid red !important;
+    }
+  }
+}
+.pointer{
+  cursor: pointer;
+}
+
+.configurationWrap{
+  & .tableWrap {
+    & table{
+      overflow: unset !important;
+      & thead{
+        & tr{
+         & th{
+          color: var(--black-color);
+          font-weight:800;
+          font-size: 11px !important;
+          background: transparent;
+          &::before{
+            display: none !important;
+          }
+         }
+
+        }
+      }
+      & tbody{
+        & tr{
+          position: relative;
+
+          &:hover{
+            box-shadow: 2px 1px 7px 4px rgba(0, 0, 0, 0.1), -4px -4px 4px -2px rgba(0, 0, 0, 0.1) !important;
+          }
+          & td{
+            padding: 10px 8px !important;
+            border-bottom: var(--light-grey-color);
+            color: var(--grey-color) !important;
+          }
+        }
+      }
+    }
+  }
+  & .mat-mdc-paginator-icon{
+    fill: var(--primary-color);
+  }
+  & .mat-mdc-icon-button[disabled] .mat-mdc-paginator-icon{
+    fill: #0000001f;
+  }
+}

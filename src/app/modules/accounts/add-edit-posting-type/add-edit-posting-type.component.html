@@ -1,0 +1,41 @@
+<div class="mainWrap p-4">
+  <div class="pageHeader">
+    <div class="closeBtn flex justify-end pointer" (click)="close()">
+      <span nz-icon nzType="close-circle" nzTheme="outline"></span>
+    </div>
+    <div class="pageTitle font-semibold text-md mb-9">{{recievedData?'Edit': 'Create'}} Posting Type</div>
+    <div class="formWrap max-w-[90%] mx-auto">
+      <form [formGroup]="postingForm">
+        <div class="formGroupRow flex justify-between items-center lg:gap-5 flex-col md:flex-wrap md:flex-row">
+          <div class="formGroup mb-5 w-[48%]">
+            <label  class="font-normal text-sm">Posting Type</label>
+            <input  nz-input type="text" formControlName="postingType"  required class="w-full p-2 mt-3 rounded-md"  />
+          </div>
+          <div class="formGroup mb-5 w-[48%]">
+            <label  class="font-normal text-sm">Select Date Range</label>
+            <nz-range-picker class="w-full mt-3 rounded-md"
+            [nzShowTime]="{ nzFormat: 'HH:mm' }"
+            nzFormat="yyyy-MM-dd HH:mm"
+            [nzPlaceHolder]="['Start Time', 'End Time']"
+            [(ngModel)]="today"
+            formControlName="date"
+            (nzOnOk)="onChange($event)"
+          ></nz-range-picker>
+
+          </div>
+          <div class="formGroup mb-5 w-[48%]">
+            <label nz-checkbox checked="true" class="text-sm font-normal" formControlName="isVATExpectedOnPostingType" id="isVATExpectedOnPostingType">VAT Expected On Posting Type</label>
+          </div>
+        </div>
+      </form>
+    </div>
+
+
+    <div class="buttonWrap flex justify-end gap-4">
+      <button (click)="close()" class="min-w-[100px] py-2 px-4 font-bold text-sm text-[--black-color] rounded-md border border-solid border-[--light-grey-color]">Cancel</button>
+      <button *ngIf="!recievedData" (click)="createPostingType()" class="min-w-[100px] py-2 px-4 font-bold text-sm bg-[--primary-color] text-white rounded-md">Save</button>
+      <button *ngIf="recievedData" (click)="updatePostingType()" class=" min-w-[100px] py-2 px-4 font-bold text-sm bg-[--primary-color] text-white rounded-md">Update</button>
+    </div>
+  </div>
+
+</div>

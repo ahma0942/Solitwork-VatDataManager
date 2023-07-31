@@ -1,0 +1,36 @@
+<div class="statusTabs flex gap-4 items-center mb-4 max-w-[80%] w-full mx-auto">
+  <button class="status text-sm py-2 px-4 rounded" (click)="tab = 1;"
+    [ngClass]="{'active font-medium text-[--primary-color] bg-[--light-primary-color] ' :tab == 1,'font-normal text-[--black-color] bg-[--light-grey-color]': tab != 1}">
+   Accounts
+  </button>
+    <button class="status text-sm py-2 px-4 rounded" (click)="tab = 2;"
+    [ngClass]="{'active font-medium text-[--primary-color] bg-[--light-primary-color]':tab == 2,'font-normal text-[--black-color] bg-[--light-grey-color]': tab != 2}">
+    Countries</button>
+    <button class="status text-sm py-2 px-4 rounded" (click)="tab = 3;"
+    [ngClass]="{'active font-medium text-[--primary-color] bg-[--light-primary-color]':tab == 3,'font-normal text-[--black-color] bg-[--light-grey-color]': tab != 3}">
+    Journal Category
+  </button>
+    <button class="status text-sm py-2 px-4 rounded" (click)="tab = 4;"
+    [ngClass]="{'active font-medium text-[--primary-color] bg-[--light-primary-color]':tab == 4,'font-normal text-[--black-color] bg-[--light-grey-color]': tab != 4}">
+    Posting Type</button>
+    <button class="status text-sm py-2 px-4 rounded" (click)="tab = 5;"
+    [ngClass]="{'active font-medium text-[--primary-color] bg-[--light-primary-color]':tab == 5,'font-normal text-[--black-color] bg-[--light-grey-color]': tab != 5}">
+    VatRates</button>
+
+</div>
+
+<ng-container *ngIf="tab==1">
+ <app-accounts></app-accounts>
+</ng-container>
+<ng-container *ngIf="tab==2">
+  <app-countries></app-countries>
+ </ng-container>
+ <ng-container *ngIf="tab==3">
+  <app-delivery-journal></app-delivery-journal>
+ </ng-container>
+ <ng-container *ngIf="tab==4">
+  <app-posting-type></app-posting-type>
+ </ng-container>
+ <ng-container *ngIf="tab==5">
+  <app-vat-rates></app-vat-rates>
+ </ng-container>

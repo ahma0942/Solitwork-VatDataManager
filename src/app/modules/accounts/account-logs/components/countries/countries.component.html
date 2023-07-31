@@ -1,0 +1,62 @@
+<div id="accountLog" class="configurationWrap mainWrap max-w-[80%] w-full mx-auto flex flex flex-col items-center justify-center">
+  <div class="pageHeader flex justify-between w-full opacity-60">
+    <div class="logo font-black text-[--black-color] text-[18px]">
+      <span class="text-[--primary-color] ">
+        Countries
+      </span>
+      / Legal Entities
+    </div>
+    <div class="filterWrap flex gap-3">
+      <button class="bg-[#e2f0f2] h-[36px] w-[36px] flex justify-center items-center text-[--primary-color] rounded-sm">
+        <mat-icon class="">search</mat-icon>
+      </button>
+      <button class="bg-[#e2f0f2] h-[36px] w-[36px] flex justify-center items-center text-[--primary-color] rounded-sm">
+        <mat-icon>filter_list</mat-icon>
+      </button>
+      <button class="bg-[#e2f0f2] h-[36px] w-[36px] flex justify-center items-center text-[--primary-color] rounded-sm">
+        <mat-icon>arrow_upward</mat-icon>
+      </button>
+      <button class="bg-[#e2f0f2] h-[36px] w-[36px] flex justify-center items-center text-[--primary-color] rounded-sm">
+        <mat-icon>arrow_downward</mat-icon>
+      </button>
+      <button class="bg-[--primary-color] py-1  px-4 rounded-sm text-white" (click)="addCountry()">
+        Add Country
+      </button>
+    </div>
+  </div>
+  <div class="mainContent bg-white rounded-sm w-full mt-3 px-3">
+    <div class="tableWrap w-full mt-3">
+      <nz-table id="table-export" #sortTable [nzData]="listOfData" (nzPageIndexChange)="pageIndexChange($event)"
+  [nzFrontPagination]="false" [nzTotal]="pagination.count || 0"
+  [nzPageIndex]="5" [nzPageSize]="pagination.limit || 0"
+  [nzShowSizeChanger]="false" nzSize="small"
+  nzTableLayout="fixed">
+    <thead>
+      <tr>
+        <th *ngFor="let column of listOfColumn.slice(0,1)" [nzShowSort]="false" [nzSortFn]="column.compare"
+                    [nzSortPriority]="column.priority" class="text-center ant-check-box-width">
+                    #
+                </th>
+                <th *ngFor="let column of listOfColumn.slice(1)" [nzShowSort]="false" [nzSortFn]="column.compare"
+                    [nzSortPriority]="column.priority">
+                    {{ column.title | uppercase }}
+                </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of sortTable.data,let i=index ">
+        <td > {{ (pagination?.skip * pagination?.limit) + (i+1)}} </td>
+        <td > {{data?.legalEntity || 'N/A' }} </td>
+        <td > {{data?.legalEntityVATCountry || 'N/A' }} </td>
+        <td > {{(data?.validfrom | date) || 'N/A' }} </td>
+        <td > {{(data?.validto |date) || 'N/A' }} </td>
+        <td (click)="editCountry(data)" class="pointer"> <span nz-icon nzType="edit" nzTheme="outline"></span> </td>
+      </tr>
+    </tbody>
+  </nz-table>
+    </div>
+   <!-- <div class="paginationWrap w-full mt-3 flex justify-end">
+    <nz-pagination [nzPageIndex]="1" [nzTotal]="500" [nzSize]="'small'"></nz-pagination>
+   </div> -->
+  </div>
+</div>

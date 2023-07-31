@@ -1,0 +1,52 @@
+<div class="mainWrap">
+  <div class="topHeading flex justify-between items-center mb-5">
+    <div class="meesageWrap">
+      <div class="greeting text-[30px] font-semibold text-[--black-color]" i18n>
+        Good Afternoon, Daisy
+      </div>
+      <div class="message text-[14px] text-[--grey-color] text-normal">
+        <b class="text-black" i18n>Sunday, 16 April 2023.</b> You've got 5 new notification & get the latest result in <a class="text-[--primary-color] font-medium underline decoration-solid ">Analytics</a>
+      </div>
+    </div>
+    <div class="btnWrap flex justify-end gap-5">
+      <button class="flex justify-between items-center bg-white rounded-md drop-shadow py-2 px-4  gap-2 font-normal">
+        <div class="icon h-[24px] text-[--grey-color]" >
+          <mat-icon>person</mat-icon>
+        </div>
+        Management
+        <div class="icon h-[24px] text-[--grey-color]">
+          <mat-icon>arrow_drop_down</mat-icon>
+        </div>
+      </button>
+      <div class="datePcikerWrap">
+        <nz-range-picker class="w-full mt-3 rounded-md"
+        nzFormat="yyyy-MM-dd"
+        [nzPlaceHolder]="['Start Time', 'End Time']"
+        [(ngModel)]="today"
+        (ngModelChange)="onChange($event)"
+      ></nz-range-picker>
+      </div>
+      <!-- <button class="flex justify-between items-center bg-white rounded-md drop-shadow py-2 px-4 gap-2 font-normal">
+        <div class="icon h-[24px] text-[--grey-color] ">
+          <mat-icon>calendar_today</mat-icon>
+        </div>
+        Sep 1, 2022 - Oct 9, 2023
+        <div class="icon h-[24px] text-[--grey-color]">
+          <mat-icon>arrow_drop_down</mat-icon>
+        </div>
+      </button> -->
+    </div>
+  </div>
+  <div class="differenceWrap flex gap-5 ">
+    <div class="kpiWrap max-w-[50%] w-full p-5 rounded-md bg-white drop-shadow">
+      <app-kpis [dateData]="dateData"></app-kpis>
+    </div>
+    <div class="kpiWrap max-w-[50%] w-full p-5 rounded-md bg-white drop-shadow">
+      <app-diffrence [dateData]="dateData"></app-diffrence>
+    </div>
+  </div>
+  <div class="detailWrap w-full p-5 rounded-md bg-white drop-shadow mt-5">
+    <app-detail-overview [dateData]="dateData"></app-detail-overview>
+  </div>
+
+</div>

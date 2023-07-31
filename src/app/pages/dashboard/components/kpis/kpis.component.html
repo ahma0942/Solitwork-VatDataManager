@@ -1,0 +1,86 @@
+<div class="heading font-semibold text-[20px]">KPI's</div>
+<div class="subheading text-[--grey-color] text-xs">
+  Please click the graph symbol next to each keyword to display it to the graph.
+</div>
+<div class="statWrap mt-5 flex flex-col gap-3">
+  <div class="stat flex items-center justify-between p-5 border border-solid border-[--light-grey-color] rounded-md">
+    <div class="statBlock">
+      <div class="title text-sm text-[--grey-color] font-semibold">
+        {{getDataValue('actualvat')?.label}}
+      </div>
+      <div class="number text-xl font-bold text-[--black-color]">
+        {{getDataValue('actualvat')?.value ? (getDataValue('actualvat')?.value | numberToKMB) : 0}}
+      </div>
+    </div>
+    <div class="statBlock">
+      <div class="title text-sm text-[--grey-color] font-semibold">
+        {{getDataValue('deviation')?.label}}
+
+      </div>
+      <div class="number text-xl font-bold text-[--black-color]">
+        {{getDataValue('deviation')?.value || 0 | numberToKMB}}
+      </div>
+    </div>
+    <div class="statBlock">
+      <div class="title text-sm text-[--grey-color] font-semibold">
+        {{getDataValue('deviation_pct')?.label}}
+      </div>
+      <div class="number text-xl font-bold text-[--green-color] bg-[--light-green-color] rounded-[40px] py-2 px-4">
+        {{getDataValue('deviation_pct')?.value }}%
+      </div>
+    </div>
+  </div>
+  <div class="stat flex items-center justify-between p-5 border border-solid border-[--light-grey-color] rounded-md">
+    <div class="statBlock">
+      <div class="title text-sm text-[--grey-color] font-semibold">
+        {{getDataValue('expectedvat')?.label}}
+      </div>
+      <div class="number text-xl font-bold text-[--black-color]">
+        {{getDataValue('expectedvat')?.value || 0 | numberToKMB}}
+      </div>
+    </div>
+    <div class="statBlock">
+      <div class="title text-sm text-[--grey-color] font-semibold">
+        {{getDataValue('verified_deviation')?.label}}
+      </div>
+      <div class="number text-xl font-bold text-[--black-color]">
+        {{getDataValue('verified_deviation')?.value || 0 | numberToKMB}}
+      </div>
+    </div>
+    <div class="statBlock">
+      <div class="title text-sm text-[--grey-color] font-semibold">
+
+        {{getDataValue('verified_deviation_pct')?.label}}
+      </div>
+      <div class="number text-xl font-bold text-[--red-color] bg-[--light-red-color] rounded-[40px] py-2 px-4">
+        {{getDataValue('verified_deviation_pct')?.value }}%
+      </div>
+    </div>
+  </div>
+  <div class="stat flex items-center justify-between p-5 border border-solid border-[--light-grey-color] rounded-md">
+    <div class="statBlock">
+      <div class="title text-sm text-[--grey-color] font-semibold">
+        {{getDataValue('reportedvat')?.label}}
+      </div>
+      <div class="number text-xl font-bold text-[--black-color]">
+        {{getDataValue('reportedvat')?.value || 0 | numberToKMB}}
+      </div>
+    </div>
+    <div class="statBlock">
+      <div class="title text-sm text-[--grey-color] font-semibold">
+        {{getDataValue('unverified_deviation')?.label}}
+      </div>
+      <div class="number text-xl font-bold text-[--black-color]">
+        {{getDataValue('unverified_deviation')?.value || 0 | numberToKMB}}
+      </div>
+    </div>
+    <div class="statBlock">
+      <div class="title text-sm text-[--grey-color] font-semibold">
+        {{getDataValue('unverified_deviation_pct')?.label}}
+      </div>
+      <div class="number text-xl font-bold text-[--red-color] bg-[--light-red-color] rounded-[40px] py-2 px-4">
+        {{getDataValue('unverified_deviation_pct')?.value}}%
+      </div>
+    </div>
+  </div>
+</div>
