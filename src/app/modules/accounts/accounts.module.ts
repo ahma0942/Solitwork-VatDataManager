@@ -49,8 +49,8 @@ const routes: Routes= [
     NzTableModule,
     NzIconModule,
     MatDialogModule,
-    ReactiveFormsModule,
     FormsModule,
+    ReactiveFormsModule,
     NzSelectModule,
     NzDatePickerModule,
     NzCheckboxModule

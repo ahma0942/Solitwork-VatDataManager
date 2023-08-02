@@ -1,5 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import {
+  FormGroup,
+  FormBuilder,
+  FormControl,
+  Validators,
+} from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import * as moment from 'moment';
 import { ConfigurationService } from 'src/app/services/configuration.service';
@@ -7,74 +12,102 @@ import { ConfigurationService } from 'src/app/services/configuration.service';
 @Component({
   selector: 'app-add-edit-vat-rates',
   templateUrl: './add-edit-vat-rates.component.html',
-  styleUrls: ['./add-edit-vat-rates.component.scss']
+  styleUrls: ['./add-edit-vat-rates.component.scss'],
 })
-export class AddEditVatRatesComponent implements OnInit{
-  recievedData:any
-  postingForm: FormGroup = new FormGroup({})
-  result:any
+export class AddEditVatRatesComponent implements OnInit {
+  recievedData: any;
+  vatRateForm: FormGroup = undefined;
+  result: any;
   fromDate: any;
   vatRateDetail: any;
-constructor(
-  @Inject(MAT_DIALOG_DATA) public data: any,
-    private dialog:MatDialogRef<AddEditVatRatesComponent>,
+  today:any=[new Date(),new Date()];
+  constructor(
+    @Inject(MAT_DIALOG_DATA) private data: any,
+    private dialog: MatDialogRef<AddEditVatRatesComponent>,
     private fb: FormBuilder,
-    private configurationService:ConfigurationService
-){
-if(data){
-  this.recievedData = data;
-  console.log(this.recievedData)
-  this.getVateRate(this.recievedData)
+    private configurationService: ConfigurationService
+  ) {
 
-}
-}
-  ngOnInit(): void {
-    this.createForm()
-
-}
-createForm(){
-  this.postingForm = this.fb.group({
-
-    vatRateID: new FormControl(this.vatRateDetail?.vatRateID,[Validators.required]),
-    legalEntity: new FormControl(this.vatRateDetail?.legalEntity,[Validators.required]),
-    account: new FormControl(this.vatRateDetail?.account,[Validators.required]),
-    expectedVATType: new FormControl(this.vatRateDetail?.expectedVATType,[Validators.required]),
-    expectedVATRate: new FormControl(this.vatRateDetail?.expectedVATRate,[Validators.required]),
-    validfrom: new FormControl('',[Validators.required]),
-    validto: new FormControl('',[Validators.required]),
-  })
-
-}
-create(){
-  this.configurationService.createPostingType(this.postingForm.value).subscribe(d=>{
-    console.log(d)
-  })
-}
-update(){
-  console.log(this.recievedData.postingType,this.postingForm.value)
-  this.configurationService.updatePostingType(this.recievedData.postingType,this.postingForm.value).subscribe(d=>{
-    console.log(d)
-  })
-}
-getVateRate(data:any){
-  var obj ={
-    vatrate_id:data.vatRateID,
   }
-  this.configurationService.getSingleVatRate(obj).subscribe((d:any)=>{
-    this.vatRateDetail = d
-    console.log('Journal detail',this.vatRateDetail)
-    this.createForm()
-  });
-}
-  close(){
+  ngOnInit(): void {
+    if (this.data) {
+      this.recievedData = this.data;
+      console.log(this.recievedData);
+      this.getVateRate(this.recievedData);
+    }else{
+      this.createForm()
+    }
+  }
+  createForm() {
+    this.vatRateForm = this.fb.group({
+      vatRateID: new FormControl(this.vatRateDetail?.vatRateID, [
+        Validators.required,
+      ]),
+      legalEntity: new FormControl(this.vatRateDetail?.legalEntity, [
+        Validators.required,
+      ]),
+      account: new FormControl(this.vatRateDetail?.account, [
+        Validators.required,
+      ]),
+      expectedVATType: new FormControl(this.vatRateDetail?.expectedVATType, [
+        Validators.required,
+      ]),
+      expectedVATRate: new FormControl(this.vatRateDetail?.expectedVATRate, [
+        Validators.required,
+      ]),
+      validfrom: new FormControl((this.vatRateDetail?.validfrom || new Date()), [Validators.required]),
+      validto: new FormControl((this.vatRateDetail?.validto || new Date()), [Validators.required]),
+      date:[this.today]
+    });
+  }
+  create() {
+    this.vatRateForm.removeControl('date');
+    this.configurationService
+      .createVateRate(this.vatRateForm.value)
+      .subscribe((d) => {
+        if(d){
+          this.dialog.close('Created')
+        }
+      });
+  }
+  update(): void {
+    this.vatRateForm.removeControl('date');
+    console.log(this.recievedData.postingType, this.vatRateForm.value);
+    this.configurationService
+      .updateVarRate(this.recievedData.vatRateID, this.vatRateForm.value)
+      .subscribe((d) => {
+        if(d){
+          this.dialog.close('Updated')
+        }
+
+      });
+  }
+  getVateRate(data: any) {
+    var obj = {
+      vatrate_id: data.vatRateID,
+    };
+    this.configurationService.getSingleVatRate(obj).subscribe((d: any) => {
+      console.log('vaterate',d)
+      this.vatRateDetail = d;
+      this.today = [new Date(this.vatRateDetail.validfrom).toISOString(),new Date(this.vatRateDetail.validto).toISOString()]
+      this.createForm();
+    });
+  }
+  close() {
     this.dialog.close();
   }
 
   // date range
-  today = new Date() ;
-
   onChange(result: any): void {
-    this.postingForm.controls['validfrom'].setValue(moment(result[0]).format('yyyy-MM-DDTHH:mm:ss'))
-    this.postingForm.controls['validto'].setValue(moment(result[1]).format('yyyy-MM-DDTHH:mm:ss'))
+    const fromDate = result[0]
+    const toDate = result[0]
+    fromDate.setHours(0)
+    fromDate.setMinutes(0)
+    fromDate.setSeconds(0)
+    toDate.setHours(23)
+    toDate.setMinutes(59)
+    toDate.setSeconds(59)
+    this.vatRateForm.controls['validfrom'].setValue(moment(fromDate).format('yyyy-MM-DDTHH:mm:ss'))
+    this.vatRateForm.controls['validto'].setValue(moment(toDate).format('yyyy-MM-DDTHH:mm:ss'))
   }
 }

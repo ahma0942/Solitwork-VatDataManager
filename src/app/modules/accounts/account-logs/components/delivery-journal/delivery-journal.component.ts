@@ -33,7 +33,7 @@ export class DeliveryJournalComponent implements OnInit{
   }
 
   ngOnInit(): void {
-this.getCountriesData()
+this.getJournalData()
   }
   pageSizeChange(value: any) {
     this.pagination.skip = 0;
@@ -42,7 +42,7 @@ this.getCountriesData()
   pageIndexChange(event:any){
     this.pagination.skip = event -1;
   }
-  getCountriesData(){
+  getJournalData(){
     var obj ={
       ...this.pagination
     }
@@ -60,6 +60,7 @@ this.getCountriesData()
     }).afterClosed().subscribe(action=>{
       if(action){
         console.log(action)
+        this.getJournalData()
       }
   });
   }
@@ -74,6 +75,7 @@ this.getCountriesData()
     }).afterClosed().subscribe(action=>{
       if(action){
         console.log(action)
+        this.getJournalData()
       }
   });
   }

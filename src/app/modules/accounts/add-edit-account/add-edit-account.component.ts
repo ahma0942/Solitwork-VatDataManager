@@ -15,40 +15,49 @@ export class AddEditAccountComponent implements OnInit{
   result:any
   fromDate: any;
   accountDetail: any;
+  dataValue: any[];
+  today:any=[new Date(),new Date()];
 constructor(
   @Inject(MAT_DIALOG_DATA) public data: any,
     private dialog:MatDialogRef<AddEditAccountComponent>,
     private fb: FormBuilder,
     private configurationService:ConfigurationService
 ){
-if(data){
-  this.recievedData = data;
-  this.getAccount(this.recievedData)
 
-}
 }
   ngOnInit(): void {
+    if(this.data){
+      this.recievedData = this.data;
+      this.getAccount(this.recievedData)
+    }else{
     this.createForm()
-
+  }
 }
 createForm(){
   this.accountForm = this.fb.group({
     account: new FormControl(this.accountDetail?.account,[Validators.required]),
     accountVATCategory: new FormControl(this.accountDetail?.accountVATCategory,[Validators.required]),
-    validfrom: new FormControl('',[Validators.required]),
-    validto: new FormControl('',[Validators.required]),
-    isVATExpectedOnAccount: new FormControl(this.accountDetail?.isVATExpectedOnAccount,[Validators.required]),
+    date:[this.today],
+    validfrom: new FormControl((this.accountDetail?.validfrom || new Date().toISOString()),[Validators.required]),
+    validto: new FormControl((this.accountDetail?.validto || new Date().toISOString()),[Validators.required]),
+    isVATExpectedOnAccount: new FormControl((this.accountDetail?.isVATExpectedOnAccount || false),[Validators.required]),
   })
 
 }
 createAccount(){
+  this.accountForm.removeControl('date');
   this.configurationService.createAccount(this.accountForm.value).subscribe(d=>{
-    console.log(d)
+    if(d){
+      this.dialog.close('created')
+    }
   })
 }
 updateAccount(){
+  this.accountForm.removeControl('date');
   this.configurationService.updateAccount(this.recievedData.account,this.accountForm.value).subscribe(d=>{
-    console.log(d)
+    if(d){
+      this.dialog.close('updated')
+    }
   })
 }
 getAccount(data:any){
@@ -57,7 +66,7 @@ getAccount(data:any){
   }
   this.configurationService.getSingleAccount(obj).subscribe((d:any)=>{
     this.accountDetail = d
-    console.log('account detail',this.accountDetail)
+    this.today = [new Date(this.accountDetail.validfrom).toISOString(),new Date(this.accountDetail.validto).toISOString()]
     this.createForm()
   });
 }
@@ -66,11 +75,19 @@ getAccount(data:any){
   }
 
   // date range
-  today = new Date() ;
+
 
   onChange(result: any): void {
-    this.accountForm.controls['validfrom'].setValue(moment(result[0]).format('yyyy-MM-DDTHH:mm:ss'))
-    this.accountForm.controls['validto'].setValue(moment(result[1]).format('yyyy-MM-DDTHH:mm:ss'))
+    const fromDate = result[0]
+    const toDate = result[0]
+    fromDate.setHours(0)
+    fromDate.setMinutes(0)
+    fromDate.setSeconds(0)
+    toDate.setHours(23)
+    toDate.setMinutes(59)
+    toDate.setSeconds(59)
+    this.accountForm.controls['validfrom'].setValue(moment(fromDate).format('yyyy-MM-DDTHH:mm:ss'))
+    this.accountForm.controls['validto'].setValue(moment(toDate).format('yyyy-MM-DDTHH:mm:ss'))
   }
 
 

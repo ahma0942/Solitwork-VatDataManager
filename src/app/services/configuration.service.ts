@@ -45,14 +45,13 @@ export class ConfigurationService {
     return this.http.get(environment.baseUrl+`/config/journalcategories`,{params:params});
   }
   getSingleJournal(params?:any):Observable<any>{
-    return this.http.get(environment.baseUrl+`/config/journalCategory`,{params:params});
+    return this.http.get(environment.baseUrl+`/config/journalcategory`,{params:params});
   }
-  createJournal(countryData:any):Observable<any>{
-    return this.http.post(environment.baseUrl+`/config/journalCategory`,countryData);
+  createJournal(journalData:any):Observable<any>{
+    return this.http.post(environment.baseUrl+`/config/journalcategory`,journalData);
   }
-  updateJournal(legalEntity:any,journalData:any):Observable<any>{
-    debugger
-    return this.http.put(environment.baseUrl+`/config/journalCategory`,journalData,{params:{legalEntity:legalEntity}});
+  updateJournal(journalcategory_id:any,journalData:any):Observable<any>{
+    return this.http.put(environment.baseUrl+`/config/journalcategory`,journalData,{params:{journalcategory_id:journalcategory_id}});
   }
 
   getPostingType(params?:any):Observable<any>{
@@ -76,11 +75,11 @@ export class ConfigurationService {
   getSingleVatRate(params?:any):Observable<any>{
     return this.http.get(environment.baseUrl+`/config/vatrate`,{params:params});
   }
-  createVateRate(countryData:any):Observable<any>{
-    return this.http.post(environment.baseUrl+`/config/vatrate`,countryData);
+  createVateRate(vatRateData:any):Observable<any>{
+    return this.http.post(environment.baseUrl+`/config/vatrate`,vatRateData);
   }
-  updateVarRate(postingtype:any,postingTypeData:any):Observable<any>{
+  updateVarRate(vateRateId:any,vatRateData:any):Observable<any>{
     debugger
-    return this.http.put(environment.baseUrl+`/config/vatrate`,postingTypeData,{params:{vatrate_id:postingtype}});
+    return this.http.put(environment.baseUrl+`/config/vatrate`,vatRateData,{params:{vatrate_id:vateRateId}});
   }
 }

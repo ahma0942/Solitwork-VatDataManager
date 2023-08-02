@@ -66,6 +66,7 @@ this.getAccountsData()
     }).afterClosed().subscribe(action=>{
       if(action){
         console.log(action)
+        this.getAccountsData()
       }
   });
   }
@@ -80,6 +81,7 @@ this.getAccountsData()
     }).afterClosed().subscribe(action=>{
       if(action){
         console.log(action)
+        this.getAccountsData()
       }
   });
   }

@@ -26,15 +26,12 @@ export class KpisComponent implements OnInit {
   }
 
   getkpi(){
-    console.log(this.dateData)
     var obj ={
       from_date:this.fromDate,
       to_date:this.toDate
     }
     this.dashboardService.getKpiData(obj).subscribe((d:any)=>{
       this.kpiData = d
-        debugger
-        console.log(this.kpiData)
     });
   }
   getDataValue(id:any){

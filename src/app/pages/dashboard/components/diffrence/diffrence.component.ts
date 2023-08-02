@@ -55,7 +55,6 @@ export class DiffrenceComponent implements OnInit{
     }
     this.dashboardService.getDifferenceData(obj).subscribe((d:any)=>{
       this.transactions = d.vatTransactions
-      console.log(this.transactions)
     });
   }
 }

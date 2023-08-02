@@ -61,6 +61,7 @@ this.getCountriesData()
     }).afterClosed().subscribe(action=>{
       if(action){
         console.log(action)
+        this.getCountriesData()
       }
   });
   }
@@ -75,6 +76,7 @@ this.getCountriesData()
     }).afterClosed().subscribe(action=>{
       if(action){
         console.log(action)
+        this.getCountriesData()
       }
   });
   }

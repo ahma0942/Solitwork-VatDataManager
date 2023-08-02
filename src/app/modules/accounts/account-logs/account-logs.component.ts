@@ -6,6 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./account-logs.component.scss']
 })
 export class AccountLogsComponent {
-  tab:any=5;
+  tab:any=1;
 
 }

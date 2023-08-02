@@ -14,6 +14,6 @@ export class FinancialService {
   }
   changeStatus(obj?:any):Observable<any>{
     console.log(obj)
-    return this.http.post(environment.baseUrl+`/setisreportedvat` + '?transactionID=' + obj.transactionID + '&IsReportedVAT=' +  obj.IsReportedVAT, {});
+    return this.http.post(environment.baseUrl+`/setisreportedvat` ,{} , {params:obj});
   }
 }

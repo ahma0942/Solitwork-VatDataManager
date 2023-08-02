@@ -15,6 +15,7 @@ export class AddEditCountryComponent implements OnInit{
   result:any
   fromDate: any;
   countryDetail: any;
+  today:any=[new Date(),new Date()];
 constructor(
   @Inject(MAT_DIALOG_DATA) public data: any,
     private dialog:MatDialogRef<AddEditCountryComponent>,
@@ -36,19 +37,24 @@ createForm(){
   this.countryForm = this.fb.group({
     legalEntity: new FormControl(this.countryDetail?.legalEntity,[Validators.required]),
     legalEntityVATCountry: new FormControl(this.countryDetail?.legalEntityVATCountry,[Validators.required]),
-    validfrom: new FormControl('',[Validators.required]),
-    validto: new FormControl('',[Validators.required]),
+    validfrom: new FormControl((this.countryDetail?.validfrom || new Date().toISOString()),[Validators.required]),
+    validto: new FormControl((this.countryDetail?.validfrom || new Date().toISOString()),[Validators.required]),
+    date:[this.today],
   })
 
 }
 createCountry(){
   this.configurationService.createCountry(this.countryForm.value).subscribe(d=>{
-    console.log(d)
+    if(d){
+      this.dialog.close('Created')
+    }
   })
 }
 updateCountry(){
   this.configurationService.updateCountry(this.recievedData.legalEntity,this.countryForm.value).subscribe(d=>{
-    console.log(d)
+    if(d){
+      this.dialog.close('Updated')
+    }
   })
 }
 getcountry(data:any){
@@ -58,6 +64,7 @@ getcountry(data:any){
   this.configurationService.getSingleCountry(obj).subscribe((d:any)=>{
     this.countryDetail = d
     console.log('country detail',this.countryDetail)
+    this.today = [new Date(this.countryDetail.validfrom).toISOString(),new Date(this.countryDetail.validto).toISOString()]
     this.createForm()
   });
 }
@@ -66,10 +73,17 @@ getcountry(data:any){
   }
 
   // date range
-  today = new Date() ;
-
   onChange(result: any): void {
-    this.countryForm.controls['validfrom'].setValue(moment(result[0]).format('yyyy-MM-DDTHH:mm:ss'))
-    this.countryForm.controls['validto'].setValue(moment(result[1]).format('yyyy-MM-DDTHH:mm:ss'))
+    const fromDate = result[0]
+    const toDate = result[0]
+    fromDate.setHours(0)
+    fromDate.setMinutes(0)
+    fromDate.setSeconds(0)
+    toDate.setHours(23)
+    toDate.setMinutes(59)
+    toDate.setSeconds(59)
+    this.countryForm.controls['validfrom'].setValue(moment(fromDate).format('yyyy-MM-DDTHH:mm:ss'))
+    this.countryForm.controls['validto'].setValue(moment(toDate).format('yyyy-MM-DDTHH:mm:ss'))
+    this.countryForm.removeControl('date');
   }
 }

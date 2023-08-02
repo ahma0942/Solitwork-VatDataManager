@@ -13,14 +13,7 @@
           </div>
           <div class="formGroup mb-5 w-[48%]">
             <label  class="font-normal text-sm">Select Date Range</label>
-            <nz-range-picker class="w-full mt-3 rounded-md"
-            [nzShowTime]="{ nzFormat: 'HH:mm' }"
-            nzFormat="yyyy-MM-dd HH:mm"
-            [nzPlaceHolder]="['Start Time', 'End Time']"
-            [(ngModel)]="today"
-            formControlName="date"
-            (nzOnOk)="onChange($event)"
-          ></nz-range-picker>
+            <nz-range-picker class="w-full mt-3 rounded-md" formControlName="date" (ngModelChange)="onChange($event)"></nz-range-picker>
 
           </div>
           <div class="formGroup mb-5 w-[48%]">

@@ -11,44 +11,51 @@ import { ConfigurationService } from 'src/app/services/configuration.service';
 })
 export class AddEditJournalCategoryComponent {
   recievedData:any
-  journalForm: FormGroup = new FormGroup({})
+  journalForm: FormGroup =undefined;
   result:any
   fromDate: any;
   journalDetail: any;
+  today:any=[new Date(),new Date()];
 constructor(
-  @Inject(MAT_DIALOG_DATA) public data: any,
+  @Inject(MAT_DIALOG_DATA) private data: any,
     private dialog:MatDialogRef<AddEditJournalCategoryComponent>,
     private fb: FormBuilder,
     private configurationService:ConfigurationService
 ){
-if(data){
-  this.recievedData = data;
-  console.log(this.recievedData)
-  this.getJournal(this.recievedData)
-
-}
 }
   ngOnInit(): void {
-    this.createForm()
+    if(this.data){
+      this.recievedData = this.data;
+      this.getJournal(this.recievedData)
+    }else{
+      this.createForm()
+    }
 
 }
 createForm(){
   this.journalForm = this.fb.group({
-    journalCategory: new FormControl(this.journalDetail?.journalCategory,[Validators.required]),
-    transactionVATCategory: new FormControl(this.journalDetail?.transactionVATCategory,[Validators.required]),
-    validfrom: new FormControl('',[Validators.required]),
-    validto: new FormControl('',[Validators.required]),
+    journalCategory: [this.journalDetail?.journalCategory,[Validators.required]],
+    transactionVATCategory: [this.journalDetail?.transactionVATCategory || null,[Validators.required]],
+    validfrom: new FormControl((this.journalDetail?.validfrom || new Date().toISOString()),[Validators.required]),
+    validto: new FormControl((this.journalDetail?.validfrom || new Date().toISOString()),[Validators.required]),
+    date:[this.today]
   })
 
 }
 createJournal(){
-  this.configurationService.createCountry(this.journalForm.value).subscribe(d=>{
-    console.log(d)
+  this.journalForm.removeControl('date');
+  this.configurationService.createJournal(this.journalForm.value).subscribe(d=>{
+    if(d){
+      this.dialog.close('Created')
+    }
   })
 }
 updateJournal(){
-  this.configurationService.updateCountry(this.recievedData.legalEntity,this.journalForm.value).subscribe(d=>{
-    console.log(d)
+  this.journalForm.removeControl('date');
+  this.configurationService.updateJournal(this.recievedData.journalCategory,this.journalForm.value).subscribe(d=>{
+    if(d){
+      this.dialog.close('Updated')
+    }
   })
 }
 getJournal(data:any){
@@ -58,6 +65,7 @@ getJournal(data:any){
   this.configurationService.getSingleJournal(obj).subscribe((d:any)=>{
     this.journalDetail = d
     console.log('Journal detail',this.journalDetail)
+    this.today = [new Date(this.journalDetail.validfrom).toISOString(),new Date(this.journalDetail.validto).toISOString()]
     this.createForm()
   });
 }
@@ -66,10 +74,16 @@ getJournal(data:any){
   }
 
   // date range
-  today = new Date() ;
-
   onChange(result: any): void {
-    this.journalForm.controls['validfrom'].setValue(moment(result[0]).format('yyyy-MM-DDTHH:mm:ss'))
-    this.journalForm.controls['validto'].setValue(moment(result[1]).format('yyyy-MM-DDTHH:mm:ss'))
+    const fromDate = result[0]
+    const toDate = result[0]
+    fromDate.setHours(0)
+    fromDate.setMinutes(0)
+    fromDate.setSeconds(0)
+    toDate.setHours(23)
+    toDate.setMinutes(59)
+    toDate.setSeconds(59)
+    this.journalForm.controls['validfrom'].setValue(moment(fromDate).format('yyyy-MM-DDTHH:mm:ss'))
+    this.journalForm.controls['validto'].setValue(moment(toDate).format('yyyy-MM-DDTHH:mm:ss'))
   }
 }

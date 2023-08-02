@@ -35,7 +35,7 @@ export class VatRatesComponent implements OnInit{
   }
 
   ngOnInit(): void {
-this.getCountriesData()
+this.getVatRateData()
   }
   pageSizeChange(value: any) {
     this.pagination.skip = 0;
@@ -44,7 +44,7 @@ this.getCountriesData()
   pageIndexChange(event:any){
     this.pagination.skip = event -1;
   }
-  getCountriesData(){
+  getVatRateData(){
     var obj ={
       ...this.pagination
     }
@@ -62,6 +62,7 @@ this.getCountriesData()
     }).afterClosed().subscribe(action=>{
       if(action){
         console.log(action)
+        this.getVatRateData()
       }
   });
   }
@@ -76,6 +77,7 @@ this.getCountriesData()
     }).afterClosed().subscribe(action=>{
       if(action){
         console.log(action)
+        this.getVatRateData()
       }
   });
   }

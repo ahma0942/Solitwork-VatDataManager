@@ -31,7 +31,7 @@ export class PostingTypeComponent implements OnInit{
   }
 
   ngOnInit(): void {
-this.getCountriesData()
+this.getPostingTypes()
   }
   pageSizeChange(value: any) {
     this.pagination.skip = 0;
@@ -40,7 +40,7 @@ this.getCountriesData()
   pageIndexChange(event:any){
     this.pagination.skip = event -1;
   }
-  getCountriesData(){
+  getPostingTypes(){
     var obj ={
       ...this.pagination
     }
@@ -58,6 +58,7 @@ this.getCountriesData()
     }).afterClosed().subscribe(action=>{
       if(action){
         console.log(action)
+        this.getPostingTypes()
       }
   });
   }
@@ -72,6 +73,7 @@ this.getCountriesData()
     }).afterClosed().subscribe(action=>{
       if(action){
         console.log(action)
+        this.getPostingTypes()
       }
   });
   }
