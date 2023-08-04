@@ -32,8 +32,10 @@ export class DetailOverviewComponent implements OnInit {
   constructor(private dashboardService:DashboardService){
   }
   ngOnChanges(){
-    this.fromDate = moment(this.dateData[0]).format('yyyy-MM-DDTHH:mm:ss')
+    if(this.dateData){
+      this.fromDate = moment(this.dateData[0]).format('yyyy-MM-DDTHH:mm:ss')
     this.toDate = moment(this.dateData[1]).format('yyyy-MM-DDTHH:mm:ss')
+    }
     this.getTransactions()
   }
   ngOnInit(): void {

@@ -1,4 +1,4 @@
-<div id="financialTransactions" class="mainWrap configurationWrap max-w-[80%] w-full mx-auto flex flex flex-col items-center justify-center">
+<div id="financialTransactions" class="mainWrap configurationWrap max-w-[80%] w-full mx-auto flex flex flex-col items-center">
   <div class="pageHeader flex justify-between w-full opacity-60">
     <div class="logo font-black text-[--black-color] text-[18px]">
       <span class="text-[--primary-color] ">
@@ -10,7 +10,7 @@
       <button class="bg-[#e2f0f2] h-[36px] w-[36px] flex justify-center items-center text-[--primary-color] rounded-sm">
         <mat-icon class="">search</mat-icon>
       </button>
-      <button class="bg-[#e2f0f2] h-[36px] w-[36px] flex justify-center items-center text-[--primary-color] rounded-sm">
+      <button (click)="showFilter = !showFilter" class="bg-[#e2f0f2] h-[36px] w-[36px] flex justify-center items-center text-[--primary-color] rounded-sm">
         <mat-icon>filter_list</mat-icon>
       </button>
       <button class="bg-[#e2f0f2] h-[36px] w-[36px] flex justify-center items-center text-[--primary-color] rounded-sm">
@@ -19,11 +19,10 @@
       <button class="bg-[#e2f0f2] h-[36px] w-[36px] flex justify-center items-center text-[--primary-color] rounded-sm">
         <mat-icon>arrow_downward</mat-icon>
       </button>
-      <!-- <button class="bg-[--primary-color] py-1  px-4 rounded-sm text-white" (click)="addAccount()">
-        Add Account
-      </button> -->
+
     </div>
   </div>
+  <app-filter class="w-full" [filters]="filters" [showFilters]="showFilter" (onSubmitEvent)="applyFilter($event)"></app-filter>
   <div class="mainContent bg-white rounded-sm w-full mt-3 px-3">
     <div class="tableWrap w-full mt-3">
       <nz-table id="table-export" #sortTable [nzData]="listOfData" (nzPageIndexChange)="pageIndexChange($event)"
@@ -62,16 +61,8 @@
         <td class="w-[150px]"> {{data?.customer || 'N/A'}} </td>
         <td class="w-[150px]"> {{data?.vendor || 'N/A'}} </td>
         <td class="w-[150px]"> {{data?.counterPartyVATCountry }} </td>
-        <td class="w-[150px]"> {{data?.IsReportedVAT }} </td>
-        <td   class="pointer">
-           <span nz-icon nzType="edit" nzTheme="outline"  [matMenuTriggerFor]="actionExportMenu"></span>
-          <mat-menu class="mt-2" #actionExportMenu="matMenu">
-            <!-- <div class="action-heading">Actions</div> -->
-            <button  (click)="editStatus(data?.transactionID,data?.IsReportedVAT)" class="mt-2 flex items-center gap-3" mat-menu-item>
-              {{data.IsReportedVAT? 'False':'True'}}
-            </button>
-          </mat-menu>
-        </td>
+        <td class="w-[150px]"> <nz-switch [(ngModel)]="data.IsReportedVAT" [nzSize]="'small'" (ngModelChange)="editStatus(data?.transactionID,data.IsReportedVAT)"></nz-switch> </td>
+
       </tr>
     </tbody>
   </nz-table>

@@ -8,6 +8,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { FinancialTransactionsComponent } from './financial-transactions/financial-transactions.component';
 import { SharedModule } from '../shared/shared.module';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { MatMenuModule } from '@angular/material/menu';
 
 const routes: Routes= [
@@ -28,7 +29,8 @@ const routes: Routes= [
     NzTableModule,
     NzIconModule,
     SharedModule,
-    MatMenuModule
+    MatMenuModule,
+    NzSwitchModule
   ]
 })
 export class FinancialTransactionsModule { }

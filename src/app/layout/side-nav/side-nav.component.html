@@ -1,26 +1,27 @@
-<mat-drawer-container class="nav-container" autosize>
-  <mat-drawer class="nav-sidenav" mode="side" [opened]="isOpened">
+<div class="nav-container" [ngClass]="isOpened?'opened':'closed'">
+  <div class="nav-sidenav" >
    <div class="navigationWrap">
     <div class="upperLinks">
       <img src="assets/logo.svg" class="logo mx-auto" />
 
       <ul class="navigation">
        <li class="link">
-         <a class="link-item">HOME</a>
-       </li>
-       <li class="link">
-         <a routerLink="/app/dashboard" routerLinkActive="is-active" class="link-item">
+         <a routerLink="/app/dashboard" routerLinkActive="is-active" class="link-item gap-2 flex justify-start items-center">
            <mat-icon>dashboard</mat-icon>
+           <span *ngIf="isOpened">Dashboard</span>
          </a>
        </li>
        <li class="link">
-         <a routerLink="/app/accounts" routerLinkActive="is-active" class="link-item">
+         <a routerLink="/app/accounts" routerLinkActive="is-active" class="link-item gap-2 flex justify-start items-center">
            <mat-icon>cloud</mat-icon>
+           <span *ngIf="isOpened">Accounts</span>
          </a>
        </li>
        <li class="link">
-         <a routerLink="/app/financial-transactions" routerLinkActive="is-active"  class="link-item">
+         <a routerLink="/app/financial-transactions" routerLinkActive="is-active"  class="link-item gap-2 flex justify-start items-center">
            <mat-icon> format_list_bulleted</mat-icon>
+           <span *ngIf="isOpened">Transactions</span>
+
          </a>
        </li>
       </ul>
@@ -28,21 +29,23 @@
      <div class="lowerLinks">
       <ul class="navigation">
         <li class="link">
-          <a routerLink="/setting" class="link-item" routerLinkActive="is-active">
+          <a routerLink="/setting" class="link-item gap-2 flex justify-start items-center" routerLinkActive="is-active">
             <mat-icon>settings</mat-icon>
+            <span *ngIf="isOpened">Settings</span>
           </a>
         </li>
         <li class="link">
-          <a routerLink="/logout" class="link-item" routerLinkActive="is-active" >
+          <a routerLink="/logout" class="link-item gap-2 flex justify-start items-center" routerLinkActive="is-active" >
             <mat-icon>exit_to_app</mat-icon>
+            <span *ngIf="isOpened">Log Out</span>
           </a>
         </li>
       </ul>
      </div>
    </div>
-  </mat-drawer>
+  </div>
 
   <div class="nav-sidenav-content">
     <mat-icon class="toggle-icon" [ngClass]="isOpened?'opened':'closed'" (click)="toggle()" [fontIcon]="'keyboard_arrow_' + (isOpened ? 'left' : 'right')"></mat-icon>
   </div>
-</mat-drawer-container>
+</div>

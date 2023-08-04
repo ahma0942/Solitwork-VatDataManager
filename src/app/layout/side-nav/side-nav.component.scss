@@ -1,9 +1,40 @@
 .nav-container {
   height: 100%;
+  background-color: #fff;
+  position: relative;
+  transition: 0.3s;
+  border-right: 1px solid #b0b0b054;
+  &.opened{
+    width: 160px;
+    & .nav-sidenav-content{
+      width: inherit;
+    }
+    & .navigationWrap{
+      width: 150px;
+      transition: 0.3s;
+      & .navigation{
+        & .link{
+          & a{
+            margin: 0 10px;
+            width: 95%;
+            justify-content: start;
+          }
+        }
+      }
+    }
+  }
+  &.closed{
+    width: 70px;
+    & .nav-sidenav-content{
+      width: inherit;
+    }
+    & .navigationWrap{
+      width: 70px;
+      transition: 0.3s;
+    }
+  }
 
   .nav-sidenav {
-    width: 70px;
-    text-align: center;
     z-index: 1;
 
     .logo {
@@ -13,7 +44,6 @@
   }
 }
 .nav-sidenav-content{
-  width: 15px;
   position: fixed;
   z-index: 3;
 }
@@ -32,10 +62,10 @@
   background-color: #fff;
   border: 1px solid #b0b0b0;
   &.opened{
-    left: -10px;
+    right: -10px;
   }
   &.closed{
-    left: -7px;
+    right: -7px;
   }
 }
 ::ng-deep .nav-container mat-drawer-content{

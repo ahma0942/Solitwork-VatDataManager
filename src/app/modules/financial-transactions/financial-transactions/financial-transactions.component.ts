@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { take } from 'rxjs';
 import { listOfColumn } from 'src/app/models/interfaces/listOfColumns.interface';
 import { FinancialService } from 'src/app/services/financial.service';
+import { FilterObject, GetSelectedFilters, ConstantFilterVariable } from '../../shared/components/filter/filter';
 
 @Component({
   selector: 'app-financial-transactions',
@@ -10,6 +11,10 @@ import { FinancialService } from 'src/app/services/financial.service';
   styleUrls: ['./financial-transactions.component.scss']
 })
 export class FinancialTransactionsComponent {
+
+  searchFilter:any ={}
+  filters: FilterObject[] = GetSelectedFilters([ConstantFilterVariable.customerName,ConstantFilterVariable.vendorName,ConstantFilterVariable.subledgervoucher, ConstantFilterVariable.date])
+  showFilter:boolean = false
   listOfColumn: Array<listOfColumn> = [
     {title:"",  variable:'',  compare: (a:any, b:any)=> null , priority:false , width:''},
     {title:'Account', variable:'account',compare:(a:any,b:any)=>a.account < b.account ? 1 : -1, priority:true,width:''},
@@ -25,10 +30,6 @@ export class FinancialTransactionsComponent {
     {title:'vendor', variable:'vendor',compare:(a:any,b:any)=>a.vendor < b.vendor ? 1 : -1, priority:true,width:''},
     {title:'counter Party VAT Country', variable:'counterPartyVATCountry',compare:(a:any,b:any)=>a.counterPartyVATCountry < b.counterPartyVATCountry ? 1 : -1, priority:true,width:''},
     {title:'Is Reported VAT', variable:'IsReportedVAT',compare:(a:any,b:any)=>a.IsReportedVAT < b.IsReportedVAT ? 1 : -1, priority:true,width:''},
-
-
-
-    {title:'Action', variable:'action', priority:true,width:''},
       ]
     listOfData:Array<any> = [];
   pagination: any = {
@@ -56,24 +57,33 @@ this.getFInancialLogs()
     this.getFInancialLogs()
   }
   getFInancialLogs(){
-    var obj ={
+    var search:any = {
       ...this.pagination,
+      ...this.searchFilter,
       legalEntity:'EEC'
-    }
-    this.financialService.getFinancialTransactions(obj).subscribe((d:any)=>{
+    };
+    this.financialService.getFinancialTransactions(search).subscribe((d:any)=>{
       this.listOfData = d.financialTransactions
       this.pagination.count = d.count
     });
   }
   editStatus(transactionId:any,status:any){
-    status = !status
+    console.log(status)
+    // status = !status
     var obj ={
       transactionID: transactionId,
       IsReportedVAT:status
     }
     this.financialService.changeStatus(obj).pipe(take(1)).subscribe((d:any)=>{
-      this.getFInancialLogs()
+      if(d){
+        this.getFInancialLogs()
+      }
     });
+  }
+  applyFilter($event) {
+    this.searchFilter = $event;
+    this.showFilter = false;
+    this.getFInancialLogs();
   }
 
 }

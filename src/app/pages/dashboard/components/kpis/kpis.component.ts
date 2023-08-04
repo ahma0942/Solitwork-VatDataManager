@@ -17,8 +17,10 @@ export class KpisComponent implements OnInit {
 
   }
   ngOnChanges(){
-    this.fromDate = moment(this.dateData[0]).format('yyyy-MM-DDTHH:mm:ss')
+    if(this.dateData){
+      this.fromDate = moment(this.dateData[0]).format('yyyy-MM-DDTHH:mm:ss')
     this.toDate = moment(this.dateData[1]).format('yyyy-MM-DDTHH:mm:ss')
+    }
     this.getkpi()
   }
   ngOnInit(): void {

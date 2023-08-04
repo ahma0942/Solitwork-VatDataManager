@@ -26,7 +26,7 @@
         <td>{{data?.postingType}}</td>
         <td>{{data?.journalCategory}}</td>
         <td>
-          <div class="lineElipsis">
+          <div class="tableEllipsis w-[200px]">
             {{data?.description}}
           </div>
         </td>
@@ -40,7 +40,7 @@
       </tr>
     </tbody>
   </nz-table>
-  <div class="totalRow flex items-center gap-3 pl-[10px] my-3">
+  <div *ngIf="transactions?.length>0" class="totalRow flex items-center gap-3 pl-[10px] my-3">
     <div class="text-[--black-color] font-bold text-[12px] w-[175px]">
       Total
     </div>
