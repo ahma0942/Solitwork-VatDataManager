@@ -14,10 +14,10 @@
 
           <div class="formGroup mb-5 w-[48%]">
             <label  class="font-normal text-sm">Account VAT Category</label>
-            <nz-select nzShowSearch [nzAllowClear]="false" class="w-full mt-3 rounded-md" formControlName="accountVATCategory" nzPlaceHolder="Select VAT Category">
+            <nz-select data-cy='vatCategory' nzShowSearch [nzAllowClear]="false" class="w-full mt-3 rounded-md" formControlName="accountVATCategory" nzPlaceHolder="Select VAT Category">
               <nz-option nzLabel="Incoming" nzValue="incoming"></nz-option>
-              <nz-option nzLabel="outgoing" nzValue="outgoing"></nz-option>
-              <nz-option nzLabel="reported" nzValue="reported"></nz-option>
+              <nz-option nzLabel="Outgoing" nzValue="outgoing"></nz-option>
+              <nz-option nzLabel="Reported" nzValue="reported"></nz-option>
             </nz-select>
           </div>
           <div class="formGroup mb-5 w-[48%]">

@@ -21,6 +21,7 @@ import { AddEditCountryComponent } from './add-edit-country/add-edit-country.com
 import { AddEditJournalCategoryComponent } from './add-edit-journal-category/add-edit-journal-category.component';
 import { AddEditPostingTypeComponent } from './add-edit-posting-type/add-edit-posting-type.component';
 import { AddEditVatRatesComponent } from './add-edit-vat-rates/add-edit-vat-rates.component';
+import { NzInputModule } from 'ng-zorro-antd/input';
 
 const routes: Routes= [
   {path:'', redirectTo:'logs',pathMatch:'full' },
@@ -53,7 +54,8 @@ const routes: Routes= [
     ReactiveFormsModule,
     NzSelectModule,
     NzDatePickerModule,
-    NzCheckboxModule
+    NzCheckboxModule,
+    NzInputModule,
   ]
 })
 export class AccountsModule { }

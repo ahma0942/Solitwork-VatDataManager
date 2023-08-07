@@ -13,7 +13,6 @@ export class AddEditJournalCategoryComponent {
   recievedData:any
   journalForm: FormGroup =undefined;
   result:any
-  fromDate: any;
   journalDetail: any;
   today:any=[new Date(),new Date()];
 constructor(
@@ -76,7 +75,7 @@ getJournal(data:any){
   // date range
   onChange(result: any): void {
     const fromDate = result[0]
-    const toDate = result[0]
+    const toDate = result[1]
     fromDate.setHours(0)
     fromDate.setMinutes(0)
     fromDate.setSeconds(0)

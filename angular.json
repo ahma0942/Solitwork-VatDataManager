@@ -5,8 +5,11 @@
   "projects": {
     "VatDataManager": {
       "i18n": {
-        "sourceLocale" :"en-US",
-        "locales": {"da":"src/locale/messages.da.xlf","en":"src/locale/messages.xlf"}
+        "sourceLocale": "en-US",
+        "locales": {
+          "da": "src/locale/messages.da.xlf",
+          "en": "src/locale/messages.xlf"
+        }
       },
       "projectType": "application",
       "schematics": {
@@ -21,7 +24,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "localize":true,
+            "localize": true,
             "i18nMissingTranslation": "error",
             "outputPath": "dist/vat-data-manager",
             "index": "src/index.html",
@@ -59,13 +62,17 @@
               ],
               "outputHashing": "all"
             },
-            "da":{
-              "localize":["da"],
-              "baseHref":"/da/"
+            "da": {
+              "localize": [
+                "da"
+              ],
+              "baseHref": "/da/"
             },
-            "en":{
-              "localize":["en"],
-              "baseHref":"/"
+            "en": {
+              "localize": [
+                "en"
+              ],
+              "baseHref": "/"
             },
             "development": {
               "buildOptimizer": false,
@@ -74,10 +81,11 @@
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true,
-              "localize":["en"]
+              "localize": [
+                "en"
+              ]
             }
           },
-
           "defaultConfiguration": "production"
         },
         "serve": {
@@ -86,10 +94,10 @@
             "production": {
               "browserTarget": "VatDataManager:build:production"
             },
-            "da":{
+            "da": {
               "browserTarget": "VatDataManager:build:da"
             },
-            "en":{
+            "en": {
               "browserTarget": "VatDataManager:build:en"
             },
             "development": {
@@ -124,11 +132,60 @@
             ],
             "scripts": []
           }
+        },
+        "cypress-run": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "devServerTarget": "VatDataManager:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "VatDataManager:serve:production"
+            }
+          }
+        },
+        "cypress-open": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "watch": true,
+            "headless": false
+          }
+        },
+        "ct": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "devServerTarget": "VatDataManager:serve",
+            "watch": true,
+            "headless": false,
+            "testingType": "component"
+          },
+          "configurations": {
+            "development": {
+              "devServerTarget": "VatDataManager:serve:development"
+            }
+          }
+        },
+        "e2e": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "devServerTarget": "VatDataManager:serve",
+            "watch": true,
+            "headless": false
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "VatDataManager:serve:production"
+            }
+          }
         }
       }
     }
   },
   "cli": {
-    "analytics": false
+    "analytics": false,
+    "schematicCollections": [
+      "@cypress/schematic",
+      "@schematics/angular"
+    ]
   }
 }

@@ -100,7 +100,7 @@ export class AddEditVatRatesComponent implements OnInit {
   // date range
   onChange(result: any): void {
     const fromDate = result[0]
-    const toDate = result[0]
+    const toDate = result[1]
     fromDate.setHours(0)
     fromDate.setMinutes(0)
     fromDate.setSeconds(0)

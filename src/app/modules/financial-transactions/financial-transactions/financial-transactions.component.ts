@@ -13,7 +13,7 @@ import { FilterObject, GetSelectedFilters, ConstantFilterVariable } from '../../
 export class FinancialTransactionsComponent {
 
   searchFilter:any ={}
-  filters: FilterObject[] = GetSelectedFilters([ConstantFilterVariable.customerName,ConstantFilterVariable.vendorName,ConstantFilterVariable.subledgervoucher, ConstantFilterVariable.date])
+  filters: FilterObject[] = GetSelectedFilters([ConstantFilterVariable.customerName,ConstantFilterVariable.vendorName,ConstantFilterVariable.subledgervoucher,ConstantFilterVariable.transactionID,ConstantFilterVariable.account,ConstantFilterVariable.postingType,ConstantFilterVariable.journalCategory,ConstantFilterVariable.journalNumber, ConstantFilterVariable.date])
   showFilter:boolean = false
   listOfColumn: Array<listOfColumn> = [
     {title:"",  variable:'',  compare: (a:any, b:any)=> null , priority:false , width:''},

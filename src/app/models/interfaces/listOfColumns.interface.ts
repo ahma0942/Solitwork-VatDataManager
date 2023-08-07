@@ -3,5 +3,6 @@ export interface listOfColumn {
   variable?:string,
   compare?:any,
   priority:boolean,
-  width?:string
+  width?:string,
+  class?:string
 }

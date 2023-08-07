@@ -14,7 +14,7 @@
 
           <div class="formGroup mb-5 w-[48%]">
             <label  class="font-normal text-sm">Transaction VAT Category</label>
-            <nz-select class="w-full mt-3 rounded-md" formControlName="transactionVATCategory" nzPlaceHolder="Select VAT Category">
+            <nz-select data-cy='transactionVATCategory' class="w-full mt-3 rounded-md" formControlName="transactionVATCategory" nzPlaceHolder="Select VAT Category">
               <nz-option nzLabel="Incoming" [nzValue]="'incoming'"></nz-option>
               <nz-option nzLabel="Outgoing" [nzValue]="'outgoing'"></nz-option>
               <nz-option nzLabel="Reported" [nzValue]="'reported'"></nz-option>

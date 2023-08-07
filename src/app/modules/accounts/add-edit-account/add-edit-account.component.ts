@@ -11,11 +11,9 @@ import { ConfigurationService } from 'src/app/services/configuration.service';
 })
 export class AddEditAccountComponent implements OnInit{
   recievedData:any
-  accountForm: FormGroup = new FormGroup({})
+  accountForm: FormGroup;
   result:any
-  fromDate: any;
   accountDetail: any;
-  dataValue: any[];
   today:any=[new Date(),new Date()];
 constructor(
   @Inject(MAT_DIALOG_DATA) public data: any,
@@ -23,7 +21,7 @@ constructor(
     private fb: FormBuilder,
     private configurationService:ConfigurationService
 ){
-
+  this.createForm()
 }
   ngOnInit(): void {
     if(this.data){
@@ -37,11 +35,12 @@ createForm(){
   this.accountForm = this.fb.group({
     account: new FormControl(this.accountDetail?.account,[Validators.required]),
     accountVATCategory: new FormControl(this.accountDetail?.accountVATCategory,[Validators.required]),
-    date:[this.today],
+
     validfrom: new FormControl((this.accountDetail?.validfrom || new Date().toISOString()),[Validators.required]),
     validto: new FormControl((this.accountDetail?.validto || new Date().toISOString()),[Validators.required]),
     isVATExpectedOnAccount: new FormControl((this.accountDetail?.isVATExpectedOnAccount || false),[Validators.required]),
-  })
+    date:[this.today],
+  });
 
 }
 createAccount(){
@@ -65,9 +64,11 @@ getAccount(data:any){
     account_id:data.account,
   }
   this.configurationService.getSingleAccount(obj).subscribe((d:any)=>{
-    this.accountDetail = d
-    this.today = [new Date(this.accountDetail.validfrom).toISOString(),new Date(this.accountDetail.validto).toISOString()]
+    if(d){
+      this.accountDetail = d
+       this.today = [new Date(this.accountDetail?.validfrom).toISOString(),new Date(this.accountDetail?.validto).toISOString()]
     this.createForm()
+    }
   });
 }
   close(){
@@ -79,7 +80,7 @@ getAccount(data:any){
 
   onChange(result: any): void {
     const fromDate = result[0]
-    const toDate = result[0]
+    const toDate = result[1]
     fromDate.setHours(0)
     fromDate.setMinutes(0)
     fromDate.setSeconds(0)

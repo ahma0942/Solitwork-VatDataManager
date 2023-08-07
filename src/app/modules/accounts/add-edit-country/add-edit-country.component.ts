@@ -13,7 +13,6 @@ export class AddEditCountryComponent implements OnInit{
   recievedData:any
   countryForm: FormGroup = new FormGroup({})
   result:any
-  fromDate: any;
   countryDetail: any;
   today:any=[new Date(),new Date()];
 constructor(
@@ -75,7 +74,7 @@ getcountry(data:any){
   // date range
   onChange(result: any): void {
     const fromDate = result[0]
-    const toDate = result[0]
+    const toDate = result[1]
     fromDate.setHours(0)
     fromDate.setMinutes(0)
     fromDate.setSeconds(0)

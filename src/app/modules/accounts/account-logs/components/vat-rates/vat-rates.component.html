@@ -34,16 +34,16 @@ Category
     <tbody>
       <tr *ngFor="let data of sortTable.data,let i=index ">
         <td > {{ (pagination?.skip * pagination?.limit) + (i+1)}} </td>
-        <td > {{data?.vatRateID || 'N/A' }} </td>
-        <td > {{data?.legalEntity || 'N/A' }} </td>
-        <td > {{data?.account || 'N/A' }} </td>
-        <td > {{data?.expectedVATType || 'N/A' }} </td>
-        <td > {{data?.expectedVATRate || 'N/A' }} </td>
+        <td data-cy="vatRateID"> {{data?.vatRateID || 'N/A' }} </td>
+        <td data-cy="legalEntity"> {{data?.legalEntity || 'N/A' }} </td>
+        <td data-cy="account"> {{data?.account || 'N/A' }} </td>
+        <td data-cy="expectedVATType"> {{data?.expectedVATType || 'N/A' }} </td>
+        <td data-cy="expectedVATRate"> {{data?.expectedVATRate || 'N/A' }} </td>
 
 
-        <td > {{(data?.validfrom | date) || 'N/A' }} </td>
-        <td > {{(data?.validto |date) || 'N/A' }} </td>
-        <td (click)="edit(data)" class="pointer"> <span nz-icon nzType="edit" nzTheme="outline"></span> </td>
+        <td data-cy="validfrom"> {{(data?.validfrom | date:'yyyy-MM-dd') || 'N/A' }} </td>
+        <td data-cy="validto"> {{(data?.validto | date:'yyyy-MM-dd') || 'N/A' }} </td>
+        <td data-cy="editVatRate" (click)="edit(data)" class="pointer"> <span nz-icon nzType="edit" nzTheme="outline"></span> </td>
       </tr>
     </tbody>
   </nz-table>

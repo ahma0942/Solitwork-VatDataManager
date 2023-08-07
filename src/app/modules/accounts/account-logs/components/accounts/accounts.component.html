@@ -34,11 +34,11 @@
     <tbody>
       <tr *ngFor="let data of sortTable.data,let i=index ">
         <td > {{ (pagination?.skip * pagination?.limit) + (i+1)}} </td>
-        <td > {{data?.account || 'N/A' }} </td>
+        <td data-cy="accountId" >{{data?.account || 'N/A' }}</td>
         <td > {{data?.accountName || 'N/A' }} </td>
-        <td > {{data?.accountVATCategory || 'N/A' }} </td>
-        <td > {{data?.isVATExpectedOnAccount }} </td>
-        <td  (click)="editAccount(data)" class="pointer"> <span nz-icon nzType="edit" nzTheme="outline"></span> </td>
+        <td data-cy="accountVCategory"> {{data?.accountVATCategory || 'N/A' }} </td>
+        <td data-cy="accountVATA"> {{data?.isVATExpectedOnAccount }} </td>
+        <td data-cy="editAccount"  (click)="editAccount(data)" class="pointer"> <span nz-icon nzType="edit" nzTheme="outline"></span> </td>
       </tr>
     </tbody>
   </nz-table>

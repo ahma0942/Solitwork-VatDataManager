@@ -20,8 +20,8 @@ interface Transaction {
 })
 export class DiffrenceComponent implements OnInit{
   @Input("dateData") dateData:any
-  fromDate:any=moment().subtract(12,'M').format("yyyy-MM-DDTHH:mm:ss")
-  toDate:any= moment().format("yyyy-MM-DDTHH:mm:ss")
+  fromDate:any
+  toDate:any
   displayedColumns: string[] = ['voucher', 'actual','expected','difference','checkbox','attachment','vatJournal'];
   transactions: Transaction[] = [];
 
@@ -29,9 +29,13 @@ export class DiffrenceComponent implements OnInit{
 
   }
   ngOnChanges(){
-    if(this.dateData){
-      this.fromDate = moment(this.dateData[0]).format('yyyy-MM-DDTHH:mm:ss')
-    this.toDate = moment(this.dateData[1]).format('yyyy-MM-DDTHH:mm:ss')
+    if(sessionStorage.getItem('dateValue')){
+      var dateResult = JSON.parse(sessionStorage.getItem('dateValue'))
+      this.fromDate = dateResult[0]
+      this.toDate = dateResult[1]
+    }else{
+      this.fromDate = moment(new Date()).format('yyyy-MM-DDTHH:mm:ss')
+      this.toDate = moment(new Date()).format('yyyy-MM-DDTHH:mm:ss')
     }
     this.getTransaction()
   }

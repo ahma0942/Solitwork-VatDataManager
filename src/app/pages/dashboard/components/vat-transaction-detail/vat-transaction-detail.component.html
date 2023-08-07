@@ -1,0 +1,134 @@
+<div id="transactionDetail" class="mainWrap p-5 ">
+  <div class="logo font-black text-[--black-color] text-[16px] border-b border-solid border-[--light-grey-color]">
+    <span class="text-[--primary-color] ">
+      VAT Transaction
+    </span>
+Detail
+  </div>
+  <div class="detailWrap flex flex-wrap justify-between mt-5 gap-4 w-[80%] mx-auto">
+    <div class="detail flex w-[48%] gap-4">
+      <div class="heading text-[--grey-color] font-bold text-xs w-[150px]">
+        Account
+      </div>
+      <div class="value text-[--black-color] font-semibold text-xs">
+        {{receivedData?.account || 'N/A'}}
+      </div>
+    </div>
+    <div class="detail flex w-[48%] gap-4">
+      <div class="heading text-[--grey-color] font-bold text-xs w-[150px]">
+        Transaction ID
+      </div>
+      <div class="value text-[--black-color] font-semibold text-xs">
+        {{receivedData?.transactionID || 'N/A'}}
+      </div>
+    </div>
+    <div class="detail flex w-[48%] gap-4">
+      <div class="heading text-[--grey-color] font-bold text-xs w-[150px]">
+        Counter Party VAT Category
+      </div>
+      <div class="value text-[--black-color] font-semibold text-xs">
+        {{receivedData?.counterPartyVATCountry || 'N/A'}}
+      </div>
+    </div>
+
+    <div class="detail flex w-[48%] gap-4">
+      <div class="heading text-[--grey-color] font-bold text-xs w-[150px]">
+        Journal Category
+      </div>
+      <div class="value text-[--black-color] font-semibold text-xs">
+        {{receivedData?.journalCategory || 'N/A'}}
+      </div>
+    </div>
+
+    <div class="detail flex w-[48%] gap-4">
+      <div class="heading text-[--grey-color] font-bold text-xs w-[150px]">
+        Journal Number
+      </div>
+      <div class="value text-[--black-color] font-semibold text-xs">
+        {{receivedData?.journalNumber || 'N/A'}}
+      </div>
+    </div>
+
+    <div class="detail flex w-[48%] gap-4">
+      <div class="heading text-[--grey-color] font-bold text-xs w-[150px]">
+        Transaction Amount
+      </div>
+      <div class="value text-[--black-color] font-semibold text-xs">
+        {{receivedData?.transactionAmount | numberToKMB}}
+      </div>
+    </div>
+
+    <div class="detail flex w-[48%] gap-4">
+      <div class="heading text-[--grey-color] font-bold text-xs w-[150px]">
+        Transaction Date
+      </div>
+      <div class="value text-[--black-color] font-semibold text-xs">
+        {{(receivedData?.transactionDate | date) || '-'}}
+      </div>
+    </div>
+
+    <div class="detail flex w-[48%] gap-4">
+      <div class="heading text-[--grey-color] font-bold text-xs w-[150px]">
+        Transaction VAT Category
+      </div>
+      <div class="value text-[--black-color] font-semibold text-xs">
+        {{receivedData?.transactionVATCategory || 'N/A'}}
+      </div>
+    </div>
+
+    <div class="detail flex w-[48%] gap-4">
+      <div class="heading text-[--grey-color] font-bold text-xs w-[150px]">
+        Reported VAT Amount
+      </div>
+      <div class="value text-[--black-color] font-semibold text-xs">
+        {{receivedData?.reportedVATAmount | numberToKMB }}
+      </div>
+    </div>
+
+    <div class="detail flex w-[48%] gap-4">
+      <div class="heading text-[--grey-color] font-bold text-xs w-[150px]">
+        Posting Type
+      </div>
+      <div class="value text-[--black-color] font-semibold text-xs">
+        {{receivedData?.postingType || 'N/A'}}
+      </div>
+    </div>
+
+    <div class="detail flex w-[48%] gap-4">
+      <div class="heading text-[--grey-color] font-bold text-xs w-[150px]">
+        Legal Entity VAT Country
+      </div>
+      <div class="value text-[--black-color] font-semibold text-xs">
+        {{receivedData?.legalEntityVATCountry || 'N/A'}}
+      </div>
+    </div>
+
+    <div class="detail flex w-[48%] gap-4">
+      <div class="heading text-[--grey-color] font-bold text-xs w-[150px]">
+        Legal Entity
+      </div>
+      <div class="value text-[--black-color] font-semibold text-xs">
+        {{receivedData?.legalEntity || 'N/A'}}
+      </div>
+    </div>
+
+    <!-- <div class="detail flex w-[48%] gap-4">
+      <div class="heading text-[--grey-color] font-bold text-xs w-[150px]">
+        Account
+      </div>
+      <div class="value text-[--black-color] font-semibold text-xs">
+        {{receivedData?.account || 'N/A'}}
+      </div>
+    </div> -->
+
+    <div class="detail flex w-full gap-4">
+      <div class="heading text-[--grey-color] font-bold text-xs w-[150px]">
+        Description
+      </div>
+      <div class="value text-[--black-color] font-semibold text-xs">
+        {{receivedData?.description || 'N/A'}}
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzTagModule } from 'ng-zorro-antd/tag';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 
@@ -24,7 +25,8 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
     NzSelectModule,
     NzDatePickerModule,
     NzTagModule,
-    NzIconModule
+    NzIconModule,
+    MatDialogModule
   ],
   exports:[
     NumberToKMBPipe,

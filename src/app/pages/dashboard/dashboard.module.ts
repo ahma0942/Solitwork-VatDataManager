@@ -12,6 +12,7 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { VatTransactionDetailComponent } from './components/vat-transaction-detail/vat-transaction-detail.component';
 
 
 
@@ -24,7 +25,8 @@ const routes: Routes= [
     DashboardComponent,
     KpisComponent,
     DiffrenceComponent,
-    DetailOverviewComponent
+    DetailOverviewComponent,
+    VatTransactionDetailComponent
   ],
   imports: [
     CommonModule,

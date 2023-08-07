@@ -34,11 +34,11 @@ Category
     <tbody>
       <tr *ngFor="let data of sortTable.data,let i=index ">
         <td > {{ (pagination?.skip * pagination?.limit) + (i+1)}} </td>
-        <td > {{data?.postingType || 'N/A' }} </td>
-        <td > {{data?.isVATExpectedOnPostingType }} </td>
-        <td > {{(data?.validfrom | date) || 'N/A' }} </td>
-        <td > {{(data?.validto |date) || 'N/A' }} </td>
-        <td (click)="editPostingType(data)"  class="pointer"> <span nz-icon nzType="edit" nzTheme="outline"></span> </td>
+        <td data-cy="postingType"> {{data?.postingType || 'N/A' }} </td>
+        <td data-cy="isVATExpectedOnPostingType"> {{data?.isVATExpectedOnPostingType }} </td>
+        <td data-cy="validfrom"> {{(data?.validfrom | date:'yyyy-MM-dd') || 'N/A' }} </td>
+        <td data-cy="validto"> {{(data?.validto | date:'yyyy-MM-dd') || 'N/A' }} </td>
+        <td data-cy="editPostingType" (click)="editPostingType(data)"  class="pointer"> <span nz-icon nzType="edit" nzTheme="outline"></span> </td>
       </tr>
     </tbody>
   </nz-table>

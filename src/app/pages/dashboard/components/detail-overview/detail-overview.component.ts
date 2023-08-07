@@ -4,6 +4,8 @@ import { Pagination } from 'src/app/models/interfaces/pagination.interface';
 import { DashboardService } from 'src/app/services/dashboard.service';
 import { transactionsData } from 'src/assets/example_input_financial_transactions';
 import * as moment from 'moment';
+import { MatDialog } from '@angular/material/dialog';
+import { VatTransactionDetailComponent } from '../vat-transaction-detail/vat-transaction-detail.component';
 interface Transaction {
   subledgerVoucher?:string,
    account?:string,
@@ -27,14 +29,22 @@ interface Transaction {
 })
 export class DetailOverviewComponent implements OnInit {
   @Input("dateData") dateData:any
-  fromDate:any=moment().subtract(12,'M').format("yyyy-MM-DDTHH:mm:ss")
-  toDate:any= moment().format("yyyy-MM-DDTHH:mm:ss")
-  constructor(private dashboardService:DashboardService){
+  fromDate:any
+  toDate:any
+  constructor(private dashboardService:DashboardService,private dialog:MatDialog,){
+    if(sessionStorage.getItem('dateValue')){
+      var dateResult = JSON.parse(sessionStorage.getItem('dateValue'))
+      this.fromDate = dateResult[0]
+      this.toDate = dateResult[1]
+    }else{
+      this.fromDate = moment(new Date()).format('yyyy-MM-DDTHH:mm:ss')
+      this.toDate = moment(new Date()).format('yyyy-MM-DDTHH:mm:ss')
+    }
   }
   ngOnChanges(){
     if(this.dateData){
-      this.fromDate = moment(this.dateData[0]).format('yyyy-MM-DDTHH:mm:ss')
-    this.toDate = moment(this.dateData[1]).format('yyyy-MM-DDTHH:mm:ss')
+      this.fromDate = this.dateData[0]
+    this.toDate = this.dateData[1]
     }
     this.getTransactions()
   }
@@ -50,7 +60,7 @@ export class DetailOverviewComponent implements OnInit {
     {title:'Expected', variable:'expected',compare:(a:any,b:any)=>a.expected < b.expected ? 1 : -1, priority:true,width:''},
     {title:'Type', variable:'PostingType',compare:(a:any,b:any)=>a.PostingType < b.PostingType ? 1 : -1, priority:true,width:''},
     {title:'Cat.', variable:'JournalCategory',compare:(a:any,b:any)=>a.JournalCategory < b.JournalCategory ? 1 : -1, priority:true,width:''},
-    {title:'Description', variable:'Description',compare:(a:any,b:any)=>a.Description < b.Description ? 1 : -1, priority:true,width:''},
+    {title:'Description', variable:'Description',compare:(a:any,b:any)=>a.Description < b.Description ? 1 : -1, priority:true,class:'w-20'},
     {title:'Customer', variable:'Customer',compare:(a:any,b:any)=>a.Customer < b.Customer ? 1 : -1, priority:true,width:''},
     {title:'Vendor', variable:'Vendor',compare:(a:any,b:any)=>a.Vendor < b.Vendor ? 1 : -1, priority:true,width:''},
     {title:'VAT Country', variable:'CounterPartyVATCountry',compare:(a:any,b:any)=>a.CounterPartyVATCountry < b.CounterPartyVATCountry ? 1 : -1, priority:true,width:''},
@@ -95,5 +105,20 @@ export class DetailOverviewComponent implements OnInit {
     this.dashboardService.getDetailOverview(obj).subscribe((d:any)=>{
       this.transactions = d.vatTransactions
     });
+  }
+
+  showDetail(data:any){
+    this.dialog.open(VatTransactionDetailComponent,{
+      autoFocus:false,
+      data:data,
+      minWidth:"60%",
+      minHeight:'80vh',
+      maxHeight:"85vh",
+      disableClose:false,
+    }).afterClosed().subscribe(action=>{
+      if(action){
+        console.log(action)
+      }
+  });
   }
 }
