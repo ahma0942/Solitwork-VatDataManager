@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { MatMenuPanel } from '@angular/material/menu';
 import { FilterObject, ConstantFilterVariable } from './filter';
-import { differenceInCalendarDays} from 'date-fns';
+import { differenceInCalendarDays } from 'date-fns';
 import * as moment from 'moment';
 
 @Component({
@@ -9,14 +9,14 @@ import * as moment from 'moment';
   templateUrl: './filter.component.html',
   styleUrls: ['./filter.component.scss']
 })
-export class FilterComponent  implements OnInit{
+export class FilterComponent implements OnInit {
 
   @ViewChild('actionMenu') trigger: MatMenuPanel | null | any;
   @Output() onSubmitEvent = new EventEmitter<any>()
   @Input() filters: FilterObject[] = [];
   @Input() showFilters: boolean = false;
   chips: { label: string, value: string }[] = []
-  operationalCityList:Array<any> = [];
+  operationalCityList: Array<any> = [];
   today = new Date();
   disabledDate = (current: Date): boolean => differenceInCalendarDays(current, this.today) > 0;
   constructor(

@@ -25,49 +25,46 @@
   <app-filter class="w-full" [filters]="filters" [showFilters]="showFilter" (onSubmitEvent)="applyFilter($event)"></app-filter>
   <div class="mainContent bg-white rounded-sm w-full mt-3 px-3">
     <div class="tableWrap w-full mt-3">
-      <nz-table id="table-export" #sortTable [nzData]="listOfData" (nzPageIndexChange)="pageIndexChange($event)"
-  [nzFrontPagination]="false" [nzTotal]="pagination.count || 0"
-  [nzPageIndex]="(pagination.skip || 0)+1" [nzPageSize]=" 25"
-  [nzShowSizeChanger]="false" nzSize="small"
-  >
-    <thead>
-      <tr>
-        <th *ngFor="let column of listOfColumn.slice(0,1)" [nzShowSort]="false" [nzSortFn]="column.compare"
-                    [nzSortPriority]="column.priority" class="text-center ant-check-box-width">
-                    #
-                </th>
-                <th *ngFor="let column of listOfColumn.slice(1)" [nzShowSort]="false" [nzSortFn]="column.compare"
-                    [nzSortPriority]="column.priority">
-                    {{ column.title | uppercase }}
-                </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let data of sortTable.data,let i=index ">
-        <td > {{ (pagination?.skip * pagination?.limit) + (i+1)}} </td>
-        <td > {{data?.account || 'N/A' }} </td>
-        <td class="w-[150px]"> {{data?.transactionAmount | numberToKMB }} </td>
-        <td class="w-[150px]"> {{data?.legalEntity || 'N/A' }} </td>
-        <td class="w-[150px]"> {{data?.postingType }} </td>
-        <td class="w-[150px]"> {{data?.journalCategory }} </td>
-        <td class="w-[150px]"> {{data?.journalNumber }} </td>
-        <td class="w-[150px]"> {{data?.subledgervoucher }} </td>
-        <td class="w-[150px]"> {{data?.transactionDate | date }} </td>
-        <td class="w-[200px]">
-          <div class="tableEllipsis w-[200px]">
-            {{data?.description}}
-          </div>
-        </td>
-        <td class="w-[150px]"> {{data?.customer || 'N/A'}} </td>
-        <td class="w-[150px]"> {{data?.vendor || 'N/A'}} </td>
-        <td class="w-[150px]"> {{data?.counterPartyVATCountry }} </td>
-        <td class="w-[150px]"> <nz-switch [(ngModel)]="data.IsReportedVAT" [nzSize]="'small'" (ngModelChange)="editStatus(data?.transactionID,data.IsReportedVAT)"></nz-switch> </td>
+      <nz-table id="table-export" #sortTable [nzData]="listOfData" (nzPageIndexChange)="pageIndexChange($event)" [nzFrontPagination]="false"
+        [nzTotal]="pagination.count || 0" [nzPageIndex]="(pagination.skip || 0)+1" [nzPageSize]=" 25" [nzShowSizeChanger]="false" nzSize="small">
+        <thead>
+          <tr>
+            <th *ngFor="let column of listOfColumn.slice(0,1)" [nzShowSort]="false" [nzSortFn]="column.compare" [nzSortPriority]="column.priority"
+              class="text-center ant-check-box-width">
+              #
+            </th>
+            <th *ngFor="let column of listOfColumn.slice(1)" [nzShowSort]="false" [nzSortFn]="column.compare" [nzSortPriority]="column.priority">
+              {{ column.title | uppercase }}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of sortTable.data,let i=index ">
+            <td> {{ (pagination?.skip * pagination?.limit) + (i+1)}} </td>
+            <td> {{data?.account || 'N/A' }} </td>
+            <td class="w-[150px]"> {{data?.transactionAmount | numberToKMB }} </td>
+            <td class="w-[150px]"> {{data?.legalEntity || 'N/A' }} </td>
+            <td class="w-[150px]"> {{data?.postingType }} </td>
+            <td class="w-[150px]"> {{data?.journalCategory }} </td>
+            <td class="w-[150px]"> {{data?.journalNumber }} </td>
+            <td class="w-[150px]"> {{data?.subledgervoucher }} </td>
+            <td class="w-[150px]"> {{data?.transactionDate | date }} </td>
+            <td class="w-[200px]">
+              <div class="tableEllipsis w-[200px]">
+                {{data?.description}}
+              </div>
+            </td>
+            <td class="w-[150px]"> {{data?.customer || 'N/A'}} </td>
+            <td class="w-[150px]"> {{data?.vendor || 'N/A'}} </td>
+            <td class="w-[150px]"> {{data?.counterPartyVATCountry }} </td>
+            <td class="w-[150px]"> <nz-switch [(ngModel)]="data.IsReportedVAT" [nzSize]="'small'"
+                (ngModelChange)="editStatus(data?.transactionID,data.IsReportedVAT)"></nz-switch> </td>
 
-      </tr>
-    </tbody>
-  </nz-table>
+          </tr>
+        </tbody>
+      </nz-table>
     </div>
-   <!-- <div class="paginationWrap w-full mt-3 flex justify-end">
+    <!-- <div class="paginationWrap w-full mt-3 flex justify-end">
     <nz-pagination [nzPageIndex]="1" [nzTotal]="500" [nzSize]="'small'"></nz-pagination>
    </div> -->
   </div>

@@ -4,17 +4,17 @@
   position: relative;
   transition: 0.3s;
   border-right: 1px solid #b0b0b054;
-  &.opened{
+  &.opened {
     width: 160px;
-    & .nav-sidenav-content{
+    & .nav-sidenav-content {
       width: inherit;
     }
-    & .navigationWrap{
+    & .navigationWrap {
       width: 150px;
       transition: 0.3s;
-      & .navigation{
-        & .link{
-          & a{
+      & .navigation {
+        & .link {
+          & a {
             margin: 0 10px;
             width: 95%;
             justify-content: start;
@@ -23,12 +23,12 @@
       }
     }
   }
-  &.closed{
+  &.closed {
     width: 70px;
-    & .nav-sidenav-content{
+    & .nav-sidenav-content {
       width: inherit;
     }
-    & .navigationWrap{
+    & .navigationWrap {
       width: 70px;
       transition: 0.3s;
     }
@@ -43,7 +43,7 @@
     }
   }
 }
-.nav-sidenav-content{
+.nav-sidenav-content {
   position: fixed;
   z-index: 3;
 }
@@ -61,60 +61,60 @@
   cursor: pointer;
   background-color: #fff;
   border: 1px solid #b0b0b0;
-  &.opened{
+  &.opened {
     right: -10px;
   }
-  &.closed{
+  &.closed {
     right: -7px;
   }
 }
-::ng-deep .nav-container mat-drawer-content{
+::ng-deep .nav-container mat-drawer-content {
   background: #fff;
 }
-.navigation{
+.navigation {
   margin-top: 30px;
-  & .link{
+  & .link {
     margin: 15px 0;
     position: relative;
-    &:hover{
-      & .link-item{
+    &:hover {
+      & .link-item {
         color: #0080ff;
-    background: #0080ff3b;
-      &::before{
-        background-color: #0080ff;
-      }
+        background: #0080ff3b;
+        &::before {
+          background-color: #0080ff;
+        }
       }
     }
-    & .link-item{
-    font-size: 12px;
-    font-weight: 500;
-    color: #757575;
-    display: flex;
-    justify-content: center;
-    width: fit-content;
-    margin: auto;
-    border-radius: 5px;
-    padding: 5px;
-    &::before{
-      position: absolute;
+    & .link-item {
+      font-size: 12px;
+      font-weight: 500;
+      color: #757575;
+      display: flex;
+      justify-content: center;
+      width: fit-content;
+      margin: auto;
+      border-radius: 5px;
+      padding: 5px;
+      &::before {
+        position: absolute;
         content: "";
         height: 100%;
         width: 5px;
         top: 0;
         left: -1px;
         border-radius: 5px;
-    }
-    &.is-active{
-      color: #0080ff;
-    background: #0080ff3b;
-      &::before{
-        background-color: #0080ff;
       }
-    }
+      &.is-active {
+        color: #0080ff;
+        background: #0080ff3b;
+        &::before {
+          background-color: #0080ff;
+        }
+      }
     }
   }
 }
-.navigationWrap{
+.navigationWrap {
   display: flex;
   flex-direction: column;
   justify-content: space-between;

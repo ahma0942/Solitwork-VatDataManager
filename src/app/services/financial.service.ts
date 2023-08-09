@@ -8,12 +8,12 @@ import { environment } from 'src/environments/environment';
 })
 export class FinancialService {
 
-  constructor(private http:HttpClient) { }
-  getFinancialTransactions(params?:any):Observable<any>{
-    return this.http.get(environment.baseUrl+`/financialtransactions`,{params:params});
+  constructor(private http: HttpClient) { }
+  getFinancialTransactions(params?: any): Observable<any> {
+    return this.http.get(environment.baseUrl + `/financialtransactions`, { params: params });
   }
-  changeStatus(obj?:any):Observable<any>{
+  changeStatus(obj?: any): Observable<any> {
     console.log(obj)
-    return this.http.post(environment.baseUrl+`/setisreportedvat` ,{} , {params:obj});
+    return this.http.post(environment.baseUrl + `/setisreportedvat`, {}, { params: obj });
   }
 }

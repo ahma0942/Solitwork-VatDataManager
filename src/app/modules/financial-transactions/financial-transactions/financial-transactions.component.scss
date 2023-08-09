@@ -1,8 +1,8 @@
-::ng-deep #financialTransactions{
-  & .tableWrap{
+::ng-deep #financialTransactions {
+  & .tableWrap {
     overflow-x: scroll !important;
   }
-  .ant-switch{
+  .ant-switch {
     background-color: var(--primary-color);
   }
 }

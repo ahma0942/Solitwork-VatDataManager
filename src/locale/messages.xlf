@@ -2,55 +2,6 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file source-language="en-US" datatype="plaintext" original="ng2.template">
     <body>
-      <trans-unit id="7149650326368440684" datatype="html">
-        <source> account_id </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/accounts/account-logs/account-logs.component.html</context>
-          <context context-type="linenumber">37</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="554061842269432999" datatype="html">
-        <source> account_name </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/accounts/account-logs/account-logs.component.html</context>
-          <context context-type="linenumber">42</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="7190562437536196183" datatype="html">
-        <source> accounts_vatcategory </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/accounts/account-logs/account-logs.component.html</context>
-          <context context-type="linenumber">47</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="2421195516677222143" datatype="html">
-        <source> accounts_vataccount </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/accounts/account-logs/account-logs.component.html</context>
-          <context context-type="linenumber">51</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="5177885684372943687" datatype="html">
-        <source> Good Afternoon, Daisy </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/dashboard/dashboard.component.html</context>
-          <context context-type="linenumber">4,6</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="3114922200445372432" datatype="html">
-        <source>Sunday, 16 April 2023.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/dashboard/dashboard.component.html</context>
-          <context context-type="linenumber">8</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="1737753151350322492" datatype="html">
-        <source><x id="PH" equiv-text="this.title"/></source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/dashboard/dashboard.component.ts</context>
-          <context context-type="linenumber">13</context>
-        </context-group>
-      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -10,65 +10,65 @@ import { ConfigurationService } from 'src/app/services/configuration.service';
   styleUrls: ['./add-edit-journal-category.component.scss']
 })
 export class AddEditJournalCategoryComponent {
-  recievedData:any
-  journalForm: FormGroup =undefined;
-  result:any
+  recievedData: any
+  journalForm: FormGroup = undefined;
+  result: any
   journalDetail: any;
-  today:any=[new Date(),new Date()];
-constructor(
-  @Inject(MAT_DIALOG_DATA) private data: any,
-    private dialog:MatDialogRef<AddEditJournalCategoryComponent>,
+  today: any = [new Date(), new Date()];
+  constructor(
+    @Inject(MAT_DIALOG_DATA) private data: any,
+    private dialog: MatDialogRef<AddEditJournalCategoryComponent>,
     private fb: FormBuilder,
-    private configurationService:ConfigurationService
-){
-}
+    private configurationService: ConfigurationService
+  ) {
+  }
   ngOnInit(): void {
-    if(this.data){
+    if (this.data) {
       this.recievedData = this.data;
       this.getJournal(this.recievedData)
-    }else{
+    } else {
       this.createForm()
     }
 
-}
-createForm(){
-  this.journalForm = this.fb.group({
-    journalCategory: [this.journalDetail?.journalCategory,[Validators.required]],
-    transactionVATCategory: [this.journalDetail?.transactionVATCategory || null,[Validators.required]],
-    validfrom: new FormControl((this.journalDetail?.validfrom || new Date().toISOString()),[Validators.required]),
-    validto: new FormControl((this.journalDetail?.validfrom || new Date().toISOString()),[Validators.required]),
-    date:[this.today]
-  })
-
-}
-createJournal(){
-  this.journalForm.removeControl('date');
-  this.configurationService.createJournal(this.journalForm.value).subscribe(d=>{
-    if(d){
-      this.dialog.close('Created')
-    }
-  })
-}
-updateJournal(){
-  this.journalForm.removeControl('date');
-  this.configurationService.updateJournal(this.recievedData.journalCategory,this.journalForm.value).subscribe(d=>{
-    if(d){
-      this.dialog.close('Updated')
-    }
-  })
-}
-getJournal(data:any){
-  var obj ={
-    journalcategory_id:data.journalCategory,
   }
-  this.configurationService.getSingleJournal(obj).subscribe((d:any)=>{
-    this.journalDetail = d
-    console.log('Journal detail',this.journalDetail)
-    this.today = [new Date(this.journalDetail.validfrom).toISOString(),new Date(this.journalDetail.validto).toISOString()]
-    this.createForm()
-  });
-}
-  close(){
+  createForm() {
+    this.journalForm = this.fb.group({
+      journalCategory: [this.journalDetail?.journalCategory, [Validators.required]],
+      transactionVATCategory: [this.journalDetail?.transactionVATCategory || null, [Validators.required]],
+      validfrom: new FormControl((this.journalDetail?.validfrom || new Date().toISOString()), [Validators.required]),
+      validto: new FormControl((this.journalDetail?.validfrom || new Date().toISOString()), [Validators.required]),
+      date: [this.today]
+    })
+
+  }
+  createJournal() {
+    this.journalForm.removeControl('date');
+    this.configurationService.createJournal(this.journalForm.value).subscribe(d => {
+      if (d) {
+        this.dialog.close('Created')
+      }
+    })
+  }
+  updateJournal() {
+    this.journalForm.removeControl('date');
+    this.configurationService.updateJournal(this.recievedData.journalCategory, this.journalForm.value).subscribe(d => {
+      if (d) {
+        this.dialog.close('Updated')
+      }
+    })
+  }
+  getJournal(data: any) {
+    var obj = {
+      journalcategory_id: data.journalCategory,
+    }
+    this.configurationService.getSingleJournal(obj).subscribe((d: any) => {
+      this.journalDetail = d
+      console.log('Journal detail', this.journalDetail)
+      this.today = [new Date(this.journalDetail.validfrom).toISOString(), new Date(this.journalDetail.validto).toISOString()]
+      this.createForm()
+    });
+  }
+  close() {
     this.dialog.close();
   }
 

@@ -14,36 +14,33 @@
   </div>
   <div class="mainContent bg-white rounded-sm w-full mt-3 px-3">
     <div class="tableWrap w-full mt-3">
-      <nz-table id="table-export" #sortTable [nzData]="listOfData" (nzPageIndexChange)="pageIndexChange($event)"
-  [nzFrontPagination]="false" [nzTotal]="pagination.count || 0"
-  [nzPageIndex]="(pagination.skip || 0)+1" [nzPageSize]=" 25"
-  [nzShowSizeChanger]="false" nzSize="small"
-  nzTableLayout="fixed">
-    <thead>
-      <tr>
-        <th *ngFor="let column of listOfColumn.slice(0,1)" [nzShowSort]="false" [nzSortFn]="column.compare"
-                    [nzSortPriority]="column.priority" class="text-center ant-check-box-width">
-                    #
-                </th>
-                <th *ngFor="let column of listOfColumn.slice(1)" [nzShowSort]="false" [nzSortFn]="column.compare"
-                    [nzSortPriority]="column.priority">
-                    {{ column.title | uppercase }}
-                </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let data of sortTable.data,let i=index ">
-        <td > {{ (pagination?.skip * pagination?.limit) + (i+1)}} </td>
-        <td data-cy="accountId" >{{data?.account || 'N/A' }}</td>
-        <td > {{data?.accountName || 'N/A' }} </td>
-        <td data-cy="accountVCategory"> {{data?.accountVATCategory || 'N/A' }} </td>
-        <td data-cy="accountVATA"> {{data?.isVATExpectedOnAccount }} </td>
-        <td data-cy="editAccount"  (click)="editAccount(data)" class="pointer"> <span nz-icon nzType="edit" nzTheme="outline"></span> </td>
-      </tr>
-    </tbody>
-  </nz-table>
+      <nz-table id="table-export" #sortTable [nzData]="listOfData" (nzPageIndexChange)="pageIndexChange($event)" [nzFrontPagination]="false"
+        [nzTotal]="pagination.count || 0" [nzPageIndex]="(pagination.skip || 0)+1" [nzPageSize]=" 25" [nzShowSizeChanger]="false" nzSize="small"
+        nzTableLayout="fixed">
+        <thead>
+          <tr>
+            <th *ngFor="let column of listOfColumn.slice(0,1)" [nzShowSort]="false" [nzSortFn]="column.compare" [nzSortPriority]="column.priority"
+              class="text-center ant-check-box-width">
+              #
+            </th>
+            <th *ngFor="let column of listOfColumn.slice(1)" [nzShowSort]="false" [nzSortFn]="column.compare" [nzSortPriority]="column.priority">
+              {{ column.title | uppercase }}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of sortTable.data,let i=index ">
+            <td> {{ (pagination?.skip * pagination?.limit) + (i+1)}} </td>
+            <td data-cy="accountId">{{data?.account || 'N/A' }}</td>
+            <td> {{data?.accountName || 'N/A' }} </td>
+            <td data-cy="accountVCategory"> {{data?.accountVATCategory || 'N/A' }} </td>
+            <td data-cy="accountVATA"> {{data?.isVATExpectedOnAccount }} </td>
+            <td data-cy="editAccount" (click)="editAccount(data)" class="pointer"> <span nz-icon nzType="edit" nzTheme="outline"></span> </td>
+          </tr>
+        </tbody>
+      </nz-table>
     </div>
-   <!-- <div class="paginationWrap w-full mt-3 flex justify-end">
+    <!-- <div class="paginationWrap w-full mt-3 flex justify-end">
     <nz-pagination [nzPageIndex]="1" [nzTotal]="500" [nzSize]="'small'"></nz-pagination>
    </div> -->
   </div>

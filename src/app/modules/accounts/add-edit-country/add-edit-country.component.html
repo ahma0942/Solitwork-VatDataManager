@@ -8,16 +8,16 @@
       <form [formGroup]="countryForm">
         <div class="formGroupRow flex justify-between items-center lg:gap-5 flex-col md:flex-wrap md:flex-row">
           <div class="formGroup mb-5 w-[48%]">
-            <label  class="font-normal text-sm">Legal Entity</label>
-            <input  nz-input type="text" formControlName="legalEntity"  required class="w-full p-2 mt-3 rounded-md"  />
+            <label class="font-normal text-sm">Legal Entity</label>
+            <input nz-input type="text" formControlName="legalEntity" required class="w-full p-2 mt-3 rounded-md" />
           </div>
 
           <div class="formGroup mb-5 w-[48%]">
-            <label  class="font-normal text-sm">Legal Entity VAT Country</label>
-            <input  nz-input type="text" formControlName="legalEntityVATCountry"  required class="w-full p-2 mt-3 rounded-md"  />
+            <label class="font-normal text-sm">Legal Entity VAT Country</label>
+            <input nz-input type="text" formControlName="legalEntityVATCountry" required class="w-full p-2 mt-3 rounded-md" />
           </div>
           <div class="formGroup mb-5 w-[48%]">
-            <label  class="font-normal text-sm">Select Date Range</label>
+            <label class="font-normal text-sm">Select Date Range</label>
             <nz-range-picker class="w-full mt-3 rounded-md" formControlName="date" (ngModelChange)="onChange($event)"></nz-range-picker>
 
           </div>
@@ -27,9 +27,12 @@
 
 
     <div class="buttonWrap flex justify-end gap-4">
-      <button (click)="close()" class="min-w-[100px] py-2 px-4 font-bold text-sm text-[--black-color] rounded-md border border-solid border-[--light-grey-color]">Cancel</button>
-      <button *ngIf="!recievedData" (click)="createCountry()" class="min-w-[100px] py-2 px-4 font-bold text-sm bg-[--primary-color] text-white rounded-md">Save</button>
-      <button *ngIf="recievedData" (click)="updateCountry()" class=" min-w-[100px] py-2 px-4 font-bold text-sm bg-[--primary-color] text-white rounded-md">Update</button>
+      <button (click)="close()"
+        class="min-w-[100px] py-2 px-4 font-bold text-sm text-[--black-color] rounded-md border border-solid border-[--light-grey-color]">Cancel</button>
+      <button *ngIf="!recievedData" (click)="createCountry()"
+        class="min-w-[100px] py-2 px-4 font-bold text-sm bg-[--primary-color] text-white rounded-md">Save</button>
+      <button *ngIf="recievedData" (click)="updateCountry()"
+        class=" min-w-[100px] py-2 px-4 font-bold text-sm bg-[--primary-color] text-white rounded-md">Update</button>
     </div>
   </div>
 

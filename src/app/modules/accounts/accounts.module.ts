@@ -12,7 +12,7 @@ import { DeliveryJournalComponent } from './account-logs/components/delivery-jou
 import { PostingTypeComponent } from './account-logs/components/posting-type/posting-type.component';
 import { VatRatesComponent } from './account-logs/components/vat-rates/vat-rates.component';
 import { AddEditAccountComponent } from './add-edit-account/add-edit-account.component';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';

@@ -9,65 +9,65 @@ import { ConfigurationService } from 'src/app/services/configuration.service';
   templateUrl: './add-edit-country.component.html',
   styleUrls: ['./add-edit-country.component.scss']
 })
-export class AddEditCountryComponent implements OnInit{
-  recievedData:any
+export class AddEditCountryComponent implements OnInit {
+  recievedData: any
   countryForm: FormGroup = new FormGroup({})
-  result:any
+  result: any
   countryDetail: any;
-  today:any=[new Date(),new Date()];
-constructor(
-  @Inject(MAT_DIALOG_DATA) public data: any,
-    private dialog:MatDialogRef<AddEditCountryComponent>,
+  today: any = [new Date(), new Date()];
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private dialog: MatDialogRef<AddEditCountryComponent>,
     private fb: FormBuilder,
-    private configurationService:ConfigurationService
-){
-if(data){
-  this.recievedData = data;
-  console.log(this.recievedData)
-  this.getcountry(this.recievedData)
+    private configurationService: ConfigurationService
+  ) {
+    if (data) {
+      this.recievedData = data;
+      console.log(this.recievedData)
+      this.getcountry(this.recievedData)
 
-}
-}
+    }
+  }
   ngOnInit(): void {
     this.createForm()
 
-}
-createForm(){
-  this.countryForm = this.fb.group({
-    legalEntity: new FormControl(this.countryDetail?.legalEntity,[Validators.required]),
-    legalEntityVATCountry: new FormControl(this.countryDetail?.legalEntityVATCountry,[Validators.required]),
-    validfrom: new FormControl((this.countryDetail?.validfrom || new Date().toISOString()),[Validators.required]),
-    validto: new FormControl((this.countryDetail?.validfrom || new Date().toISOString()),[Validators.required]),
-    date:[this.today],
-  })
-
-}
-createCountry(){
-  this.configurationService.createCountry(this.countryForm.value).subscribe(d=>{
-    if(d){
-      this.dialog.close('Created')
-    }
-  })
-}
-updateCountry(){
-  this.configurationService.updateCountry(this.recievedData.legalEntity,this.countryForm.value).subscribe(d=>{
-    if(d){
-      this.dialog.close('Updated')
-    }
-  })
-}
-getcountry(data:any){
-  var obj ={
-    legalEntity:data.legalEntity,
   }
-  this.configurationService.getSingleCountry(obj).subscribe((d:any)=>{
-    this.countryDetail = d
-    console.log('country detail',this.countryDetail)
-    this.today = [new Date(this.countryDetail.validfrom).toISOString(),new Date(this.countryDetail.validto).toISOString()]
-    this.createForm()
-  });
-}
-  close(){
+  createForm() {
+    this.countryForm = this.fb.group({
+      legalEntity: new FormControl(this.countryDetail?.legalEntity, [Validators.required]),
+      legalEntityVATCountry: new FormControl(this.countryDetail?.legalEntityVATCountry, [Validators.required]),
+      validfrom: new FormControl((this.countryDetail?.validfrom || new Date().toISOString()), [Validators.required]),
+      validto: new FormControl((this.countryDetail?.validfrom || new Date().toISOString()), [Validators.required]),
+      date: [this.today],
+    })
+
+  }
+  createCountry() {
+    this.configurationService.createCountry(this.countryForm.value).subscribe(d => {
+      if (d) {
+        this.dialog.close('Created')
+      }
+    })
+  }
+  updateCountry() {
+    this.configurationService.updateCountry(this.recievedData.legalEntity, this.countryForm.value).subscribe(d => {
+      if (d) {
+        this.dialog.close('Updated')
+      }
+    })
+  }
+  getcountry(data: any) {
+    var obj = {
+      legalEntity: data.legalEntity,
+    }
+    this.configurationService.getSingleCountry(obj).subscribe((d: any) => {
+      this.countryDetail = d
+      console.log('country detail', this.countryDetail)
+      this.today = [new Date(this.countryDetail.validfrom).toISOString(), new Date(this.countryDetail.validto).toISOString()]
+      this.createForm()
+    });
+  }
+  close() {
     this.dialog.close();
   }
 

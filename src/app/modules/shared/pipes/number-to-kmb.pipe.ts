@@ -5,8 +5,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class NumberToKMBPipe implements PipeTransform {
 
-  transform(value: number){
-    if(isNaN(value)){
+  transform(value: number) {
+    if (isNaN(value)) {
       return 0;
     }
 

@@ -1,23 +1,23 @@
 .stat {
-  & .statBlock:nth-child(2){
+  & .statBlock:nth-child(2) {
     position: relative;
-    &::after{
+    &::after {
       position: absolute;
-      content: '';
+      content: "";
       top: 0;
       right: -60%;
       height: 100%;
       width: 1px;
-      background-color:var(--light-grey-color);
+      background-color: var(--light-grey-color);
     }
-    &::before{
+    &::before {
       position: absolute;
-      content: '';
+      content: "";
       top: 0;
       left: -60%;
       height: 100%;
       width: 1px;
-      background-color:var(--light-grey-color);
+      background-color: var(--light-grey-color);
     }
   }
 }

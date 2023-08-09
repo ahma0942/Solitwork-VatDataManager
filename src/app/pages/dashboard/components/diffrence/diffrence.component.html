@@ -1,64 +1,64 @@
 <div id="differenceWrap">
   <div class="heading font-semibold text-[20px]">Difference</div>
-<div class="subheading text-[--grey-color] text-xs">
-  by subledger voucher
-</div>
-<div class="tableWrap mt-5">
-<!-- new table  -->
-<nz-table #headerTable [nzData]="updatedtransactions" [nzScroll]="{ x: '600px' }" (nzPageIndexChange)="pageIndexChange($event)"
-[nzFrontPagination]="false" [nzTotal]="pagination.count || 0"
-[nzPageIndex]="(pagination.skip || 0)+1" [nzPageSize]="8"
-[nzShowSizeChanger]="false" nzSize="small">
-  <thead>
-    <tr>
-      <th *ngFor="let column of listOfColumn" [nzShowSort]="false" [nzSortFn]="column.compare"
-      [nzSortPriority]="column.priority" [class]="column.class">
-      {{ column.title }}
-  </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let data of headerTable.data">
-      <td >
-        <div class="tableEllipsis w-[70px]">
-        {{data?.differenceId}}
-        </div>
-      </td>
-      <td>{{data?.actualVATAmount | numberToKMB}}</td>
-      <td>{{data?.expectedVATAmount | numberToKMB }}</td>
-      <td>{{data?.differenceVATAmount | numberToKMB }}</td>
-      <td> <mat-checkbox [color]="'primary'" [(ngModel)]="checked" (ngModelChange)="updateFile(data)"></mat-checkbox></td>
-      <td>{{data?.verifications[0]?.files?.length}}</td>
+  <div class="subheading text-[--grey-color] text-xs">
+    by subledger voucher
+  </div>
+  <div class="tableWrap mt-5">
+    <!-- new table  -->
+    <nz-table #headerTable [nzData]="updatedtransactions" [nzScroll]="{ x: '600px' }" (nzPageIndexChange)="pageIndexChange($event)" [nzFrontPagination]="false"
+      [nzTotal]="pagination.count || 0" [nzPageIndex]="(pagination.skip || 0)+1" [nzPageSize]="8" [nzShowSizeChanger]="false" nzSize="small">
+      <thead>
+        <tr>
+          <th *ngFor="let column of listOfColumn" [nzShowSort]="false" [nzSortFn]="column.compare" [nzSortPriority]="column.priority" [class]="column.class">
+            {{ column.title }}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of headerTable.data">
+          <td>
+            <div class="tableEllipsis w-[70px]">
+              {{data?.differenceId}}
+            </div>
+          </td>
+          <td>{{data?.actualVATAmount | numberToKMB}}</td>
+          <td>{{data?.expectedVATAmount | numberToKMB }}</td>
+          <td>{{data?.differenceVATAmount | numberToKMB }}</td>
+          <td> <mat-checkbox [color]="'primary'" [(ngModel)]="checked" (ngModelChange)="updateFile(data)"></mat-checkbox></td>
+          <td>{{data?.verifications[0]?.files?.length}}</td>
 
-      <td>
-        <div class="tableEllipsis w-[75px]">
-          <a [ngClass]="data?.journalNumber? 'text-[--primary-color] underline underline-solid hover:underline-solid hover:underline':'text-[--black-color]'">{{data?.journalNumber || '-'}}</a>
-        </div>
-      </td>
-      <td>
-        <div [ngClass]="{'text-[--light-red-color]':!data.verifications,'text-[--green-color]':!data.verifications[0].void,'text[--red-color]':data.verifications[0].void}">
-          {{!data.verifications? 'Not Verified': !data.verifications[0]?.void? 'Verified' :  'Voided'  }}
-        </div>
-      </td>
+          <td>
+            <div class="tableEllipsis w-[75px]">
+              <a
+                [ngClass]="data?.journalNumber? 'text-[--primary-color] underline underline-solid hover:underline-solid hover:underline':'text-[--black-color]'">{{data?.journalNumber
+                || '-'}}</a>
+            </div>
+          </td>
+          <td>
+            <div
+              [ngClass]="{'text-[--light-red-color]':!data.verifications,'text-[--green-color]':!data.verifications[0].void,'text[--red-color]':data.verifications[0].void}">
+              {{!data.verifications? 'Not Verified': !data.verifications[0]?.void? 'Verified' : 'Voided' }}
+            </div>
+          </td>
 
-    </tr>
-  </tbody>
-</nz-table>
-  <!-- new table  -->
-  <div *ngIf="transactions?.length>0" class="totalRow flex items-center gap-3 pl-[10px] my-3">
-    <div class="text-[--primary-color] font-bold text-[12px] w-[65px]">
-      Total
-    </div>
-    <div class="actualTotal font-bold text-[12px] w-[60px] text-[--black-color]">
-      {{getTotalActual() | numberToKMB}}
-    </div>
-    <div class="expectedTotal font-bold text-[12px] w-[60px] text-[--black-color]">
-      {{getTotalExpected() | numberToKMB}}
-    </div>
-    <div class="differenceTotal font-bold text-[12px] w-[60px] text-[--black-color]">
-      {{getTotalDifference()| numberToKMB }}
+        </tr>
+      </tbody>
+    </nz-table>
+    <!-- new table  -->
+    <div *ngIf="transactions?.length>0" class="totalRow flex items-center gap-3 pl-[10px] my-3">
+      <div class="text-[--primary-color] font-bold text-[12px] w-[65px]">
+        Total
+      </div>
+      <div class="actualTotal font-bold text-[12px] w-[60px] text-[--black-color]">
+        {{getTotalActual() | numberToKMB}}
+      </div>
+      <div class="expectedTotal font-bold text-[12px] w-[60px] text-[--black-color]">
+        {{getTotalExpected() | numberToKMB}}
+      </div>
+      <div class="differenceTotal font-bold text-[12px] w-[60px] text-[--black-color]">
+        {{getTotalDifference()| numberToKMB }}
+      </div>
     </div>
   </div>
-</div>
 
 </div>

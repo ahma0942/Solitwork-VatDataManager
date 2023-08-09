@@ -1,31 +1,14 @@
 <div id="header">
-  <!-- [matMenuTriggerFor]="titleMenu" -->
-  <div class="title" >
+  <div class="title">
     Vat OverView
-    <!-- <div class="icon" >
-      <mat-icon>arrow_drop_down</mat-icon>
-    </div> -->
   </div>
-  <!-- <div class="searchbar">
-    <div class="inputWrap">
-     <div class="icon">
-      <mat-icon>search</mat-icon>
-     </div>
-      <input matInput placeholder="Search here">
-    </div>
-
-    <div class="icon">
-      <mat-icon>tune</mat-icon>
-    </div>
-  </div> -->
 
   <div class="profileNotification">
     <div class="notification">
-      <mat-icon matBadge="5" matBadgeColor="warn" matBadgeSize="small" >notifications</mat-icon>
+      <mat-icon matBadge="5" matBadgeColor="warn" matBadgeSize="small">notifications</mat-icon>
     </div>
     <div class="profileWrap pointer" [matMenuTriggerFor]="actionMenu">
-      <!-- <nz-avatar [nzSize]="'large'" [matMenuTriggerFor]="actionMenu" class="pointer" nzSrc="assets/images/dummy-profile.png"></nz-avatar> -->
-      <div class="profile pointer" >
+      <div class="profile pointer">
         <img src="assets/images/dummy-profile.png" class="w-[40px] h-[40px] rounded-full" alt="">
       </div>
       <div class="nameWrap">
@@ -39,24 +22,22 @@
       <div class="icon color-[--grey-color]">
         <mat-icon>arrow_drop_down</mat-icon>
       </div>
-  </div>
+    </div>
   </div>
 </div>
 
 <mat-menu class="mt-2" #actionMenu="matMenu">
-    <!-- <div class="action-heading">Actions</div> -->
-    <div class="mt-2 flex items-center gap-3 text-black font-normal" mat-menu-item>
-      test
-    </div>
-    <mat-divider class="m-0"></mat-divider>
-    <button class="mt-2 flex items-center gap-3 fg-danger font-medium" mat-menu-item>
-      <span>Logout</span>
-      <span nz-icon nzType="arrow-right" nzTheme="outline"></span>
+  <div class="mt-2 flex items-center gap-3 text-black font-normal" mat-menu-item>
+    test
+  </div>
+  <mat-divider class="m-0"></mat-divider>
+  <button class="mt-2 flex items-center gap-3 fg-danger font-medium" mat-menu-item>
+    <span>Logout</span>
+    <span nz-icon nzType="arrow-right" nzTheme="outline"></span>
 
-    </button>
+  </button>
 </mat-menu>
 <mat-menu class="mt-2" #titleMenu="matMenu">
-  <!-- <div class="action-heading">Actions</div> -->
   <div class="mt-2 flex items-center gap-3 text-black font-normal" mat-menu-item>
     test
   </div>

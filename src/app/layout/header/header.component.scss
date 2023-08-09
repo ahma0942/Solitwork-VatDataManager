@@ -1,23 +1,22 @@
-#header{
+#header {
   display: flex;
   justify-content: space-between;
   gap: 20px;
   padding: 15px 30px;
-  border-bottom: 1px solid rgba(0,0,0,.12);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
   background-color: #fff;
-
 }
-.title{
+.title {
   font-size: 20px;
   font-weight: 700;
   display: flex;
   align-items: center;
-  & .icon{
+  & .icon {
     margin-top: 8px;
     color: #888888;
   }
 }
-.searchbar{
+.searchbar {
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -28,46 +27,44 @@
   padding: 5px;
   max-width: 300px;
   width: 100%;
-  & .icon{
+  & .icon {
     height: 24px;
     color: #b5b4ba;
   }
-  & .inputWrap{
+  & .inputWrap {
     align-items: center;
     display: flex;
     gap: 9px;
-    & input{
+    & input {
       background-color: transparent;
     }
   }
 }
 
-.profileNotification{
+.profileNotification {
   display: flex;
   gap: 20px;
   align-items: center;
-  & .notification{
+  & .notification {
     color: #888888;
   }
-  & .profileWrap{
+  & .profileWrap {
     display: flex;
     gap: 10px;
-    & .nameWrap{
-      & .name{
+    & .nameWrap {
+      & .name {
         font-weight: 600;
       }
-      & .role{
+      & .role {
         margin-top: -5px;
         font-size: 14px;
         font-weight: 500;
         color: #0080ff;
       }
     }
-    & .icon{
+    & .icon {
       margin-top: 8px;
       color: #888888;
     }
   }
 }
-
-

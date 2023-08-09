@@ -1,45 +1,45 @@
-
-::ng-deep  #filter{
-  .ant-tag-close-icon{
-      margin-left: 10px;
-      color: var(--warn-color);
-      cursor: pointer;
-      font-size: 12px;
-      border-radius: 50%;
-      border: 1px solid;
-      padding: 1px;
-      zoom: 70%;
+::ng-deep #filter {
+  .ant-tag-close-icon {
+    margin-left: 10px;
+    color: var(--warn-color);
+    cursor: pointer;
+    font-size: 12px;
+    border-radius: 50%;
+    border: 1px solid;
+    padding: 1px;
+    zoom: 70%;
   }
 
   // input,.ant-select,nz-range-picker{
   //     height: 36px !important;
   // }
-  .selectInput.ant-select{
-      border: 1px solid #d9d9d9;
-      border-radius: 2px;
+  .selectInput.ant-select {
+    border: 1px solid #d9d9d9;
+    border-radius: 2px;
   }
-  ::ng-deep .selectInput.ant-select>.ant-select-selector{
-
-      height: 100% !important;
+  ::ng-deep .selectInput.ant-select > .ant-select-selector {
+    height: 100% !important;
   }
-  input.ng-invalid.ng-touched,.selectInput.ant-select.ng-invalid.ng-touched,nz-range-picker.ng-invalid.ng-touched{
-      border-color: red !important;
+  input.ng-invalid.ng-touched,
+  .selectInput.ant-select.ng-invalid.ng-touched,
+  nz-range-picker.ng-invalid.ng-touched {
+    border-color: red !important;
   }
-  .ant-select.ng-invalid{
-      border: 1px solid;
+  .ant-select.ng-invalid {
+    border: 1px solid;
   }
-  .ant-picker-focused, .ant-picker:hover{
+  .ant-picker-focused,
+  .ant-picker:hover {
     border-color: red !important;
   }
 }
-::ng-deep #filter .inputWrap{
-  input{
-      width: 100%;
-      background-color: transparent;
-      outline: 0;
-      height: 50px;
-      color: #000000;
-      border-color: var(--grey4-color);
+::ng-deep #filter .inputWrap {
+  input {
+    width: 100%;
+    background-color: transparent;
+    outline: 0;
+    height: 50px;
+    color: #000000;
+    border-color: var(--grey4-color);
   }
-
 }

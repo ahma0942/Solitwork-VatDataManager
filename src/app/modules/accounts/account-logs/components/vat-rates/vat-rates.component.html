@@ -4,7 +4,7 @@
       <span class="text-[--primary-color] ">
         Journal
       </span>
-Category
+      Category
     </div>
     <div class="filterWrap flex gap-3 justify-end">
       <button class="bg-[--primary-color] py-1  px-4 rounded-sm text-white" (click)="create()">
@@ -14,41 +14,38 @@ Category
   </div>
   <div class="mainContent bg-white rounded-sm w-full mt-3 px-3">
     <div class="tableWrap w-full mt-3">
-      <nz-table id="table-export" #sortTable [nzData]="listOfData" (nzPageIndexChange)="pageIndexChange($event)"
-  [nzFrontPagination]="false" [nzTotal]="pagination.count || 0"
-  [nzPageIndex]="5" [nzPageSize]="pagination.limit || 0"
-  [nzShowSizeChanger]="false" nzSize="small"
-  nzTableLayout="fixed">
-    <thead>
-      <tr>
-        <th *ngFor="let column of listOfColumn.slice(0,1)" [nzShowSort]="false" [nzSortFn]="column.compare"
-                    [nzSortPriority]="column.priority" class="text-center ant-check-box-width">
-                    #
-                </th>
-                <th *ngFor="let column of listOfColumn.slice(1)" [nzShowSort]="false" [nzSortFn]="column.compare"
-                    [nzSortPriority]="column.priority">
-                    {{ column.title | uppercase }}
-                </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let data of sortTable.data,let i=index ">
-        <td > {{ (pagination?.skip * pagination?.limit) + (i+1)}} </td>
-        <td data-cy="vatRateID"> {{data?.vatRateID || 'N/A' }} </td>
-        <td data-cy="legalEntity"> {{data?.legalEntity || 'N/A' }} </td>
-        <td data-cy="account"> {{data?.account || 'N/A' }} </td>
-        <td data-cy="expectedVATType"> {{data?.expectedVATType || 'N/A' }} </td>
-        <td data-cy="expectedVATRate"> {{data?.expectedVATRate || 'N/A' }} </td>
+      <nz-table id="table-export" #sortTable [nzData]="listOfData" (nzPageIndexChange)="pageIndexChange($event)" [nzFrontPagination]="false"
+        [nzTotal]="pagination.count || 0" [nzPageIndex]="5" [nzPageSize]="pagination.limit || 0" [nzShowSizeChanger]="false" nzSize="small"
+        nzTableLayout="fixed">
+        <thead>
+          <tr>
+            <th *ngFor="let column of listOfColumn.slice(0,1)" [nzShowSort]="false" [nzSortFn]="column.compare" [nzSortPriority]="column.priority"
+              class="text-center ant-check-box-width">
+              #
+            </th>
+            <th *ngFor="let column of listOfColumn.slice(1)" [nzShowSort]="false" [nzSortFn]="column.compare" [nzSortPriority]="column.priority">
+              {{ column.title | uppercase }}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of sortTable.data,let i=index ">
+            <td> {{ (pagination?.skip * pagination?.limit) + (i+1)}} </td>
+            <td data-cy="vatRateID"> {{data?.vatRateID || 'N/A' }} </td>
+            <td data-cy="legalEntity"> {{data?.legalEntity || 'N/A' }} </td>
+            <td data-cy="account"> {{data?.account || 'N/A' }} </td>
+            <td data-cy="expectedVATType"> {{data?.expectedVATType || 'N/A' }} </td>
+            <td data-cy="expectedVATRate"> {{data?.expectedVATRate || 'N/A' }} </td>
 
 
-        <td data-cy="validfrom"> {{(data?.validfrom | date:'yyyy-MM-dd') || 'N/A' }} </td>
-        <td data-cy="validto"> {{(data?.validto | date:'yyyy-MM-dd') || 'N/A' }} </td>
-        <td data-cy="editVatRate" (click)="edit(data)" class="pointer"> <span nz-icon nzType="edit" nzTheme="outline"></span> </td>
-      </tr>
-    </tbody>
-  </nz-table>
+            <td data-cy="validfrom"> {{(data?.validfrom | date:'yyyy-MM-dd') || 'N/A' }} </td>
+            <td data-cy="validto"> {{(data?.validto | date:'yyyy-MM-dd') || 'N/A' }} </td>
+            <td data-cy="editVatRate" (click)="edit(data)" class="pointer"> <span nz-icon nzType="edit" nzTheme="outline"></span> </td>
+          </tr>
+        </tbody>
+      </nz-table>
     </div>
-   <!-- <div class="paginationWrap w-full mt-3 flex justify-end">
+    <!-- <div class="paginationWrap w-full mt-3 flex justify-end">
     <nz-pagination [nzPageIndex]="1" [nzTotal]="500" [nzSize]="'small'"></nz-pagination>
    </div> -->
   </div>

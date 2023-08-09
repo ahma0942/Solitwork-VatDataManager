@@ -8,19 +8,20 @@
       <form *ngIf="updateForm" [formGroup]="updateForm">
         <div class="formGroupRow flex justify-between items-center lg:gap-5 flex-col md:flex-wrap md:flex-row">
           <div class="formGroup mb-5 w-[48%]">
-            <label  class="font-normal text-sm">Note</label>
-            <input  nz-input type="text" formControlName="note"  required class="w-full p-2 mt-3 rounded-md"  />
+            <label class="font-normal text-sm">Note</label>
+            <input nz-input type="text" formControlName="note" required class="w-full p-2 mt-3 rounded-md" />
           </div>
           <div class="formGroup mb-5 w-[48%]">
-            <label nz-checkbox checked="true" class="text-sm font-normal" formControlName="reverifyDifference" id="reverifyDifference">Reverify Difference</label>
+            <label nz-checkbox checked="true" class="text-sm font-normal" formControlName="reverifyDifference" id="reverifyDifference">Reverify
+              Difference</label>
           </div>
         </div>
       </form>
       <form *ngIf="updateFile" [formGroup]="updateFile" enctype="multipart/form-data">
         <div class="formGroupRow flex justify-between items-center lg:gap-5 flex-col md:flex-wrap md:flex-row">
           <div class="formGroup mb-5 w-[48%]">
-            <label  class="font-normal text-sm">Upload File</label>
-            <input  nz-input type="file" (change)="fileChange($event)"  required class="w-full p-2 mt-3 rounded-md"  />
+            <label class="font-normal text-sm">Upload File</label>
+            <input nz-input type="file" (change)="fileChange($event)" required class="w-full p-2 mt-3 rounded-md" />
           </div>
         </div>
       </form>
@@ -28,8 +29,9 @@
 
 
     <div class="buttonWrap flex justify-end gap-4">
-      <button (click)="close()" class="min-w-[100px] py-2 px-4 font-bold text-sm text-[--black-color] rounded-md border border-solid border-[--light-grey-color]">Cancel</button>
-      <button (click)="updateData()"  class=" min-w-[100px] py-2 px-4 font-bold text-sm bg-[--primary-color] text-white rounded-md">Update</button>
+      <button (click)="close()"
+        class="min-w-[100px] py-2 px-4 font-bold text-sm text-[--black-color] rounded-md border border-solid border-[--light-grey-color]">Cancel</button>
+      <button (click)="updateData()" class=" min-w-[100px] py-2 px-4 font-bold text-sm bg-[--primary-color] text-white rounded-md">Update</button>
     </div>
   </div>
 

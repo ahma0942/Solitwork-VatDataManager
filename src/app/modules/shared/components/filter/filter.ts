@@ -1,4 +1,4 @@
-export interface FilterObject { label: string, search?:string,variable: string | any, check: boolean, value: any, placeholder: string,isDisable?: boolean,isMultiple?:boolean, options?: { label: string | {}, value: number | string }[], type: string }
+export interface FilterObject { label: string, search?: string, variable: string | any, check: boolean, value: any, placeholder: string, isDisable?: boolean, isMultiple?: boolean, options?: { label: string | {}, value: number | string }[], type: string }
 export class ConstantFilterVariable {
     public static customerName = 'customer';
     public static vendorName = 'vendor';
@@ -9,7 +9,7 @@ export class ConstantFilterVariable {
     public static journalCategory = 'journalCategory';
     public static journalNumber = 'journalNumber';
 
-    public static date='date';
+    public static date = 'date';
 }
 export class ConstantFilterLabel {
     public static date = 'date';
@@ -32,7 +32,7 @@ export interface SearchCriteria {
 }
 
 const Filters: FilterObject[] = [
-    { label: ConstantFilterLabel.date, variable: ConstantFilterLabel.date, check: false, value: {fromDate:'',toDate:''}, placeholder: "", options: [], type: "date" },
+    { label: ConstantFilterLabel.date, variable: ConstantFilterLabel.date, check: false, value: { fromDate: '', toDate: '' }, placeholder: "", options: [], type: "date" },
     { label: ConstantFilterLabel.customerName, variable: ConstantFilterVariable.customerName, check: false, value: "", placeholder: "e.g Jhon Doe", options: [], type: "text" },
     { label: ConstantFilterLabel.subledgervoucher, variable: ConstantFilterVariable.subledgervoucher, check: false, value: "", placeholder: "68C29646-E033", options: [], type: "text" },
     { label: ConstantFilterLabel.vendorName, variable: ConstantFilterVariable.vendorName, check: false, value: "", placeholder: "e.g Jhon Doe", options: [], type: "text" },
@@ -46,10 +46,10 @@ export function GetAllFilters() {
     return JSON.parse(JSON.stringify(Filters));
 };
 
-export function GetSelectedFilters(variables: string[] ) {
+export function GetSelectedFilters(variables: string[]) {
     var filters: FilterObject[] = [];
     for (var variable of variables) {
-        const field = Filters.find(field => field.variable == variable || field.label == variable );
+        const field = Filters.find(field => field.variable == variable || field.label == variable);
         if (field) {
             filters.push(field);
         }

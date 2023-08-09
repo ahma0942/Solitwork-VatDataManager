@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
 })
 export class LayoutComponent {
   isCollapsed = false;
-  fullName:string = "";
+  fullName: string = "";
 }

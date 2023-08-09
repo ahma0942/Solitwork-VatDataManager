@@ -1,59 +1,59 @@
 <div id="detailOverview">
   <div class="heading font-semibold text-[20px]">Detailed Overview</div>
-<div class="subheading text-[--grey-color] text-xs">
-  by subledger voucher
-</div>
-<div class="tableWrap mt-5">
-  <nz-table #headerTable [nzData]="transactions" [nzScroll]="{x:'800px', y: '400px' }"(nzPageIndexChange)="pageIndexChange($event)"
-  [nzFrontPagination]="false" [nzTotal]="pagination.count || 0"
-  [nzPageIndex]="(pagination.skip || 0)+1" [nzPageSize]="25"
-  [nzShowSizeChanger]="false" nzSize="small">
-    <thead>
-      <tr>
-        <th *ngFor="let column of listOfColumn" [nzShowSort]="false" [nzSortFn]="column.compare"
-        [nzSortPriority]="column.priority" [class]="column.class">
-        {{ column.title }}
-    </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let data of headerTable.data">
-        <td (click)="showDetail(data)" class="text-[--primary-color] pointer"><div class="text-[--primary-color]">{{data?.subledgervoucher}}</div></td>
-        <td>{{data?.account}}</td>
-        <td>{{data?.transactionAmount | numberToKMB}}</td>
-        <td>{{data?.actualVATAmount | numberToKMB }}</td>
-        <td>{{data?.expectedVATAmount | numberToKMB }}</td>
-        <td>{{data?.postingType}}</td>
-        <td>{{data?.journalCategory}}</td>
-        <td class="w-20">
-          <div class="tableEllipsis w-[150px]">
-            {{data?.description}}
-          </div>
-        </td>
-        <td>{{data?.customer}}</td>
-        <td>{{data?.vendor}}</td>
-        <td>{{data?.counterPartyVATCountry}}</td>
-        <td>{{data?.manuCountry}}</td>
-        <td>{{data?.vatType}}</td>
-        <td>{{data?.transactionDate | date:'dd/MM/YYYY'}}</td>
-
-      </tr>
-    </tbody>
-  </nz-table>
-  <div *ngIf="transactions?.length>0" class="totalRow flex items-center gap-3 pl-[10px] my-3">
-    <div class="text-[--black-color] font-bold text-[12px] w-[150px]">
-      Total
-    </div>
-    <div class="amountTotal font-bold text-[12px] w-[70px] text-[--black-color]">
-      {{getTotalAmount()| numberToKMB }}
-    </div>
-    <div class="actualTotal font-bold text-[12px] w-[75px] text-[--black-color]">
-      {{(getTotalActual() | numberToKMB)  }}
-    </div>
-    <div class="expectedTotal font-bold text-[12px] w-[50px] text-[--black-color]">
-      {{(getTotalExpected() | numberToKMB)}}
-    </div>
-
+  <div class="subheading text-[--grey-color] text-xs">
+    by subledger voucher
   </div>
-</div>
+  <div class="tableWrap mt-5">
+    <nz-table #headerTable [nzData]="transactions" [nzScroll]="{x:'800px', y: '400px' }" (nzPageIndexChange)="pageIndexChange($event)"
+      [nzFrontPagination]="false" [nzTotal]="pagination.count || 0" [nzPageIndex]="(pagination.skip || 0)+1" [nzPageSize]="25" [nzShowSizeChanger]="false"
+      nzSize="small">
+      <thead>
+        <tr>
+          <th *ngFor="let column of listOfColumn" [nzShowSort]="false" [nzSortFn]="column.compare" [nzSortPriority]="column.priority" [class]="column.class">
+            {{ column.title }}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of headerTable.data">
+          <td (click)="showDetail(data)" class="text-[--primary-color] pointer">
+            <div class="text-[--primary-color]">{{data?.subledgervoucher}}</div>
+          </td>
+          <td>{{data?.account}}</td>
+          <td>{{data?.transactionAmount | numberToKMB}}</td>
+          <td>{{data?.actualVATAmount | numberToKMB }}</td>
+          <td>{{data?.expectedVATAmount | numberToKMB }}</td>
+          <td>{{data?.postingType}}</td>
+          <td>{{data?.journalCategory}}</td>
+          <td class="w-20">
+            <div class="tableEllipsis w-[150px]">
+              {{data?.description}}
+            </div>
+          </td>
+          <td>{{data?.customer}}</td>
+          <td>{{data?.vendor}}</td>
+          <td>{{data?.counterPartyVATCountry}}</td>
+          <td>{{data?.manuCountry}}</td>
+          <td>{{data?.vatType}}</td>
+          <td>{{data?.transactionDate | date:'dd/MM/YYYY'}}</td>
+
+        </tr>
+      </tbody>
+    </nz-table>
+    <div *ngIf="transactions?.length>0" class="totalRow flex items-center gap-3 pl-[10px] my-3">
+      <div class="text-[--black-color] font-bold text-[12px] w-[150px]">
+        Total
+      </div>
+      <div class="amountTotal font-bold text-[12px] w-[70px] text-[--black-color]">
+        {{getTotalAmount()| numberToKMB }}
+      </div>
+      <div class="actualTotal font-bold text-[12px] w-[75px] text-[--black-color]">
+        {{(getTotalActual() | numberToKMB) }}
+      </div>
+      <div class="expectedTotal font-bold text-[12px] w-[50px] text-[--black-color]">
+        {{(getTotalExpected() | numberToKMB)}}
+      </div>
+
+    </div>
+  </div>
 </div>

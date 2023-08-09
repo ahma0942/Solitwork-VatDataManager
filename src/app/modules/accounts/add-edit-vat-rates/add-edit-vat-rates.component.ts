@@ -20,7 +20,7 @@ export class AddEditVatRatesComponent implements OnInit {
   result: any;
   fromDate: any;
   vatRateDetail: any;
-  today:any=[new Date(),new Date()];
+  today: any = [new Date(), new Date()];
   constructor(
     @Inject(MAT_DIALOG_DATA) private data: any,
     private dialog: MatDialogRef<AddEditVatRatesComponent>,
@@ -34,7 +34,7 @@ export class AddEditVatRatesComponent implements OnInit {
       this.recievedData = this.data;
       console.log(this.recievedData);
       this.getVateRate(this.recievedData);
-    }else{
+    } else {
       this.createForm()
     }
   }
@@ -57,7 +57,7 @@ export class AddEditVatRatesComponent implements OnInit {
       ]),
       validfrom: new FormControl((this.vatRateDetail?.validfrom || new Date()), [Validators.required]),
       validto: new FormControl((this.vatRateDetail?.validto || new Date()), [Validators.required]),
-      date:[this.today]
+      date: [this.today]
     });
   }
   create() {
@@ -65,7 +65,7 @@ export class AddEditVatRatesComponent implements OnInit {
     this.configurationService
       .createVateRate(this.vatRateForm.value)
       .subscribe((d) => {
-        if(d){
+        if (d) {
           this.dialog.close('Created')
         }
       });
@@ -76,7 +76,7 @@ export class AddEditVatRatesComponent implements OnInit {
     this.configurationService
       .updateVarRate(this.recievedData.vatRateID, this.vatRateForm.value)
       .subscribe((d) => {
-        if(d){
+        if (d) {
           this.dialog.close('Updated')
         }
 
@@ -87,9 +87,9 @@ export class AddEditVatRatesComponent implements OnInit {
       vatrate_id: data.vatRateID,
     };
     this.configurationService.getSingleVatRate(obj).subscribe((d: any) => {
-      console.log('vaterate',d)
+      console.log('vaterate', d)
       this.vatRateDetail = d;
-      this.today = [new Date(this.vatRateDetail.validfrom).toISOString(),new Date(this.vatRateDetail.validto).toISOString()]
+      this.today = [new Date(this.vatRateDetail.validfrom).toISOString(), new Date(this.vatRateDetail.validto).toISOString()]
       this.createForm();
     });
   }
