@@ -104,6 +104,7 @@ export class DetailOverviewComponent implements OnInit {
     }
     this.dashboardService.getDetailOverview(obj).subscribe((d:any)=>{
       this.transactions = d.vatTransactions
+      this.pagination.count = d.count
     });
   }
 

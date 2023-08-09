@@ -8,10 +8,14 @@
 
 `docker run -p 4200:4200 angular-frontend`
 
+## Test
+
+Both Backend and Frontend must be running before you run the tests:
+
+`npm run cypress:run`
+
 ## Translations
 
-To create a translation file, run the following command:
+Change language programatically by changing the `lang` variable in `/src/app/services/translate.service.ts`
 
-`ng extract-i18n --output-path src/locale`
-
-Replace locale with the locale for your translation. Rename the file and change the translations accordingly.
+The language will not change unless you comment out line 36 (this line detects the browser language and sets it automatically if it exists)

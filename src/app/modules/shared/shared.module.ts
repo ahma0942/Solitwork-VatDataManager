@@ -9,13 +9,15 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzTagModule } from 'ng-zorro-antd/tag';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { MatDialogModule } from '@angular/material/dialog';
+import { TranslatePipe } from 'src/app/pipes/translate.pipe';
 
 
 
 @NgModule({
   declarations: [
     NumberToKMBPipe,
-    FilterComponent
+    FilterComponent,
+    TranslatePipe
   ],
   imports: [
     CommonModule,
@@ -28,9 +30,10 @@ import { MatDialogModule } from '@angular/material/dialog';
     NzIconModule,
     MatDialogModule
   ],
-  exports:[
+  exports: [
     NumberToKMBPipe,
-    FilterComponent
+    FilterComponent,
+    TranslatePipe
   ]
 })
 export class SharedModule { }

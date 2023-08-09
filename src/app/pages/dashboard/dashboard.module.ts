@@ -5,20 +5,22 @@ import { RouterModule, Routes } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { KpisComponent } from './components/kpis/kpis.component';
 import { DiffrenceComponent } from './components/diffrence/diffrence.component';
-import {MatTableModule} from '@angular/material/table';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatTableModule } from '@angular/material/table';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { DetailOverviewComponent } from './components/detail-overview/detail-overview.component';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { VatTransactionDetailComponent } from './components/vat-transaction-detail/vat-transaction-detail.component';
+import { UpdateDifferenceTransactionComponent } from './components/update-difference-transaction/update-difference-transaction.component';
+import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 
 
 
-const routes: Routes= [
+const routes: Routes = [
 
-    {path:'', component:DashboardComponent }
+  { path: '', component: DashboardComponent }
 ]
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ const routes: Routes= [
     KpisComponent,
     DiffrenceComponent,
     DetailOverviewComponent,
-    VatTransactionDetailComponent
+    VatTransactionDetailComponent,
+    UpdateDifferenceTransactionComponent
   ],
   imports: [
     CommonModule,
@@ -39,6 +42,7 @@ const routes: Routes= [
     NzTableModule,
     SharedModule,
     NzDatePickerModule,
+    NzCheckboxModule,
 
   ]
 })

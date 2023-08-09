@@ -6,8 +6,8 @@
 <div class="tableWrap mt-5">
   <nz-table #headerTable [nzData]="transactions" [nzScroll]="{x:'800px', y: '400px' }"(nzPageIndexChange)="pageIndexChange($event)"
   [nzFrontPagination]="false" [nzTotal]="pagination.count || 0"
-  [nzPageIndex]="(pagination.skip || 0)+1" [nzPageSize]="pagination.limit || 0"
-  [nzShowSizeChanger]="false" nzSize="small" [nzPageSizeOptions]=" [25,50,75,100]" (nzPageSizeChange)="pageSizeChange($event)">
+  [nzPageIndex]="(pagination.skip || 0)+1" [nzPageSize]="25"
+  [nzShowSizeChanger]="false" nzSize="small">
     <thead>
       <tr>
         <th *ngFor="let column of listOfColumn" [nzShowSort]="false" [nzSortFn]="column.compare"

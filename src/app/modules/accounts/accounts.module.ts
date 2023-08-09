@@ -22,10 +22,11 @@ import { AddEditJournalCategoryComponent } from './add-edit-journal-category/add
 import { AddEditPostingTypeComponent } from './add-edit-posting-type/add-edit-posting-type.component';
 import { AddEditVatRatesComponent } from './add-edit-vat-rates/add-edit-vat-rates.component';
 import { NzInputModule } from 'ng-zorro-antd/input';
+import { SharedModule } from '../shared/shared.module';
 
-const routes: Routes= [
-  {path:'', redirectTo:'logs',pathMatch:'full' },
-  {path:'logs',component:AccountLogsComponent},
+const routes: Routes = [
+  { path: '', redirectTo: 'logs', pathMatch: 'full' },
+  { path: 'logs', component: AccountLogsComponent },
   // {path:'add-account', component:AddEditAccountComponent },
 ]
 @NgModule({
@@ -56,6 +57,7 @@ const routes: Routes= [
     NzDatePickerModule,
     NzCheckboxModule,
     NzInputModule,
+    SharedModule
   ]
 })
 export class AccountsModule { }

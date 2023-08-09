@@ -1,14 +1,18 @@
 import { CurrencyPipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
 import * as moment from 'moment';
+import { listOfColumn } from 'src/app/models/interfaces/listOfColumns.interface';
+import { Pagination } from 'src/app/models/interfaces/pagination.interface';
 import { DashboardService } from 'src/app/services/dashboard.service';
+import { UpdateDifferenceTransactionComponent } from '../update-difference-transaction/update-difference-transaction.component';
 
 interface Transaction {
-  voucher?: string;
-  actual?: number;
-  expected?:number;
-  difference?:number;
+  differenceId?: string;
+  actualVATAmount?: number;
+  expectedVATAmount?:number;
+  differenceVATAmount?:number;
   status?:boolean;
   attachment?:number;
   vatJournal?:string;
@@ -24,8 +28,33 @@ export class DiffrenceComponent implements OnInit{
   toDate:any
   displayedColumns: string[] = ['voucher', 'actual','expected','difference','checkbox','attachment','vatJournal'];
   transactions: Transaction[] = [];
+  updatedtransactions:any[]=[]
+  checked:boolean = false
 
-  constructor(private dashboardService:DashboardService){
+  listOfColumn: Array<listOfColumn> = [
+    {title:"Voucher",  variable:'differenceId',  compare: (a:any, b:any)=> a.differenceId<b.differenceId? 1: -1 , priority:true , width:''},
+    {title:"Actual",  variable:'actualVATAmount',  compare: (a:any, b:any)=> a.actualVATAmount<b.actualVATAmount? 1: -1 , priority:true , width:''},
+    {title:"Expected",  variable:'expectedVATAmount',  compare: (a:any, b:any)=> a.expectedVATAmount<b.expectedVATAmount? 1: -1 , priority:true , width:''},
+    {title:"Difference",  variable:'differenceVATAmount',  compare: (a:any, b:any)=> a.differenceVATAmount<b.differenceVATAmount? 1: -1 , priority:true , width:''},
+    {title:"checkbox",  variable:'checbox',   priority:true , width:''},
+    {title:"attachFile",  variable:'attachment',   priority:true , width:''},
+    {title:"VAT Journal",  variable:'vatJournal',   priority:true , width:''},
+    {title:"Status",  variable:'status',   priority:true , width:''},
+
+
+      ]
+  pagination: Pagination = {
+    limit: 25,
+    skip: 0,
+  }
+  pageSizeChange(value: any) {
+    this.pagination.skip = 0;
+    this.pagination.limit = value;
+  }
+  pageIndexChange(event:any){
+    this.pagination.skip = event -1;
+  }
+  constructor(private dashboardService:DashboardService,private dialog:MatDialog){
 
   }
   ngOnChanges(){
@@ -44,13 +73,13 @@ export class DiffrenceComponent implements OnInit{
 
   }
   getTotalActual() {
-    return this.transactions.map(t => t.actual).reduce((acc:any, value:any) => acc + value, 0);
+    return this.updatedtransactions.map(t => t.actualVATAmount).reduce((acc:any, value:any) => acc + value, 0);
   }
   getTotalExpected() {
-    return this.transactions.map(t => t.expected).reduce((acc:any, value:any) => acc + value, 0);
+    return this.updatedtransactions.map(t => t.expectedVATAmount).reduce((acc:any, value:any) => acc + value, 0);
   }
   getTotalDifference() {
-    return this.transactions.map(t => t.difference).reduce((acc:any, value:any) => acc + value, 0);
+    return this.updatedtransactions.map(t => t.differenceVATAmount).reduce((acc:any, value:any) => acc + value, 0);
   }
   getTransaction(){
     var obj ={
@@ -60,7 +89,31 @@ export class DiffrenceComponent implements OnInit{
      legalEntity:'EEC'
     }
     this.dashboardService.getDifferenceData(obj).subscribe((d:any)=>{
-      this.transactions = d.vatTransactions
+      if(d){
+        this.transactions = d.differences
+        this.pagination.count = d.count
+      this.updatedtransactions = this.transactions?.map((obj)=>{
+        const differenceVATAmount = obj.expectedVATAmount -obj.actualVATAmount;
+        return {...obj,differenceVATAmount};
+      })
+      console.log(this.updatedtransactions)
+      }
     });
+  }
+  updateFile(data){
+      this.dialog.open(UpdateDifferenceTransactionComponent,{
+        autoFocus:false,
+        data:data,
+        minWidth:"600px",
+        minHeight:'300px',
+        maxHeight:"85vh",
+        disableClose:true,
+      }).afterClosed().subscribe(action=>{
+        if(action){
+          console.log(action)
+          this.getTransaction()
+        }
+    });
+
   }
 }

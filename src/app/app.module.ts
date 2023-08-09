@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
@@ -9,13 +9,13 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { HttpClientModule } from '@angular/common/http';
-import { NZ_I18N } from 'ng-zorro-antd/i18n';
-import { en_US } from 'ng-zorro-antd/i18n';
-import { registerLocaleData } from '@angular/common';
-import en from '@angular/common/locales/en';
 import { FormsModule } from '@angular/forms';
+import { TranslateService } from './services/translate.service';
+import { SharedModule } from './modules/shared/shared.module';
 
-registerLocaleData(en);
+export function setupTranslateFactory(service: TranslateService) {
+  return () => service.selectBrowserLang();
+}
 
 @NgModule({
   declarations: [
@@ -30,10 +30,17 @@ registerLocaleData(en);
     AppRoutingModule,
     NzPaginationModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    SharedModule
   ],
   providers: [
-    { provide: NZ_I18N, useValue: en_US }
+    TranslateService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: setupTranslateFactory,
+      deps: [TranslateService],
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

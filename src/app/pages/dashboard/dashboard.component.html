@@ -1,16 +1,17 @@
 <div class="mainWrap">
   <div class="topHeading flex justify-between items-center mb-5">
     <div class="meesageWrap">
-      <div class="greeting text-[30px] font-semibold text-[--black-color]" i18n>
-        Good Afternoon, Daisy
+      <div class="greeting text-[30px] font-semibold text-[--black-color]">
+        {{ "Good Afternoon, Daisy" | translate }}
       </div>
       <div class="message text-[14px] text-[--grey-color] text-normal">
-        <b class="text-black" i18n>Sunday, 16 April 2023.</b> You've got 5 new notification & get the latest result in <a class="text-[--primary-color] font-medium underline decoration-solid ">Analytics</a>
+        <b class="text-black">Sunday, 16 April 2023.</b> You've got 5 new notification & get the latest result in <a
+          class="text-[--primary-color] font-medium underline decoration-solid ">Analytics</a>
       </div>
     </div>
     <div class="btnWrap flex justify-end gap-5">
       <button class="flex justify-between items-center bg-white rounded-md drop-shadow py-2 px-4  gap-2 font-normal">
-        <div class="icon h-[24px] text-[--grey-color]" >
+        <div class="icon h-[24px] text-[--grey-color]">
           <mat-icon>person</mat-icon>
         </div>
         Management
@@ -19,11 +20,7 @@
         </div>
       </button>
       <div class="datePcikerWrap bg-white rounded-md drop-shadow py-2 px-4  gap-2 font-normal">
-        <nz-range-picker class=""
-        [(ngModel)]="today"
-        nzBorderless
-        (ngModelChange)="onChange($event)"
-      ></nz-range-picker>
+        <nz-range-picker class="" [(ngModel)]="today" nzBorderless (ngModelChange)="onChange($event)"></nz-range-picker>
       </div>
       <!-- <button class="flex justify-between items-center bg-white rounded-md drop-shadow py-2 px-4 gap-2 font-normal">
         <div class="icon h-[24px] text-[--grey-color] ">

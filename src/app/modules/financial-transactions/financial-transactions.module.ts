@@ -11,14 +11,14 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { MatMenuModule } from '@angular/material/menu';
 
-const routes: Routes= [
-  {path:'', redirectTo:'logs',pathMatch:'full' },
-  {path:'logs',component:FinancialTransactionsComponent},
+const routes: Routes = [
+  { path: '', redirectTo: 'logs', pathMatch: 'full' },
+  { path: 'logs', component: FinancialTransactionsComponent },
 ]
 
 @NgModule({
   declarations: [
-    FinancialTransactionsComponent
+    FinancialTransactionsComponent,
   ],
   imports: [
     CommonModule,
