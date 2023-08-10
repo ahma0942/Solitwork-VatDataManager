@@ -37,7 +37,7 @@ export class AddEditCountryComponent implements OnInit {
       legalEntity: new FormControl(this.countryDetail?.legalEntity, [Validators.required]),
       legalEntityVATCountry: new FormControl(this.countryDetail?.legalEntityVATCountry, [Validators.required]),
       validfrom: new FormControl((this.countryDetail?.validfrom || new Date().toISOString()), [Validators.required]),
-      validto: new FormControl((this.countryDetail?.validfrom || new Date().toISOString()), [Validators.required]),
+      validto: new FormControl((this.countryDetail?.validto || new Date().toISOString()), [Validators.required]),
       date: [this.today],
     })
 

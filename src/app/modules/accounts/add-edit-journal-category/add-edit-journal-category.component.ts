@@ -36,7 +36,7 @@ export class AddEditJournalCategoryComponent {
       journalCategory: [this.journalDetail?.journalCategory, [Validators.required]],
       transactionVATCategory: [this.journalDetail?.transactionVATCategory || null, [Validators.required]],
       validfrom: new FormControl((this.journalDetail?.validfrom || new Date().toISOString()), [Validators.required]),
-      validto: new FormControl((this.journalDetail?.validfrom || new Date().toISOString()), [Validators.required]),
+      validto: new FormControl((this.journalDetail?.validto || new Date().toISOString()), [Validators.required]),
       date: [this.today]
     })
 
