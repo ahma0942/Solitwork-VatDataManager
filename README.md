@@ -12,6 +12,7 @@
 
 Both Backend and Frontend must be running before you run the tests:
 
+`npm install`
 `npm run cypress:run`
 
 ## Translations
