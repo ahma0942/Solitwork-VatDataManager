@@ -12,7 +12,7 @@ describe('Validate Add/Edit Posting Type', () => {
     cy.get('.ant-picker-input input').eq(0).focus().clear();
     cy.get('.ant-picker-input input').eq(0).type('2023-08-01').should('have.value', '2023-08-01');
     cy.get('.ant-picker-input input').eq(1).focus().clear();
-    cy.get('.ant-picker-input input').eq(1).type('2023-08-07').should('have.value', '2023-08-07');
+    cy.get('.ant-picker-input input').eq(1).type('2023-08-01').should('have.value', '2023-08-01');
     cy.get('.ant-picker-input').eq(1).type('{enter}');
 
     cy.get("input[type='checkbox']").eq(0).check();
@@ -21,7 +21,7 @@ describe('Validate Add/Edit Posting Type', () => {
       cy.get("td[data-cy='postingType']").eq(0).should('contain.text',textBoxInput);
       cy.get("td[data-cy='isVATExpectedOnPostingType']").eq(0).should('contain.text','true');
       cy.get("td[data-cy='validfrom']").eq(0).should('contain.text','2023-08-01');
-      cy.get("td[data-cy='validto']").eq(0).should('contain.text','2023-08-07');
+      cy.get("td[data-cy='validto']").eq(0).should('contain.text','2023-08-01');
     });
   })
 })
