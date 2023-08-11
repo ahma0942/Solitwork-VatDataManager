@@ -12,6 +12,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { TranslateService } from './services/translate.service';
 import { SharedModule } from './modules/shared/shared.module';
+import { NZ_I18N } from 'ng-zorro-antd/i18n';
+import { en_US } from 'ng-zorro-antd/i18n';
+import { registerLocaleData } from '@angular/common';
+import en from '@angular/common/locales/en';
+
+registerLocaleData(en);
 
 export function setupTranslateFactory(service: TranslateService) {
   return () => service.selectBrowserLang();
@@ -40,7 +46,8 @@ export function setupTranslateFactory(service: TranslateService) {
       useFactory: setupTranslateFactory,
       deps: [TranslateService],
       multi: true
-    }
+    },
+    { provide: NZ_I18N, useValue: en_US }
   ],
   bootstrap: [AppComponent]
 })
