@@ -22,6 +22,9 @@ export class DashboardService {
   getSingleDifferenceData(verificationId?: any) {
     return this.http.get(environment.baseUrl + `/verifications/${verificationId}`, {});
   }
+  deleteDifference(verificationId?:any): Observable<any> {
+    return this.http.delete(environment.baseUrl + `/verifications/${verificationId}`, {});
+  }
   updateDifferenceData(verificationId?: any, obj?: any) {
     return this.http.put(environment.baseUrl + `/verifications/${verificationId}`, {}, { params: obj });
   }
@@ -29,5 +32,8 @@ export class DashboardService {
     var form = new FormData();
     form.set('file', obj);
     return this.http.post(environment.baseUrl + `/verifications/${verificationId}/files`, form);
+  }
+  deleteFile(verificationId?:any,fileId?:any){
+    return this.http.delete(environment.baseUrl + `/verifications/${verificationId}/files/${fileId}`, {});
   }
 }

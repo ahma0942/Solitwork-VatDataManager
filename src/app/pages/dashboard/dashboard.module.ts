@@ -15,6 +15,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { VatTransactionDetailComponent } from './components/vat-transaction-detail/vat-transaction-detail.component';
 import { UpdateDifferenceTransactionComponent } from './components/update-difference-transaction/update-difference-transaction.component';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { DifferenceDetailComponent } from './components/difference-detail/difference-detail.component';
+import { NzTagModule } from 'ng-zorro-antd/tag';
 
 
 
@@ -29,7 +33,8 @@ const routes: Routes = [
     DiffrenceComponent,
     DetailOverviewComponent,
     VatTransactionDetailComponent,
-    UpdateDifferenceTransactionComponent
+    UpdateDifferenceTransactionComponent,
+    DifferenceDetailComponent
   ],
   imports: [
     CommonModule,
@@ -43,6 +48,9 @@ const routes: Routes = [
     SharedModule,
     NzDatePickerModule,
     NzCheckboxModule,
+    NzIconModule,
+    MatMenuModule,
+    NzTagModule
 
   ]
 })

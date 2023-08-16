@@ -1,0 +1,72 @@
+<div id="transactionDetail" class="mainWrap p-5 ">
+  <div class="logo font-black text-[--black-color] text-[16px] border-b border-solid border-[--light-grey-color]">
+    <span class="text-[--primary-color] ">
+      Difference
+    </span>
+    Detail
+  </div>
+  <div class="detailWrap flex flex-wrap justify-between mt-5 gap-4 w-[80%] mx-auto">
+    <div class="detail flex w-[48%] gap-4">
+      <div class="heading text-[--grey-color] font-bold text-xs w-[150px]">
+        Difference Id
+      </div>
+      <div class="value text-[--black-color] font-semibold text-xs">
+        {{receivedData?.differenceId || 'N/A'}}
+      </div>
+    </div>
+    <div class="detail flex w-[48%] gap-4">
+      <div class="heading text-[--grey-color] font-bold text-xs w-[150px]">
+        Journal Number
+      </div>
+      <div class="value text-[--black-color] font-semibold text-xs">
+        {{receivedData?.journalNumber || 'N/A'}}
+      </div>
+    </div>
+    <div class="detail flex w-[48%] gap-4">
+      <div class="heading text-[--grey-color] font-bold text-xs w-[150px]">
+        Legal Entity
+      </div>
+      <div class="value text-[--black-color] font-semibold text-xs">
+        {{receivedData?.legalEntity || 'N/A'}}
+      </div>
+    </div>
+  </div>
+  <div class="font-black text-[--black-color] text-xs border-b border-solid border-[--light-grey-color] w-[80%] mt-5 mx-auto">
+    Verifications
+  </div>
+  <div class="detailWrap mt-5 gap-4 w-[80%] mx-auto">
+    <div class="tableWrap">
+      <nz-table #basicTable [nzData]="receivedData.verifications" [nzFrontPagination]="true" [nzShowPagination]="false">
+        <thead>
+          <tr>
+            <th>legal Entity</th>
+            <th>Verified By</th>
+            <th>Email</th>
+            <th>Note</th>
+            <th>From Date</th>
+            <th>To Date</th>
+            <th>Files</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of basicTable.data">
+            <td>{{data?.legalEntity}}</td>
+            <td>{{data?.verifiedBy?.name}}</td>
+            <td>{{data?.verifiedBy?.email}}</td>
+            <td>{{data?.note}}</td>
+            <td>{{data?.fromDate | date}}</td>
+            <td>
+              {{data?.toDate | date}}
+            </td>
+            <td>
+              <div class="flex flex-col gap-2">
+                <a href="#" target="_blank" *ngFor="let file of data?.files">{{file?.filename}}</a>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </div>
+
+  </div>
+</div>

@@ -19,12 +19,16 @@ export class AccountsComponent implements OnInit {
     { title: 'account_name', variable: 'accountName', compare: (a: any, b: any) => a.accountName < b.accountName ? 1 : -1, priority: true, width: '' },
     { title: 'accounts_VATCategory', variable: 'AccountVATCategory', compare: (a: any, b: any) => a.AccountVATCategory < b.AccountVATCategory ? 1 : -1, priority: true, width: '' },
     { title: 'accounts_vataccount', variable: 'IsVATExpectedOnAccount', compare: (a: any, b: any) => a.IsVATExpectedOnAccount < b.IsVATExpectedOnAccount ? 1 : -1, priority: true, width: '' },
-    { title: 'Action', variable: 'action', priority: true, width: '' },
+    { title: 'Valid From', variable: 'validfrom', compare: (a: any, b: any) => a.validfrom < b.validfrom ? 1 : -1, priority: true, width: '' },
+    { title: 'Valid To', variable: 'validto', compare: (a: any, b: any) => a.validto < b.validto ? 1 : -1, priority: true, width: '' },
+    { title: 'Edit', variable: 'edit', priority: true, width: '' },
+    { title: 'Delete', variable: 'delete', priority: true, width: '' },
   ]
   listOfData: Array<any> = [];
   pagination: any = {
     limit: 25,
     skip: 0,
+    page:0
   }
 
 
@@ -44,7 +48,8 @@ export class AccountsComponent implements OnInit {
     this.pagination.limit = value;
   }
   pageIndexChange(event: any) {
-    this.pagination.skip = event - 1;
+    this.pagination.page = (event - 1)
+    this.pagination.skip = this.pagination.page * this.pagination.limit
     this.getAccountsData()
   }
   getAccountsData() {
@@ -54,6 +59,14 @@ export class AccountsComponent implements OnInit {
     this.configurationService.getAccountConfigurations(obj).subscribe((d: any) => {
       this.listOfData = d.accounts
       this.pagination.count = d.count
+    });
+  }
+  deleteAccount(data:any){
+    var obj = {
+      account_id:data.account
+    }
+    this.configurationService.deleteAccount(obj).subscribe((d: any) => {
+      this.getAccountsData()
     });
   }
   addAccount() {

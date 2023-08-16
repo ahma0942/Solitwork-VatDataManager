@@ -42,7 +42,7 @@ export class UpdateDifferenceTransactionComponent implements OnInit {
 
   }
   getDifference(data: any) {
-    console.log('data', data)
+    console.log('data asd', data)
     this.dashboardService.getSingleDifferenceData(this.verificationId).subscribe((d: any) => {
       if (d) {
         this.transactionData = d
@@ -69,9 +69,17 @@ export class UpdateDifferenceTransactionComponent implements OnInit {
       console.log(r.result)
       this.updateFile.controls['file'].setValue(r.result)
     }
+    console.log('files',event.target.files[0])
     this.updateFile.controls['file'].setValue(event.target.files[0])
 
     //  r.readAsArrayBuffer(event.target.files[0])
+  }
+  onClose(fileId:any): void {
+    this.dashboardService.deleteFile(this.verificationId, fileId).subscribe((d: any) => {
+      if (d) {
+        this.dialog.close('file Deleted')
+      }
+    });
   }
   close() {
     this.dialog.close();

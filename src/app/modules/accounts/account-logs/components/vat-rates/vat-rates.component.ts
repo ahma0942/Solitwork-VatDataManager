@@ -12,7 +12,7 @@ import { AddEditVatRatesComponent } from '../../../add-edit-vat-rates/add-edit-v
 export class VatRatesComponent implements OnInit {
   listOfColumn: Array<listOfColumn> = [
     { title: "", variable: '', compare: (a: any, b: any) => null, priority: false, width: '' },
-    { title: 'Journal Category', variable: 'vatRateID', compare: (a: any, b: any) => a.vatRateID < b.vatRateID ? 1 : -1, priority: true, width: '' },
+    { title: 'Vat Rates', variable: 'vatRateID', compare: (a: any, b: any) => a.vatRateID < b.vatRateID ? 1 : -1, priority: true, width: '' },
     { title: 'Legal Entity', variable: 'legalEntity', compare: (a: any, b: any) => a.legalEntity < b.legalEntity ? 1 : -1, priority: true, width: '' },
     { title: 'Account', variable: 'account', compare: (a: any, b: any) => a.account < b.account ? 1 : -1, priority: true, width: '' },
     { title: 'expected VAT Type', variable: 'expectedVATType', compare: (a: any, b: any) => a.expectedVATType < b.expectedVATType ? 1 : -1, priority: true, width: '' },
@@ -20,12 +20,14 @@ export class VatRatesComponent implements OnInit {
 
     { title: 'Valid From', variable: 'validfrom', compare: (a: any, b: any) => a.validfrom < b.validfrom ? 1 : -1, priority: true, width: '' },
     { title: 'Valid To', variable: 'validto', compare: (a: any, b: any) => a.validto < b.validto ? 1 : -1, priority: true, width: '' },
-    { title: 'Action', variable: 'action', priority: true, width: '' },
+    { title: 'Edit', variable: 'edit', priority: true, width: '' },
+    { title: 'Delete', variable: 'delete', priority: true, width: '' },
   ]
   listOfData: Array<any> = [];
   pagination: any = {
     limit: 25,
     skip: 0,
+    page:0,
   }
 
 
@@ -42,7 +44,9 @@ export class VatRatesComponent implements OnInit {
     this.pagination.limit = value;
   }
   pageIndexChange(event: any) {
-    this.pagination.skip = event - 1;
+    this.pagination.page = (event - 1)
+    this.pagination.skip = this.pagination.page * this.pagination.limit
+    this.getVatRateData()
   }
   getVatRateData() {
     var obj = {
@@ -50,6 +54,7 @@ export class VatRatesComponent implements OnInit {
     }
     this.configurationService.getVatRates(obj).subscribe((d: any) => {
       this.listOfData = d.vatrates
+      this.pagination.count = d.count
     });
   }
   create() {
@@ -64,6 +69,14 @@ export class VatRatesComponent implements OnInit {
         console.log(action)
         this.getVatRateData()
       }
+    });
+  }
+  deleteVatRate(data:any){
+    var obj = {
+      vatrate_id:data.vatRateID
+    }
+    this.configurationService.deleteVateRate(obj).subscribe((d: any) => {
+      this.getVatRateData()
     });
   }
   edit(data: any) {

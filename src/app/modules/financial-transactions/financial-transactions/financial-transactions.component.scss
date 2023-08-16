@@ -3,6 +3,9 @@
     overflow-x: scroll !important;
   }
   .ant-switch {
-    background-color: var(--primary-color);
+    background-color: var(--light-grey-color);
+    &.ant-switch-checked{
+      background-color: var(--primary-color);
+    }
   }
 }

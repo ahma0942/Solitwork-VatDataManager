@@ -8,19 +8,19 @@
           <li class="link">
             <a routerLink="/app/dashboard" routerLinkActive="is-active" class="link-item gap-2 flex justify-start items-center">
               <mat-icon>dashboard</mat-icon>
-              <span *ngIf="isOpened">Dashboard</span>
+              <span *ngIf="isOpened">{{"Dashboard"| translate}}</span>
             </a>
           </li>
           <li class="link">
             <a routerLink="/app/accounts" routerLinkActive="is-active" class="link-item gap-2 flex justify-start items-center">
               <mat-icon>cloud</mat-icon>
-              <span *ngIf="isOpened">Accounts</span>
+              <span *ngIf="isOpened">{{"Accounts"| translate}}</span>
             </a>
           </li>
           <li class="link">
             <a routerLink="/app/financial-transactions" routerLinkActive="is-active" class="link-item gap-2 flex justify-start items-center">
               <mat-icon> format_list_bulleted</mat-icon>
-              <span *ngIf="isOpened">Transactions</span>
+              <span *ngIf="isOpened">{{"Transactions" | translate}}</span>
 
             </a>
           </li>
@@ -31,13 +31,13 @@
           <li class="link">
             <a routerLink="/setting" class="link-item gap-2 flex justify-start items-center" routerLinkActive="is-active">
               <mat-icon>settings</mat-icon>
-              <span *ngIf="isOpened">Settings</span>
+              <span *ngIf="isOpened">{{"Settings"| translate}}</span>
             </a>
           </li>
           <li class="link">
             <a routerLink="/logout" class="link-item gap-2 flex justify-start items-center" routerLinkActive="is-active">
               <mat-icon>exit_to_app</mat-icon>
-              <span *ngIf="isOpened">Log Out</span>
+              <span *ngIf="isOpened">{{"Log Out"| translate}}</span>
             </a>
           </li>
         </ul>

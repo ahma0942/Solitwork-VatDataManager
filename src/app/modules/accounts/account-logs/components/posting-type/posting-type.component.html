@@ -2,20 +2,20 @@
   <div class="pageHeader flex justify-between w-full opacity-60">
     <div class="logo font-black text-[--black-color] text-[18px]">
       <span class="text-[--primary-color] ">
-        Journal
+        {{"Journal" |translate}}
       </span>
-      Category
+      {{"Category"|translate}}
     </div>
     <div class="filterWrap flex gap-3 justify-end">
       <button class="bg-[--primary-color] py-1  px-4 rounded-sm text-white" (click)="addPostingType()">
-        Add Post Type
+        {{"Add Post Type"|translate}}
       </button>
     </div>
   </div>
   <div class="mainContent bg-white rounded-sm w-full mt-3 px-3">
     <div class="tableWrap w-full mt-3">
       <nz-table id="table-export" #sortTable [nzData]="listOfData" (nzPageIndexChange)="pageIndexChange($event)" [nzFrontPagination]="false"
-        [nzTotal]="pagination.count || 0" [nzPageIndex]="5" [nzPageSize]="pagination.limit || 0" [nzShowSizeChanger]="false" nzSize="small"
+        [nzTotal]="pagination.count || 0" [nzPageIndex]="(pagination.page || 0)+1" [nzPageSize]="pagination.limit || 0" [nzShowSizeChanger]="false" nzSize="small"
         nzTableLayout="fixed">
         <thead>
           <tr>
@@ -24,18 +24,20 @@
               #
             </th>
             <th *ngFor="let column of listOfColumn.slice(1)" [nzShowSort]="false" [nzSortFn]="column.compare" [nzSortPriority]="column.priority">
-              {{ column.title | uppercase }}
+              {{ (column.title | uppercase) | translate }}
             </th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let data of sortTable.data,let i=index ">
-            <td> {{ (pagination?.skip * pagination?.limit) + (i+1)}} </td>
+            <td> {{ (pagination?.page * pagination?.limit) + (i+1)}} </td>
             <td data-cy="postingType"> {{data?.postingType || 'N/A' }} </td>
             <td data-cy="isVATExpectedOnPostingType"> {{data?.isVATExpectedOnPostingType }} </td>
             <td data-cy="validfrom"> {{(data?.validfrom | date:'yyyy-MM-dd') || 'N/A' }} </td>
             <td data-cy="validto"> {{(data?.validto | date:'yyyy-MM-dd') || 'N/A' }} </td>
             <td data-cy="editPostingType" (click)="editPostingType(data)" class="pointer"> <span nz-icon nzType="edit" nzTheme="outline"></span> </td>
+            <td  (click)="deletePostingType(data)" class="pointer"> <span class="text-[--red-color]" nz-icon nzType="delete" nzTheme="outline"></span> </td>
+
           </tr>
         </tbody>
       </nz-table>

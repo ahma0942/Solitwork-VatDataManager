@@ -28,12 +28,12 @@
             <button nz-button class="flex items-center border bg-[#FFF] hover:bg-[--primary-color] hover:text-white rounded-[6px] py-2.5 px-3 h-[36px]  gap-2.5"
                 (click)="clear()">
                 <span nz-icon nzType="delete" nzTheme="outline"></span>
-                Clear all filters
+                {{"Clear all filters"|translate}}
             </button>
             <button nz-button class="flex items-center border bg-[#FFF] hover:bg-[--primary-color] hover:text-white rounded-[6px] py-2.5 px-3 h-[36px]  gap-2.5"
                 (click)="onSubmit()">
                 <span nz-icon nzType="filter" nzTheme="outline"></span>
-                Apply Filter
+                {{"Apply Filter"|translate}}
             </button>
         </div>
     </div>
@@ -50,7 +50,7 @@
 
     <ng-template #textField let-field="field">
         <div class="inputWrap w-3/12 max-w-[25%] p-1">
-            <div class="text-muted text-xs p-1">{{field.label}}</div>
+            <div class="text-muted text-xs p-1">{{field.label | translate}}</div>
             <nz-input-group class="border rounded p-0 px-2 bg-white">
                 <input name="{{field.variable}}-name" id="{{field.variable}}-id" [(ngModel)]="field.value" class="input-field max-h-[36px]"
                     [placeholder]="field.placeholder">
@@ -69,7 +69,7 @@
           </nz-form-item>
       </form> -->
         <div class="inputWrap w-3/12 max-w-[25%] p-1">
-            <div class="text-muted text-xs p-1">{{field.label}}</div>
+            <div class="text-muted text-xs p-1">{{field.label | translate}}</div>
             <nz-input-group class="border rounded p-0 bg-white">
                 <nz-range-picker class="input-field max-h-[36px] w-100" nzSecondStep nzSeparator="-" name="{{field.variable}}-name" id="{{field.variable}}-id"
                     [(ngModel)]="field.value" (ngModelChange)="onDateChange($event, field)"></nz-range-picker>
@@ -80,9 +80,9 @@
     <ng-template #selectField let-field="field">
         <div class="inputWrap w-3/12 max-w-[25%] p-1">
             <div class="text-muted text-xs p-1">{{field.label}}</div>
-            <nz-input-group class="border rounded p-0 bg-white">
+            <nz-input-group class="rounded p-0 bg-white">
                 <nz-select [nzPlaceHolder]="field.placeholder" name="{{field.variable}}-name" id="{{field.variable}}-id" [(ngModel)]="field.value"
-                    [nzDropdownClassName]="'option-width-100'" class="max-h-[36px] h-[36px] w-100">
+                    [nzDropdownClassName]="'option-width-100'" class="max-h-[36px] h-[36px] w-full">
                     <nz-option *ngFor="let option of field.options" [nzValue]="option.value" [nzLabel]="option.label"></nz-option>
                 </nz-select>
             </nz-input-group>

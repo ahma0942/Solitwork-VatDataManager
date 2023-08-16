@@ -33,7 +33,7 @@ export class KpisComponent implements OnInit {
     this.getkpi()
   }
   ngOnInit(): void {
-    this.getkpi();
+    // this.getkpi();
   }
 
   getkpi() {

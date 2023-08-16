@@ -16,12 +16,14 @@ export class PostingTypeComponent implements OnInit {
     { title: 'VAT Expected on posting Type', variable: 'isVATExpectedOnPostingType', compare: (a: any, b: any) => a.isVATExpectedOnPostingType < b.isVATExpectedOnPostingType ? 1 : -1, priority: true, width: '150px' },
     { title: 'Valid From', variable: 'validfrom', compare: (a: any, b: any) => a.validfrom < b.validfrom ? 1 : -1, priority: true, width: '' },
     { title: 'Valid To', variable: 'validto', compare: (a: any, b: any) => a.validto < b.validto ? 1 : -1, priority: true, width: '' },
-    { title: 'Action', variable: 'action', priority: true, width: '' },
+    { title: 'Edit', variable: 'edit', priority: true, width: '' },
+    { title: 'Delete', variable: 'delete', priority: true, width: '' },
   ]
   listOfData: Array<any> = [];
   pagination: any = {
     limit: 25,
     skip: 0,
+    page:0
   }
 
 
@@ -38,7 +40,9 @@ export class PostingTypeComponent implements OnInit {
     this.pagination.limit = value;
   }
   pageIndexChange(event: any) {
-    this.pagination.skip = event - 1;
+    this.pagination.page = (event - 1)
+    this.pagination.skip = this.pagination.page * this.pagination.limit
+    this.getPostingTypes()
   }
   getPostingTypes() {
     var obj = {
@@ -46,6 +50,7 @@ export class PostingTypeComponent implements OnInit {
     }
     this.configurationService.getPostingType(obj).subscribe((d: any) => {
       this.listOfData = d.postingtypes
+      this.pagination.count = d.count
     });
   }
   addPostingType() {
@@ -60,6 +65,14 @@ export class PostingTypeComponent implements OnInit {
         console.log(action)
         this.getPostingTypes()
       }
+    });
+  }
+  deletePostingType(data:any){
+    var obj = {
+      postingtype_id:data.postingType
+    }
+    this.configurationService.deletePostingType(obj).subscribe((d: any) => {
+      this.getPostingTypes()
     });
   }
   editPostingType(data: any) {

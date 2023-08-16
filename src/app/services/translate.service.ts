@@ -8,7 +8,7 @@ import { BehaviorSubject } from 'rxjs';
 export class TranslateService {
   onchange: BehaviorSubject<null> = new BehaviorSubject(null);
   langs = ['en', 'da'];
-  lang = 'en';
+  lang = 'da';
   data = {};
 
   constructor(private http: HttpClient) { }
@@ -33,7 +33,7 @@ export class TranslateService {
 
   selectBrowserLang() {
     const l = navigator.language.includes('-') ? navigator.language.split('-')[0] : navigator.language;
-    if (this.langs.includes(l)) return this.use(l);
+    // if (this.langs.includes(l)) return this.use(l);
     return this.use(this.lang);
   }
 

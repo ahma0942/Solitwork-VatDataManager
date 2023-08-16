@@ -25,6 +25,12 @@
           </div>
         </div>
       </form>
+      <div class="attachFiles" *ngIf="transactionData?.files?.length > 0">
+        <div class="font-normal text-sm">Attached Files</div>
+        <div class="filesWrap">
+          <nz-tag nzMode="closeable" class="mt-3 bg-[--light-grey-color] text-xs py-1 px-2 rounded-lg text-[--primary-color]"  *ngFor="let file of transactionData?.files" (nzOnClose)="onClose(file.fileId)">{{file.filename}}</nz-tag>
+        </div>
+      </div>
     </div>
 
 

@@ -49,7 +49,7 @@ export class DetailOverviewComponent implements OnInit {
     this.getTransactions()
   }
   ngOnInit(): void {
-    this.getTransactions()
+    // this.getTransactions()
 
   }
   listOfColumn: Array<listOfColumn> = [
@@ -59,7 +59,7 @@ export class DetailOverviewComponent implements OnInit {
     { title: 'Actual', variable: 'actual', compare: (a: any, b: any) => a.actual < b.actual ? 1 : -1, priority: true, width: '' },
     { title: 'Expected', variable: 'expected', compare: (a: any, b: any) => a.expected < b.expected ? 1 : -1, priority: true, width: '' },
     { title: 'Type', variable: 'PostingType', compare: (a: any, b: any) => a.PostingType < b.PostingType ? 1 : -1, priority: true, width: '' },
-    { title: 'Cat.', variable: 'JournalCategory', compare: (a: any, b: any) => a.JournalCategory < b.JournalCategory ? 1 : -1, priority: true, width: '' },
+    { title: 'Cat', variable: 'JournalCategory', compare: (a: any, b: any) => a.JournalCategory < b.JournalCategory ? 1 : -1, priority: true, width: '' },
     { title: 'Description', variable: 'Description', compare: (a: any, b: any) => a.Description < b.Description ? 1 : -1, priority: true, class: 'w-20' },
     { title: 'Customer', variable: 'Customer', compare: (a: any, b: any) => a.Customer < b.Customer ? 1 : -1, priority: true, width: '' },
     { title: 'Vendor', variable: 'Vendor', compare: (a: any, b: any) => a.Vendor < b.Vendor ? 1 : -1, priority: true, width: '' },
@@ -72,13 +72,16 @@ export class DetailOverviewComponent implements OnInit {
   pagination: Pagination = {
     limit: 25,
     skip: 0,
+    page:0,
   }
   pageSizeChange(value: any) {
     this.pagination.skip = 0;
     this.pagination.limit = value;
   }
   pageIndexChange(event: any) {
-    this.pagination.skip = event - 1;
+    this.pagination.page = (event - 1)
+    this.pagination.skip = this.pagination.page * this.pagination.limit
+    this.getTransactions()
   }
 
 

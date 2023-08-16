@@ -50,7 +50,7 @@ export class FilterComponent implements OnInit {
         obj[field.variable] = field.value.toString().trim();
         if (field.type == 'select') {
           const label = field.options?.find(e => e.value == field.value)?.label;
-          this.chips.push({ label: field.label, value: label || field.value });
+          this.chips.push({ label: field.label, value: field.value});
         } else {
           this.chips.push({ label: field.label, value: field.value });
         }

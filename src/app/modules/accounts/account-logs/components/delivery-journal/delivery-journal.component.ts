@@ -16,12 +16,14 @@ export class DeliveryJournalComponent implements OnInit {
     { title: 'Transaction VAT Category', variable: 'transactionVATCategory', compare: (a: any, b: any) => a.transactionVATCategory < b.transactionVATCategory ? 1 : -1, priority: true, width: '' },
     { title: 'Valid From', variable: 'validfrom', compare: (a: any, b: any) => a.validfrom < b.validfrom ? 1 : -1, priority: true, width: '' },
     { title: 'Valid To', variable: 'validto', compare: (a: any, b: any) => a.validto < b.validto ? 1 : -1, priority: true, width: '' },
-    { title: 'Action', variable: 'action', priority: true, width: '' },
+    { title: 'Edit', variable: 'edit', priority: true, width: '' },
+    { title: 'Delete', variable: 'delete', priority: true, width: '' },
   ]
   listOfData: Array<any> = [];
   pagination: any = {
     limit: 25,
     skip: 0,
+    page:0,
   }
 
 
@@ -40,7 +42,9 @@ export class DeliveryJournalComponent implements OnInit {
     this.pagination.limit = value;
   }
   pageIndexChange(event: any) {
-    this.pagination.skip = event - 1;
+    this.pagination.page = (event - 1)
+    this.pagination.skip = this.pagination.page * this.pagination.limit
+    this.getJournalData()
   }
   getJournalData() {
     var obj = {
@@ -48,6 +52,7 @@ export class DeliveryJournalComponent implements OnInit {
     }
     this.configurationService.getDeliveryJournal(obj).subscribe((d: any) => {
       this.listOfData = d.journalcategories
+      this.pagination.count = d.count
     });
   }
   addJournal() {
@@ -62,6 +67,14 @@ export class DeliveryJournalComponent implements OnInit {
         console.log(action)
         this.getJournalData()
       }
+    });
+  }
+  deleteJournal(data:any){
+    var obj = {
+      journalcategory_id:data.journalCategory
+    }
+    this.configurationService.deleteJournal(obj).subscribe((d: any) => {
+      this.getJournalData()
     });
   }
   editJournal(data: any) {

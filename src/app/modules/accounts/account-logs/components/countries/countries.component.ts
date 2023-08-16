@@ -17,12 +17,14 @@ export class CountriesComponent implements OnInit {
     { title: 'VAT Country', variable: 'legalEntityVATCountry', compare: (a: any, b: any) => a.legalEntityVATCountry < b.legalEntityVATCountry ? 1 : -1, priority: true, width: '' },
     { title: 'Valid From', variable: 'validfrom', compare: (a: any, b: any) => a.validfrom < b.validfrom ? 1 : -1, priority: true, width: '' },
     { title: 'Valid To', variable: 'validto', compare: (a: any, b: any) => a.validto < b.validto ? 1 : -1, priority: true, width: '' },
-    { title: 'Action', variable: 'action', priority: true, width: '' },
+    { title: 'Edit', variable: 'edit', priority: true, width: '' },
+    { title: 'Delete', variable: 'delete', priority: true, width: '' },
   ]
   listOfData: Array<any> = [];
   pagination: any = {
     limit: 25,
     skip: 0,
+    page:0,
   }
 
 
@@ -40,7 +42,9 @@ export class CountriesComponent implements OnInit {
     this.pagination.limit = value;
   }
   pageIndexChange(event: any) {
-    this.pagination.skip = event - 1;
+    this.pagination.page = (event - 1)
+    this.pagination.skip = this.pagination.page * this.pagination.limit
+    this.getCountriesData()
   }
   getCountriesData() {
     var obj = {
@@ -48,6 +52,7 @@ export class CountriesComponent implements OnInit {
     }
     this.configurationService.getCountriesConfiguration(obj).subscribe((d: any) => {
       this.listOfData = d.countries
+      this.pagination.count = d.count
     });
   }
 
@@ -63,6 +68,14 @@ export class CountriesComponent implements OnInit {
         console.log(action)
         this.getCountriesData()
       }
+    });
+  }
+  deleteCountry(data:any){
+    var obj = {
+      legalEntity:data.legalEntity
+    }
+    this.configurationService.deleteCountry(obj).subscribe((d: any) => {
+      this.getCountriesData()
     });
   }
   editCountry(data: any) {

@@ -7,6 +7,7 @@ import { listOfColumn } from 'src/app/models/interfaces/listOfColumns.interface'
 import { Pagination } from 'src/app/models/interfaces/pagination.interface';
 import { DashboardService } from 'src/app/services/dashboard.service';
 import { UpdateDifferenceTransactionComponent } from '../update-difference-transaction/update-difference-transaction.component';
+import { DifferenceDetailComponent } from '../difference-detail/difference-detail.component';
 
 interface Transaction {
   differenceId?: string;
@@ -16,6 +17,7 @@ interface Transaction {
   status?: boolean;
   attachment?: number;
   vatJournal?: string;
+  verifications?:Array<any>;
 }
 @Component({
   selector: 'app-diffrence',
@@ -37,22 +39,26 @@ export class DiffrenceComponent implements OnInit {
     { title: "Expected", variable: 'expectedVATAmount', compare: (a: any, b: any) => a.expectedVATAmount < b.expectedVATAmount ? 1 : -1, priority: true, width: '' },
     { title: "Difference", variable: 'differenceVATAmount', compare: (a: any, b: any) => a.differenceVATAmount < b.differenceVATAmount ? 1 : -1, priority: true, width: '' },
     { title: "checkbox", variable: 'checbox', priority: true, width: '' },
-    { title: "attachFile", variable: 'attachment', priority: true, width: '' },
+    { title: "Attach File", variable: 'attachment', priority: true, width: '' },
     { title: "VAT Journal", variable: 'vatJournal', priority: true, width: '' },
     { title: "Status", variable: 'status', priority: true, width: '' },
+    { title: "Action", variable: 'action', priority: true, width: '' },
 
 
   ]
   pagination: Pagination = {
     limit: 25,
     skip: 0,
+    page:0,
   }
   pageSizeChange(value: any) {
     this.pagination.skip = 0;
     this.pagination.limit = value;
   }
   pageIndexChange(event: any) {
-    this.pagination.skip = event - 1;
+    this.pagination.page = (event -1)
+    this.pagination.skip = this.pagination.page*this.pagination.limit;
+    this.getTransaction()
   }
   constructor(private dashboardService: DashboardService, private dialog: MatDialog) {
 
@@ -69,7 +75,7 @@ export class DiffrenceComponent implements OnInit {
     this.getTransaction()
   }
   ngOnInit(): void {
-    this.getTransaction()
+    // this.getTransaction()
 
   }
   getTotalActual() {
@@ -100,6 +106,14 @@ export class DiffrenceComponent implements OnInit {
       }
     });
   }
+  deleteVatRate(data:any){
+    var obj = {
+      verificationId:data.verifications[0].verificationId
+    }
+    this.dashboardService.deleteDifference(obj.verificationId).subscribe((d: any) => {
+      this.getTransaction()
+    });
+  }
   updateFile(data) {
     this.dialog.open(UpdateDifferenceTransactionComponent, {
       autoFocus: false,
@@ -114,6 +128,19 @@ export class DiffrenceComponent implements OnInit {
         this.getTransaction()
       }
     });
-
+  }
+  showDetail(data: any) {
+    this.dialog.open(DifferenceDetailComponent, {
+      autoFocus: false,
+      data: data,
+      minWidth: "60%",
+      minHeight: '80vh',
+      maxHeight: "85vh",
+      disableClose: false,
+    }).afterClosed().subscribe(action => {
+      if (action) {
+        console.log(action)
+      }
+    });
   }
 }

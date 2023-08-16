@@ -13,7 +13,7 @@ import { FilterObject, GetSelectedFilters, ConstantFilterVariable } from '../../
 export class FinancialTransactionsComponent {
 
   searchFilter: any = {}
-  filters: FilterObject[] = GetSelectedFilters([ConstantFilterVariable.customerName, ConstantFilterVariable.vendorName, ConstantFilterVariable.subledgervoucher, ConstantFilterVariable.transactionID, ConstantFilterVariable.account, ConstantFilterVariable.postingType, ConstantFilterVariable.journalCategory, ConstantFilterVariable.journalNumber, ConstantFilterVariable.date])
+  filters: FilterObject[] = GetSelectedFilters([ConstantFilterVariable.customerName, ConstantFilterVariable.vendorName, ConstantFilterVariable.subledgervoucher, ConstantFilterVariable.transactionID, ConstantFilterVariable.account, ConstantFilterVariable.postingType, ConstantFilterVariable.journalCategory, ConstantFilterVariable.journalNumber,ConstantFilterVariable.description,ConstantFilterVariable.counterPartyVATCountry,ConstantFilterVariable.IsReportedVAT, ConstantFilterVariable.date])
   showFilter: boolean = false
   listOfColumn: Array<listOfColumn> = [
     { title: "", variable: '', compare: (a: any, b: any) => null, priority: false, width: '' },
@@ -35,6 +35,7 @@ export class FinancialTransactionsComponent {
   pagination: any = {
     limit: 25,
     skip: 0,
+    page:0,
   }
 
 
@@ -53,7 +54,8 @@ export class FinancialTransactionsComponent {
     this.pagination.limit = value;
   }
   pageIndexChange(event: any) {
-    this.pagination.skip = event - 1;
+    this.pagination.page = (event - 1)
+    this.pagination.skip = this.pagination.page * this.pagination.limit
     this.getFInancialLogs()
   }
   getFInancialLogs() {

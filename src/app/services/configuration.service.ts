@@ -18,6 +18,9 @@ export class ConfigurationService {
   createAccount(accountData: any): Observable<any> {
     return this.http.post(environment.baseUrl + `/config/account`, accountData);
   }
+  deleteAccount(params?:any): Observable<any> {
+    return this.http.delete(environment.baseUrl + `/config/account`, {params:params});
+  }
   updateAccount(accountId: any, accountData: any): Observable<any> {
     debugger
     return this.http.put(environment.baseUrl + `/config/account`, accountData, { params: { account_id: accountId } });
@@ -33,6 +36,9 @@ export class ConfigurationService {
   }
   createCountry(countryData: any): Observable<any> {
     return this.http.post(environment.baseUrl + `/config/country`, countryData);
+  }
+  deleteCountry(params?:any): Observable<any> {
+    return this.http.delete(environment.baseUrl + `/config/country`, {params:params});
   }
   updateCountry(legalEntity: any, countryData: any): Observable<any> {
     debugger
@@ -50,6 +56,9 @@ export class ConfigurationService {
   createJournal(journalData: any): Observable<any> {
     return this.http.post(environment.baseUrl + `/config/journalcategory`, journalData);
   }
+  deleteJournal(params?:any): Observable<any> {
+    return this.http.delete(environment.baseUrl + `/config/journalcategory`, {params:params});
+  }
   updateJournal(journalcategory_id: any, journalData: any): Observable<any> {
     return this.http.put(environment.baseUrl + `/config/journalcategory`, journalData, { params: { journalcategory_id: journalcategory_id } });
   }
@@ -62,6 +71,9 @@ export class ConfigurationService {
   }
   createPostingType(countryData: any): Observable<any> {
     return this.http.post(environment.baseUrl + `/config/postingtype`, countryData);
+  }
+  deletePostingType(params?:any): Observable<any> {
+    return this.http.delete(environment.baseUrl + `/config/postingtype`, {params:params});
   }
   updatePostingType(postingtype: any, postingTypeData: any): Observable<any> {
     debugger
@@ -77,6 +89,9 @@ export class ConfigurationService {
   }
   createVateRate(vatRateData: any): Observable<any> {
     return this.http.post(environment.baseUrl + `/config/vatrate`, vatRateData);
+  }
+  deleteVateRate(params?:any): Observable<any> {
+    return this.http.delete(environment.baseUrl + `/config/vatrate`, {params:params});
   }
   updateVarRate(vateRateId: any, vatRateData: any): Observable<any> {
     debugger

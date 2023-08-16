@@ -1,21 +1,24 @@
 <div class="statusTabs flex gap-4 items-center mb-4 max-w-[80%] w-full mx-auto">
   <button class="status text-sm py-2 px-4 rounded" (click)="tab = 1;"
     [ngClass]="{'active font-medium text-[--primary-color] bg-[--light-primary-color] ' :tab == 1,'font-normal text-[--black-color] bg-[--light-grey-color]': tab != 1}">
-    Accounts
+    {{"Accounts"|translate}}
   </button>
   <button data-cy="countryTab" class="status text-sm py-2 px-4 rounded" (click)="tab = 2;"
     [ngClass]="{'active font-medium text-[--primary-color] bg-[--light-primary-color]':tab == 2,'font-normal text-[--black-color] bg-[--light-grey-color]': tab != 2}">
-    Countries</button>
+    {{"Countries"|translate}}
+  </button>
   <button data-cy="journalTab" class="status text-sm py-2 px-4 rounded" (click)="tab = 3;"
     [ngClass]="{'active font-medium text-[--primary-color] bg-[--light-primary-color]':tab == 3,'font-normal text-[--black-color] bg-[--light-grey-color]': tab != 3}">
-    Journal Category
+    {{"Journal Category" | translate}}
   </button>
   <button data-cy="postingTab" class="status text-sm py-2 px-4 rounded" (click)="tab = 4;"
     [ngClass]="{'active font-medium text-[--primary-color] bg-[--light-primary-color]':tab == 4,'font-normal text-[--black-color] bg-[--light-grey-color]': tab != 4}">
-    Posting Type</button>
+    {{"Posting Type" | translate}}
+  </button>
   <button data-cy="vatRateTab" class="status text-sm py-2 px-4 rounded" (click)="tab = 5;"
     [ngClass]="{'active font-medium text-[--primary-color] bg-[--light-primary-color]':tab == 5,'font-normal text-[--black-color] bg-[--light-grey-color]': tab != 5}">
-    VatRates</button>
+    {{"VatRates" |translate}}
+  </button>
 
 </div>
 

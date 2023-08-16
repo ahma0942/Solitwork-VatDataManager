@@ -1,16 +1,16 @@
 <div id="detailOverview">
-  <div class="heading font-semibold text-[20px]">Detailed Overview</div>
+  <div class="heading font-semibold text-[20px]">{{"Detailed Overview" | translate}}</div>
   <div class="subheading text-[--grey-color] text-xs">
-    by subledger voucher
+    {{"by subledger voucher" | translate}}
   </div>
   <div class="tableWrap mt-5">
     <nz-table #headerTable [nzData]="transactions" [nzScroll]="{x:'800px', y: '400px' }" (nzPageIndexChange)="pageIndexChange($event)"
-      [nzFrontPagination]="false" [nzTotal]="pagination.count || 0" [nzPageIndex]="(pagination.skip || 0)+1" [nzPageSize]="25" [nzShowSizeChanger]="false"
+      [nzFrontPagination]="false" [nzTotal]="pagination.count || 0" [nzPageIndex]="(pagination.page || 0)+1" [nzPageSize]="25" [nzShowSizeChanger]="false"
       nzSize="small">
       <thead>
         <tr>
           <th *ngFor="let column of listOfColumn" [nzShowSort]="false" [nzSortFn]="column.compare" [nzSortPriority]="column.priority" [class]="column.class">
-            {{ column.title }}
+            {{ column.title | translate}}
           </th>
         </tr>
       </thead>

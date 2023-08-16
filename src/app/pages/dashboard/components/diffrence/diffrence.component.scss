@@ -43,3 +43,23 @@
     }
   }
 }
+::ng-deep .matActionMenu{
+  & .mat-mdc-menu-item{
+    & .mat-mdc-menu-item-text{
+      align-items: center !important;
+    display: flex !important;
+    gap: 10px !important;
+    font-size: 13px !important;
+    min-width: 120px !important;
+    }
+  }
+}
+
+::ng-deep .checkboxbg{
+  &.mat-mdc-checkbox-checked{
+    & .mdc-checkbox__background{
+      background: var(--primary-color) !important;
+    }
+  }
+
+}
