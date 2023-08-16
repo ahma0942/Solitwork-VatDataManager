@@ -10,6 +10,9 @@ export class DashboardService {
 
   constructor(private http: HttpClient) { }
 
+  getUser(): Observable<any> {
+    return this.http.get(environment.baseUrl + `/currentuser`,{});
+  }
   getKpiData(params: any): Observable<any> {
     return this.http.get(environment.baseUrl + `/kpis`, { params: params });
   }
@@ -36,4 +39,9 @@ export class DashboardService {
   deleteFile(verificationId?:any,fileId?:any){
     return this.http.delete(environment.baseUrl + `/verifications/${verificationId}/files/${fileId}`, {});
   }
+
+  addVerification(obj?:any,userData?:any){
+    return this.http.post(environment.baseUrl + `/verifications`, userData,{params:obj});
+  }
 }
+

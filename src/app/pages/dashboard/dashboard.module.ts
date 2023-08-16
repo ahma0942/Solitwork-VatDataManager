@@ -19,6 +19,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { DifferenceDetailComponent } from './components/difference-detail/difference-detail.component';
 import { NzTagModule } from 'ng-zorro-antd/tag';
+import { AddVerificationComponent } from './components/add-verification/add-verification.component';
 
 
 
@@ -34,7 +35,8 @@ const routes: Routes = [
     DetailOverviewComponent,
     VatTransactionDetailComponent,
     UpdateDifferenceTransactionComponent,
-    DifferenceDetailComponent
+    DifferenceDetailComponent,
+    AddVerificationComponent
   ],
   imports: [
     CommonModule,

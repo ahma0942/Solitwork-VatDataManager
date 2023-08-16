@@ -30,14 +30,23 @@
           <td>
             <div class="tableEllipsis w-[75px]">
               <a
-                [ngClass]="data?.journalNumber? 'text-[--primary-color] underline underline-solid hover:underline-solid hover:underline':'text-[--black-color]'">{{data?.journalNumber
+                [ngClass]="data?.journalNumber? 'text-[--primary-color] underline underline-solid hover:underline-solid hover:underline':'text-[--black-color]'" (click)="showDetail(data)">{{data?.journalNumber
                 || '-'}}</a>
             </div>
           </td>
           <td>
-            <div
+            <!-- <div
               [ngClass]="{'text-[--light-red-color]':!data?.verifications,'text-[--green-color]':!data?.verifications[0]?.void,'text[--red-color]':data?.verifications[0]?.void}">
               {{(!data?.verifications? 'Not Verified': !data?.verifications[0]?.void? 'Verified' : 'Voided') || '-'}}
+            </div> -->
+            <div *ngIf="data.verifications.length>0 && !data?.verifications[0]?.void" class="text-[--green-color]">
+              Verified
+            </div>
+            <div *ngIf="data.verifications.length>0 && data?.verifications[0]?.void" class="text-[--light-red-color]">
+              Voided
+            </div>
+            <div *ngIf="data.verifications.length == 0" class="text-[--red-color]">
+              Not verified
             </div>
           </td>
           <td>
@@ -48,7 +57,10 @@
           </button>
         <mat-menu class="mt-2 matActionMenu" #actionExportMenu="matMenu">
             <!-- <div class="action-heading">Actions</div> -->
-            <button (click)="updateFile(data)" class=" flex items-center gap-3 text-sm " mat-menu-item>
+            <button (click)="addVerification(data)" *ngIf="data?.verifications?.length == 0" class=" flex items-center gap-3 text-sm " mat-menu-item>
+              <span nz-icon nzType="edit" nzTheme="outline"></span> Add Verification
+            </button>
+            <button (click)="updateFile(data)" *ngIf="data?.verifications?.length > 0" class=" flex items-center gap-3 text-sm " mat-menu-item>
               <span nz-icon nzType="edit" nzTheme="outline"></span> Edit
             </button>
             <button (click)="showDetail(data)" class=" flex items-center gap-3 text-sm" mat-menu-item>

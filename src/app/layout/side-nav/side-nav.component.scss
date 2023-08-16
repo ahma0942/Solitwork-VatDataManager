@@ -1,16 +1,30 @@
-.nav-container {
+.nav-container-background {
+  position: fixed;
+  z-index: 1;
   height: 100%;
   background-color: #fff;
+  border-right: 1px solid #b0b0b054;
+  &.opened {
+    width: 160px;
+  }
+  &.closed {
+    width: 70px;
+  }
+}
+.nav-container {
+  height: 100%;
   position: relative;
   transition: 0.3s;
-  border-right: 1px solid #b0b0b054;
+  z-index: 2;
   &.opened {
     width: 160px;
     & .nav-sidenav-content {
       width: inherit;
     }
     & .navigationWrap {
+      background-color: #fff;
       width: 150px;
+      margin-right: 10px;
       transition: 0.3s;
       & .navigation {
         & .link {

@@ -85,6 +85,7 @@ export class FinancialTransactionsComponent {
   applyFilter($event) {
     this.searchFilter = $event;
     this.showFilter = false;
+    this.pagination.skip =0
     this.getFInancialLogs();
   }
 

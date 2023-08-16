@@ -77,7 +77,7 @@ export class UpdateDifferenceTransactionComponent implements OnInit {
   onClose(fileId:any): void {
     this.dashboardService.deleteFile(this.verificationId, fileId).subscribe((d: any) => {
       if (d) {
-        this.dialog.close('file Deleted')
+
       }
     });
   }

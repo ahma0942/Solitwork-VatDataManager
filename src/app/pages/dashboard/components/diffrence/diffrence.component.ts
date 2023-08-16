@@ -8,6 +8,7 @@ import { Pagination } from 'src/app/models/interfaces/pagination.interface';
 import { DashboardService } from 'src/app/services/dashboard.service';
 import { UpdateDifferenceTransactionComponent } from '../update-difference-transaction/update-difference-transaction.component';
 import { DifferenceDetailComponent } from '../difference-detail/difference-detail.component';
+import { AddVerificationComponent } from '../add-verification/add-verification.component';
 
 interface Transaction {
   differenceId?: string;
@@ -47,7 +48,7 @@ export class DiffrenceComponent implements OnInit {
 
   ]
   pagination: Pagination = {
-    limit: 25,
+    limit: 8,
     skip: 0,
     page:0,
   }
@@ -91,7 +92,7 @@ export class DiffrenceComponent implements OnInit {
     var obj = {
       from_date: this.fromDate,
       to_date: this.toDate,
-      limit: 8,
+      ...this.pagination,
       legalEntity: 'EEC'
     }
     this.dashboardService.getDifferenceData(obj).subscribe((d: any) => {
@@ -112,6 +113,21 @@ export class DiffrenceComponent implements OnInit {
     }
     this.dashboardService.deleteDifference(obj.verificationId).subscribe((d: any) => {
       this.getTransaction()
+    });
+  }
+  addVerification(data){
+    this.dialog.open(AddVerificationComponent, {
+      autoFocus: false,
+      data:data,
+      minWidth: "600px",
+      minHeight: '300px',
+      maxHeight: "85vh",
+      disableClose: true,
+    }).afterClosed().subscribe(action => {
+      if (action) {
+        console.log(action)
+        this.getTransaction()
+      }
     });
   }
   updateFile(data) {
