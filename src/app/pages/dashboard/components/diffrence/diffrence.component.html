@@ -9,13 +9,16 @@
       [nzTotal]="pagination.count || 0" [nzPageIndex]="(pagination.page || 0)+1" [nzPageSize]="8" [nzShowSizeChanger]="false" nzSize="small">
       <thead>
         <tr>
-          <th *ngFor="let column of listOfColumn" [nzShowSort]="false" [nzSortFn]="column.compare" [nzSortPriority]="column.priority" [class]="column.class">
+          <th *ngFor="let column of listOfColumn" [ngStyle]="{width: column.width}" [nzShowSort]="false" [nzSortFn]="column.compare" [nzSortPriority]="column.priority" [class]="column.class">
             {{ column.title | translate}}
           </th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let data of headerTable.data">
+          <td>
+            <mat-checkbox [color]="'primary'" [disabled]="true" [ngModel]="data?.verifications.length > 0? false : true" class="checkboxbg"></mat-checkbox>
+          </td>
           <td>
             <div class="tableEllipsis w-[70px]">
               {{data?.differenceId}}
@@ -24,21 +27,15 @@
           <td>{{data?.actualVATAmount | numberToKMB}}</td>
           <td>{{data?.expectedVATAmount | numberToKMB }}</td>
           <td>{{data?.differenceVATAmount | numberToKMB }}</td>
-          <td> <mat-checkbox [color]="'primary'" [disabled]="true" [ngModel]="data?.verifications.length > 0? false : true" class="checkboxbg"></mat-checkbox></td>
           <td>{{data?.verifications[0]?.files?.length || 0}}</td>
 
           <td>
             <div class="tableEllipsis w-[75px]">
-              <a
-                [ngClass]="data?.journalNumber? 'text-[--primary-color] underline underline-solid hover:underline-solid hover:underline':'text-[--black-color]'" (click)="showDetail(data)">{{data?.journalNumber
-                || '-'}}</a>
+              <a [ngClass]="data?.journalNumber ? 'text-[--primary-color] underline underline-solid hover:underline-solid hover:underline' : 'text-[--black-color]'"
+                (click)="showDetail(data)">{{ data?.journalNumber || '-' }}</a>
             </div>
           </td>
           <td>
-            <!-- <div
-              [ngClass]="{'text-[--light-red-color]':!data?.verifications,'text-[--green-color]':!data?.verifications[0]?.void,'text[--red-color]':data?.verifications[0]?.void}">
-              {{(!data?.verifications? 'Not Verified': !data?.verifications[0]?.void? 'Verified' : 'Voided') || '-'}}
-            </div> -->
             <div *ngIf="data.verifications.length>0 && !data?.verifications[0]?.void" class="text-[--green-color]">
               Verified
             </div>
@@ -50,31 +47,26 @@
             </div>
           </td>
           <td>
-            <button nz-button
-            class=" flex justify-center items-center gap-2 py-2 text-xl text-center  font-medium text-[--grey-color]"
-            [matMenuTriggerFor]="actionExportMenu">
-            <span nz-icon nzType="more" nzTheme="outline"></span>
-          </button>
-        <mat-menu class="mt-2 matActionMenu" #actionExportMenu="matMenu">
-            <!-- <div class="action-heading">Actions</div> -->
-            <button (click)="addVerification(data)" *ngIf="data?.verifications?.length == 0" class=" flex items-center gap-3 text-sm " mat-menu-item>
-              <span nz-icon nzType="edit" nzTheme="outline"></span> Add Verification
+            <button nz-button class=" flex justify-center items-center gap-2 py-2 text-xl text-center  font-medium text-[--grey-color]"
+              [matMenuTriggerFor]="actionExportMenu">
+              <span nz-icon nzType="more" nzTheme="outline" style="margin-left: -10px"></span>
             </button>
-            <button (click)="updateFile(data)" *ngIf="data?.verifications?.length > 0" class=" flex items-center gap-3 text-sm " mat-menu-item>
-              <span nz-icon nzType="edit" nzTheme="outline"></span> Edit
-            </button>
-            <button (click)="showDetail(data)" class=" flex items-center gap-3 text-sm" mat-menu-item>
-              <span nz-icon nzType="eye" nzTheme="outline"></span> View
-            </button>
-            <button (click)="deleteVatRate(data)" class=" flex items-center gap-3 text-sm" mat-menu-item>
-              <span class="" nz-icon nzType="delete" nzTheme="outline"></span> Delete
-            </button>
-            <!-- <button (click)="deleteVatRate(data)" class="pointer flex items-center gap-3 text-sm" [disabled]="data?.verifications.length == 0">
-              <span class="" nz-icon nzType="delete" nzTheme="outline"></span> Delete
-            </button> -->
+            <mat-menu class="mt-2 matActionMenu" #actionExportMenu="matMenu">
+              <button (click)="addVerification(data)" *ngIf="data?.verifications?.length == 0" class=" flex items-center gap-3 text-sm " mat-menu-item>
+                <span nz-icon nzType="edit" nzTheme="outline"></span> Add Verification
+              </button>
+              <button (click)="updateFile(data)" *ngIf="data?.verifications?.length > 0" class=" flex items-center gap-3 text-sm " mat-menu-item>
+                <span nz-icon nzType="edit" nzTheme="outline"></span> Edit
+              </button>
+              <button (click)="showDetail(data)" class=" flex items-center gap-3 text-sm" mat-menu-item>
+                <span nz-icon nzType="eye" nzTheme="outline"></span> View
+              </button>
+              <button (click)="deleteVatRate(data)" class=" flex items-center gap-3 text-sm" mat-menu-item>
+                <span class="" nz-icon nzType="delete" nzTheme="outline"></span> Delete
+              </button>
 
-        </mat-menu>
-              </td>
+            </mat-menu>
+          </td>
 
 
         </tr>

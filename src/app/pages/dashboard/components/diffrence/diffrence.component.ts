@@ -1,7 +1,5 @@
-import { CurrencyPipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatTableModule } from '@angular/material/table';
 import * as moment from 'moment';
 import { listOfColumn } from 'src/app/models/interfaces/listOfColumns.interface';
 import { Pagination } from 'src/app/models/interfaces/pagination.interface';
@@ -35,15 +33,15 @@ export class DiffrenceComponent implements OnInit {
   checked: boolean = false
 
   listOfColumn: Array<listOfColumn> = [
+    { title: "", variable: 'checbox', priority: true, width: '30px' },
     { title: "Voucher", variable: 'differenceId', compare: (a: any, b: any) => a.differenceId < b.differenceId ? 1 : -1, priority: true, width: '' },
     { title: "Actual", variable: 'actualVATAmount', compare: (a: any, b: any) => a.actualVATAmount < b.actualVATAmount ? 1 : -1, priority: true, width: '' },
     { title: "Expected", variable: 'expectedVATAmount', compare: (a: any, b: any) => a.expectedVATAmount < b.expectedVATAmount ? 1 : -1, priority: true, width: '' },
     { title: "Difference", variable: 'differenceVATAmount', compare: (a: any, b: any) => a.differenceVATAmount < b.differenceVATAmount ? 1 : -1, priority: true, width: '' },
-    { title: "checkbox", variable: 'checbox', priority: true, width: '' },
     { title: "Attach File", variable: 'attachment', priority: true, width: '' },
     { title: "VAT Journal", variable: 'vatJournal', priority: true, width: '' },
-    { title: "Status", variable: 'status', priority: true, width: '' },
-    { title: "Action", variable: 'action', priority: true, width: '' },
+    { title: "Status", variable: 'status', priority: true, width: '62px' },
+    { title: "", variable: 'action', priority: true, width: '30px' },
 
 
   ]

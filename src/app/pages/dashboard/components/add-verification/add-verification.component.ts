@@ -12,6 +12,7 @@ import { DashboardService } from 'src/app/services/dashboard.service';
 export class AddVerificationComponent implements OnInit{
 
   addForm: FormGroup = undefined
+  updateFile: FormGroup = undefined
   receivedData:any
   today: any = [new Date(), new Date()];
   userData:any
@@ -24,6 +25,7 @@ export class AddVerificationComponent implements OnInit{
     this.receivedData = this.data;
   }
   ngOnInit(): void {
+    this.today = JSON.parse(sessionStorage.getItem('dateValue'))
     this.createForm()
     this.getUser()
     console.log(this.receivedData)
@@ -31,10 +33,12 @@ export class AddVerificationComponent implements OnInit{
   createForm() {
     this.addForm = this.fb.group({
       note: new FormControl( '', [Validators.required]),
-      from_date: new FormControl(( new Date().toISOString()), [Validators.required]),
-      to_date: new FormControl(( new Date().toISOString()), [Validators.required]),
-      date: [this.today],
+      from_date: new FormControl('', [Validators.required]),
+      to_date: new FormControl('', [Validators.required]),
       // reverifyDifference: new FormControl(|| false, [Validators.required]),
+    })
+    this.updateFile = this.fb.group({
+      file: new FormControl(null, [Validators.required]),
     })
 
   }
@@ -47,21 +51,40 @@ export class AddVerificationComponent implements OnInit{
     })
   }
   create(){
-    this.addForm.removeControl('date');
+    this.addForm.controls['from_date'].setValue(this.today[0])
+    this.addForm.controls['to_date'].setValue(this.today[1])
+
     var obj={
       differenceId:this.receivedData?.differenceId,
       legalEntity:this.receivedData?.legalEntity,
       journalNumber:this.receivedData?.journalNumber,
       ...this.addForm.value,
     }
-    this.dashboardService.addVerification(obj,this.userData).subscribe(d => {
-      if (d) {
-        this.dialog.close('created')
+    console.log(obj)
+    this.dashboardService.addVerification(obj,this.userData).subscribe((d:any) => {
+      if (d.verificationId) {
+        this.uploadFile(d.verificationId)
       }
     })
   }
   close() {
     this.dialog.close();
+  }
+  fileChange(event) {
+    var r = new FileReader();
+    r.onload = (e) => {
+      console.log(r.result)
+      this.updateFile.controls['file'].setValue(r.result)
+    }
+    console.log('files',event.target.files[0])
+    this.updateFile.controls['file'].setValue(event.target.files[0])
+  }
+  uploadFile(verificationId:any){
+    this.dashboardService.updateFile(verificationId, this.updateFile.value.file).subscribe((d: any) => {
+      if (d) {
+        this.dialog.close('Updated')
+      }
+    });
   }
   onChange(result: any): void {
     const fromDate = result[0]

@@ -1,14 +1,14 @@
 <div id="transactionDetail" class="mainWrap p-5 ">
   <div class="logo font-black text-[--black-color] text-[16px] border-b border-solid border-[--light-grey-color]">
     <span class="text-[--primary-color] ">
-      Difference
+      {{ "Difference" | translate }}
     </span>
-    Detail
+    {{ "Detail" | translate }}
   </div>
   <div class="detailWrap flex flex-wrap justify-between mt-5 gap-4 w-[80%] mx-auto">
     <div class="detail flex w-[48%] gap-4">
       <div class="heading text-[--grey-color] font-bold text-xs w-[150px]">
-        Difference Id
+        {{ "Difference Id" | translate }}
       </div>
       <div class="value text-[--black-color] font-semibold text-xs">
         {{receivedData?.differenceId || 'N/A'}}
@@ -16,7 +16,7 @@
     </div>
     <div class="detail flex w-[48%] gap-4">
       <div class="heading text-[--grey-color] font-bold text-xs w-[150px]">
-        Journal Number
+        {{ "Journal Number" | translate }}
       </div>
       <div class="value text-[--black-color] font-semibold text-xs">
         {{receivedData?.journalNumber || 'N/A'}}
@@ -24,7 +24,7 @@
     </div>
     <div class="detail flex w-[48%] gap-4">
       <div class="heading text-[--grey-color] font-bold text-xs w-[150px]">
-        Legal Entity
+        {{ "Legal Entity" | translate }}
       </div>
       <div class="value text-[--black-color] font-semibold text-xs">
         {{receivedData?.legalEntity || 'N/A'}}
@@ -32,20 +32,20 @@
     </div>
   </div>
   <div class="font-black text-[--black-color] text-xs border-b border-solid border-[--light-grey-color] w-[80%] mt-5 mx-auto">
-    Verifications
+    {{ "Verifications" | translate }}
   </div>
   <div class="detailWrap mt-5 gap-4 w-[80%] mx-auto">
     <div class="tableWrap">
       <nz-table #basicTable [nzData]="receivedData.verifications" [nzFrontPagination]="true" [nzShowPagination]="false">
         <thead>
           <tr>
-            <th>legal Entity</th>
-            <th>Verified By</th>
-            <th>Email</th>
-            <th>Note</th>
-            <th>From Date</th>
-            <th>To Date</th>
-            <th>Files</th>
+            <th>{{ "Legal Entity" | translate }}</th>
+            <th>{{ "Verified By" | translate }}</th>
+            <th>{{ "Email" | translate }}</th>
+            <th>{{ "Note" | translate }}</th>
+            <th>{{ "From Date" | translate }}</th>
+            <th>{{ "To Date" | translate }}</th>
+            <th>{{ "Files" | translate }}</th>
           </tr>
         </thead>
         <tbody>
